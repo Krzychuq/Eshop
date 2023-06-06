@@ -21,7 +21,7 @@ if($mail_weryfikacja == $email){
     $token = substr(sha1(mt_rand()),0,20);
     $token_link = "localhost/session/przeslanie_hasla.php"."?key=".$token;
     // Zawartość
-    $content = "Witaj! O to <a href=$token_link>link</a> do zmiany hasła.Jeśli to nie ty wysłałeś prośbe zmiany hasła. Skontaktuj się znami pod support@gmail.com i zmień hasło!";
+    $content = "<h2>Witaj!</h2> <p>O to <a href=$token_link>link</a> do zmiany hasła.Jeśli to nie ty wysłałeś prośbe zmiany hasła. Skontaktuj się znami pod support@gmail.com i zmień hasło!</p>";
     $content = wordwrap($content,70,"\r\n");
     //poczatek wiadomosci
     $headers = "From: <no-reply@gmail.com> \r\n";
