@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v=1.2">
+    <link rel="stylesheet" href="s.css">
     <title>Sesja</title>
 </head>
 <body>
@@ -40,7 +40,18 @@ include_once("laczenieZbaza.php");
     <input type="text" maxlength="100" name="miasto" placeholder="..." >
 
     <label for="kraj">Podaj swoją narodowość: </label>
-    <input type="text" maxlength="100" name="kraj" placeholder="..." >
+    <select type="text" maxlength="100" name="kraj">
+        <option value="">...</option>
+    <?php
+    $file = fopen("kraje.txt", "r");
+    while(! feof($file)) {
+      $line = fgets($file);
+      echo "<option value=$line>$line</option>";
+    }
+    
+    fclose($file);
+    ?>
+    </select>
 
     <label for="opis">Napisz o sobie: </label>
     <textarea name="opis" id="opis" rows="11"  maxlength='372' placeholder="..." style="resize:none;"></textarea>
@@ -54,9 +65,10 @@ include_once("laczenieZbaza.php");
     <button id="przycisk_zapisz" type="submit"><img src="svg/save.svg" width='30px' height='30px' alt="Zapisz"></button>
 
 </form>
-   
-    
 
 </main>
+<footer>
+    <?php include_once("footer.html"); ?>
+</footer>
 </body>
 </html>

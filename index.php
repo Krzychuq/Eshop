@@ -19,5 +19,8 @@ session_start();
 
 
 </main>
+<footer>
+    <?php include_once("footer.html"); ?>
+</footer>
 </body>
 </html>

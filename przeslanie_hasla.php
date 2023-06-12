@@ -53,6 +53,9 @@ if(isset($_SESSION['wiadomosc_hasla'])){
 </form>
 
 </section>
+<footer>
+    <?php include_once("footer.html"); ?>
+</footer>
 </body>
 </html>
 <script>

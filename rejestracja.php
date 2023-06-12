@@ -57,6 +57,9 @@ if(isset($_SESSION['wiadomosc_rejestracji'])){
 
 
 </section>
+<footer>
+    <?php include_once("footer.html"); ?>
+</footer>
 </body>
 <script>
 

@@ -31,5 +31,8 @@ session_start();
     </form>
 
 </section>
+<footer>
+    <?php include_once("footer.html"); ?>
+</footer>
 </body>
 </html>

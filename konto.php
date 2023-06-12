@@ -1,11 +1,11 @@
 <?php
 session_start();
-        if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email']) ){
-            //nic
-        }
-        else{
-            header("location: index.php");
-        }
+    if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email']) ){
+        //nic
+    }
+    else{
+        header("location: index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -35,13 +35,13 @@ session_start();
     $dane = $conn->query($pyt_o_dane);
     if($dane->num_rows > 0){
         while($linia = $dane->fetch_assoc()) {
-                $profilowe = $linia['avatar'];
-                $nick = $linia['nazwa'];
-                $uro = $linia['data_urodzenia'];
-                $tel = $linia['nr_tel'];
-                $miasto = $linia['miasto'];
-                $kraj = $linia['kraj'];
-                $opis = $linia['opis_konta'];
+            $profilowe = $linia['avatar'];
+            $nick = $linia['nazwa'];
+            $uro = $linia['data_urodzenia'];
+            $tel = $linia['nr_tel'];
+            $miasto = $linia['miasto'];
+            $kraj = $linia['kraj'];
+            $opis = $linia['opis_konta'];
         }
     }
     $conn->close();
@@ -79,7 +79,7 @@ else{
 <p>Kraj: <?php echo $kraj ?></p>
 
 <div class='opis_konta'>
-    <p style="border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">O mnie: <br> <?php echo $opis ?></p>
+    <p style="border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; color:white; background-color:black;">O mnie: <br> <?php echo $opis ?></p>
 </div>
 
 </div><br>
@@ -94,5 +94,8 @@ else{
         unset($_SESSION['wiadomosc_o_zdjeciu']);
     }
 ?>
+<footer>
+    <?php include_once("footer.html"); ?>
+</footer>
 </body>
 </html>

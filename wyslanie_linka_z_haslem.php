@@ -62,5 +62,8 @@ $conn->close();
     </div>
 
 </section>
+<footer>
+    <?php include_once("footer.html"); ?>
+</footer>
 </body>
 </html>
