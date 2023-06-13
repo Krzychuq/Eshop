@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css">
+    <link rel="stylesheet" href="s.css?v1.1">
     <title>Sesja</title>
 </head>
 <body>
@@ -20,7 +20,7 @@ session_start();
 include_once("header.php");
 include_once("laczenieZbaza.php");
 ?>
-<main>
+<div class="contener">
 
 <form action="zapis_danych_konta.php" class="form_konta" enctype="multipart/form-data" method="POST">
 
@@ -66,7 +66,7 @@ include_once("laczenieZbaza.php");
 
 </form>
 
-</main>
+</div>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

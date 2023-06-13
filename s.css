@@ -1,10 +1,30 @@
 /* key elements */
+@font-face {
+    font-family: Font1;
+    src: url('summer-font/Summer-GpYG.otf');
+}
+@font-face {
+    font-family: Font2;
+    src: url('sunflower-font/Sunflower-lgZye.otf');
+}
 *{box-sizing: border-box; margin: 0;}
-body{background-color: rgb(161, 158, 111); /*background-image: url('background.jpg');*/ font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white;}
-header{
-    margin: 20px;
+body{
+    min-height: 100vh; 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    background: url('svg/cool-background.svg'); 
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    color: black;
+    margin: 0;
+
+}
+.contener{
+    padding-top: 2rem;
+    padding-bottom: 2rem; 
+    flex: 1;
+}
+header{
+    padding: 10px;
 }
 /* ID's */
 #zmien_dane_div{
@@ -118,7 +138,8 @@ header{
     height: 48px;
     justify-content: center;
     line-height: 24px;
-    max-width: 40%;
+    min-width: 60%;
+    max-width: 100%;
     padding: 0 25px;
     position: relative;
     text-align: center;
@@ -129,7 +150,7 @@ header{
   }
   
   .linki:after {
-    background-color: #ffffff4d;
+    background-color: #00000048;
     border-radius: 8px;
     content: "";
     display: block;
@@ -186,7 +207,8 @@ header{
 }
 .przycisk_zaloguj_zarejestruj{
     margin-top: 7px;
-    background-color: #77dd77;
+    background-color: rgb(214, 65, 122);
+    box-shadow: 0 0 10px black;
     border: none;
     border-radius: 10px;
     width: 60%;
@@ -218,14 +240,29 @@ header{
 }
 
 .menu{
+    font-family: Font2, "segoe ui";
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
+    border-bottom: solid 1px #111;
+    padding-bottom: 7px;
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    place-self: center;
 }
+    .menu a:nth-child(1){
+        place-self: center;
+        grid-area: 1 / 2 / 2 / 3;
+    }
+    .menu a:nth-child(2){
+        place-self: center;
+        grid-area: 2 / 1 / 3 / 2;
+    }
+    .menu a:nth-child(3){
+        place-self: center;
+        grid-area: 2 / 3 / 3 / 4;
+    }
 
 .zdjecie_profilowe{
     margin-left: auto;
@@ -249,7 +286,7 @@ header{
         transition: 0.3s;
     }
     .rejestracja a:hover{
-        color: greenyellow;
+        color: rgb(206, 2, 80);
         font-size: 15px;
         transition: 0.3s;
     }
@@ -265,7 +302,7 @@ header{
     margin-right: auto;   
     padding: 10px;
     border-radius: 20px;
-    border: solid 2px black;
+    border: solid 2px transparent;
     color: white;
     user-select: none;
     -webkit-user-select: none;
@@ -342,9 +379,31 @@ header{
 }
 
 .footer{
-    
+    width: 100%;  
+    height: 20%;
+    border-top-left-radius: 31px;
+    border-top-right-radius: 31px;
+    background-color: rgba(156, 0, 60, 0.880);
+    display: flex;
+    flex-direction: row;
 }
-
+    .footer div{
+        font-family: Font1, "segoe ui";
+        font-size: 20px;
+        width: 33%;
+        padding: 20px;
+        color: white;
+    }
+    .footer div:nth-child(1){
+        border-left: 1px solid black;
+    }
+        .footer div p{
+            padding: 3px;
+            cursor: pointer;
+        }
+        .footer div img{
+            cursor: pointer;
+        }
 /* mobile */
 
 @media only screen and (max-width: 1100px) {

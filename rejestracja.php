@@ -9,6 +9,7 @@
 </head>
 <body>
 <?php include_once("header.php")?>
+<div class="contener">
 <section class="wrap-sign-up-in">
 
 <form id="formularz" class='zaloguj' action="sign_up.php" method='POST'>
@@ -57,6 +58,7 @@ if(isset($_SESSION['wiadomosc_rejestracji'])){
 
 
 </section>
+</div>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

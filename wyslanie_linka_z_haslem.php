@@ -54,6 +54,7 @@ $conn->close();
 </head>
 <body>
 <?php include_once("header.php");?>
+<div style="content">
 <section class="wrap-sign-up-in">
     <div class='zaloguj'>
         <div class="divy-grid">
@@ -62,6 +63,7 @@ $conn->close();
     </div>
 
 </section>
+</div>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

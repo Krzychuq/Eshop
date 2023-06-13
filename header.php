@@ -17,7 +17,7 @@ if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){
 </div>
 
 <div class="menu">
-    
+    <a href="index.php"><img src="svg/logo1.svg" alt="logo" width="110px" height="auto"></a>
     <a href="index.php" class="linki">Strona główna</a>
 <?php
     if( !isset( $_SESSION['email'] ) && empty( $_SESSION['email'] ) ){

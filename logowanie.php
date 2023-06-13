@@ -11,6 +11,7 @@ session_start();
 </head>
 <body>
 <?php include_once("header.php")?>
+<div class="contener">
 <section class="wrap-sign-up-in">
     <form class='zaloguj' action="sign_in.php" method='POST'>
         <div class="divy">
@@ -43,6 +44,7 @@ session_start();
         
     </div>
 </section>
+</div>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

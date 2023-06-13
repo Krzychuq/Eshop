@@ -16,6 +16,7 @@ session_start();
     <title>Sesja</title>
 </head>
 <body>
+<div class="contener">
 <?php include_once("header.php");?>
 <?php include_once("laczenieZbaza.php");?>
 <section class="wrap-konta">
@@ -94,6 +95,7 @@ else{
         unset($_SESSION['wiadomosc_o_zdjeciu']);
     }
 ?>
+</div>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>
