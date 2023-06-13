@@ -24,6 +24,8 @@ body{
     flex: 1;
 }
 header{
+    display: flex;
+    flex-direction: row;
     padding: 10px;
 }
 /* ID's */
@@ -112,7 +114,7 @@ header{
     font-weight: bold;
     align-items: center;
     text-decoration: none; 
-    color: BLACK;
+    color: white;
     padding: 7px;
     cursor: pointer;
 }
@@ -241,8 +243,6 @@ header{
 
 .menu{
     font-family: Font2, "segoe ui";
-    margin-left: auto;
-    margin-right: auto;
     border-bottom: solid 1px #111;
     padding-bottom: 7px;
     width: 50%;
@@ -368,7 +368,7 @@ header{
 .form_konta{
     display: flex;
     flex-direction: column;
-    background-color: #ffffff4d;
+    background-color: #ffffff60;
     border-radius: 7px;
     color: black;
     padding: 20px;
