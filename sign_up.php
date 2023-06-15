@@ -12,51 +12,47 @@ if( isset($login) && !empty($login) && isset($pass) && !empty($pass) ){
     
     if( $pass == $powtorzone_pass){
         if($weryfikacja_hasla == TRUE){
+        $l="";
         $data = date("Y-m-d H:i:s");
         $czas_rejestracji = $data;
-        $l="";
-        $sprawdzenie = "SELECT login from loginy where login like '$login'";
-        $wykonaj_sprawdzenie= $conn->query($sprawdzenie);
-        if($wykonaj_sprawdzenie ->num_rows > 0){
-    
-            while($linia = $wykonaj_sprawdzenie->fetch_assoc()) {
-                    $l = $linia['login'];
-            }
-        }
+        $sprawdzenie = $conn -> prepare('SELECT login from loginy where login like ?');
+        $sprawdzenie -> execute([$login]);
+        $wykonaj_sprawdzenie = $sprawdzenie -> fetchColumn();
+        if($wykonaj_sprawdzenie){ 
+                $l = $wykonaj_sprawdzenie;
+        }   
          if($login == $l){
             $_SESSION['wiadomosc_loginu'] = "Email jest zajety";
              header("location: logowanie.php");
-             $conn->close();
+             $conn = null;
          }
     
          else{
-             $zapytanie1 = "INSERT INTO loginy (login, pass, data_rejestru) VALUES('$login', '$password', '$czas_rejestracji')";
-             $rejestracja = $conn->query($zapytanie1);
+            $zapytanie1 = $conn -> prepare("INSERT INTO loginy (login, pass, data_rejestru) VALUES(?, ?, ?)");
+            $zapytanie1 -> execute([$login, $password, $czas_rejestracji]);
         
-             if ($rejestracja === TRUE) {
+             if ($zapytanie1 === TRUE) {
                  echo $login." ". $password. " ". $czas_rejestracji;
              } 
              else {
-                 echo "Błąd: " . $zapytanie1 . "<br>" . $conn->error;
+                 echo "Błąd tworzenia konta";
              }
             
-             $zapytanie2 = "SELECT id from loginy where login like '$login'";
-             $id = $conn->query($zapytanie2);
-             if($id ->num_rows > 0){
-        
-                 while($linia = $id->fetch_assoc()) {
-                         $id_login = $linia['id'];
-                 }
-             }
-        
-             $zapytanie3 = "INSERT INTO dane_konta (id_loginu) VALUES('$id_login')";
-        
-             $dodajID = $conn->query($zapytanie3);
-             if ($dodajID=== FALSE) {
-                 echo "Błąd: " . $zapytanie3 . "<br>" . $conn->error;
+                $zapytanie2 = $conn -> prepare("SELECT id FROM loginy WHERE login LIKE ?");
+                $zapytanie2 -> execute([$login]);
+                if($zapytanie2){
+                    foreach($zapytanie2 as $linia){
+                        $id_login = $linia['id'];
+                    }
+                }
+                $zapytanie3 = $conn -> prepare("INSERT INTO dane_konta (id_loginu) VALUES(?)");
+                $zapytanie3 -> execute([$id_login]);
+
+             if ($zapytanie3 === FALSE) {
+                 echo "Błąd dodania konta";
              } 
             
-             $conn->close();
+             $conn = null;
              header("location: logowanie.php");
          }
         }

@@ -24,28 +24,27 @@ session_start();
 <?php
     $mail = $_SESSION['email'];
     //identyfikacja
-    $pyt_o_id="SELECT id FROM loginy WHERE login like '$mail'";
-    $wykonanie = $conn->query($pyt_o_id);
-    if($wykonanie->num_rows > 0){
-        while($linia = $wykonanie->fetch_assoc()) {
-                $id = $linia['id'];
-        }
-    }
+    $mail = $_SESSION['email'];
+    $pyt_o_id = $conn->prepare("SELECT id FROM loginy WHERE login like ?");
+    $pyt_o_id -> execute([$mail]);
+    $wykonanie = $pyt_o_id->fetch(PDO::FETCH_ASSOC);
+    $id = $wykonanie['id'];
+
     //dane konta
-    $pyt_o_dane = "SELECT * FROM dane_konta WHERE id_loginu = '$id'";
-    $dane = $conn->query($pyt_o_dane);
-    if($dane->num_rows > 0){
-        while($linia = $dane->fetch_assoc()) {
-            $profilowe = $linia['avatar'];
-            $nick = $linia['nazwa'];
-            $uro = $linia['data_urodzenia'];
-            $tel = $linia['nr_tel'];
-            $miasto = $linia['miasto'];
-            $kraj = $linia['kraj'];
-            $opis = $linia['opis_konta'];
-        }
+    $pyt_o_dane = $conn->prepare("SELECT * FROM dane_konta WHERE id_loginu = ?");
+    $pyt_o_dane -> execute([$id]);
+    $wykonanie = $pyt_o_dane->fetchAll();
+
+    foreach ($wykonanie as $linia){
+        $profilowe = $linia['avatar'];
+        $nick = $linia['nazwa'];
+        $uro = $linia['data_urodzenia'];
+        $tel = $linia['nr_tel'];
+        $miasto = $linia['miasto'];
+        $kraj = $linia['kraj'];
+        $opis = $linia['opis_konta'];
     }
-    $conn->close();
+    $conn = null;
     
 ?>
 

@@ -93,15 +93,16 @@ if(isset($_POST['pass']) && isset($_POST['passp'])){
         
         if( $pass == $pass_powtorzone){
             if($weryfikacja_hasla == TRUE){
-                $pyt1 = "SELECT token_hasla FROM loginy WHERE token_hasla = '$token_strony'";
-                $query1 = $conn->query($pyt1);
+                $pyt1 = $conn->prepare("SELECT token_hasla FROM loginy WHERE token_hasla = ?");
+                $pyt1 -> execute([$token_strony]);
+                $pyt1_liczba = $pyt1 -> fetchColumn();
 
-                if( $query1->num_rows > 0 ){
+                if($pyt1_liczba){
                     $data_zmiany_hasla = date("Y-m-d H:i:s");
                     $token = substr(sha1(mt_rand()),0,20);
                     //Zmiana hasla, daty i tokenu
-                    $pyt2 = "UPDATE loginy SET data_zmiany_hasla = '$data_zmiany_hasla', token_hasla = '$token', pass = '$nowe_haslo' WHERE token_hasla = '$token_strony'";
-                    $query2 = $conn->query($pyt2);
+                    $pyt2 = $conn->prepare("UPDATE loginy SET data_zmiany_hasla = ?, token_hasla = ?, pass = ? WHERE token_hasla = ?")
+                    $pyt2 -> execute([$data_zmiany_hasla, $token, $nowe_haslo, $token_strony]);
                     header("location: logowanie.php");
                 }
                 else{
@@ -118,7 +119,6 @@ if(isset($_POST['pass']) && isset($_POST['passp'])){
         else{
             $_SESSION['wiadomosc_hasla'] = "Hasła nie są takie same!";
         }
-            
-$conn->close();
+$conn = null; 
 }
 ?>

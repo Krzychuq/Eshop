@@ -3,17 +3,13 @@ session_start();
 include_once("laczenieZbaza.php");
 $email = $_POST['email'];
 $pass = $_POST['pass'];
-$pytanieEmail = "SELECT pass FROM loginy WHERE login like '$email'";
+$pytanieEmail = $conn->prepare('SELECT pass FROM loginy WHERE login like ?');
+$pytanieEmail->execute([$email]);
+$pass_baza = $pytanieEmail->fetch(PDO::FETCH_ASSOC);
+$hash = $pass_baza['pass'];
 $czasZalogowania = date("Y-m-d H:i:s");
-$userLog = "UPDATE loginy set ostatnie_logowanie = '$czasZalogowania' WHERE login like '$email'";
-$pass_baza = $conn->query($pytanieEmail);
-$log = $conn->query($userLog);
-
-if($pass_baza->num_rows > 0){
-        while($linia = $pass_baza->fetch_assoc()) {
-                $hash = $linia['pass'];
-        }
-}
+$userLog = $conn->prepare('UPDATE loginy SET ostatnie_logowanie = ? WHERE login LIKE ?');
+$userLog->execute([$czasZalogowania, $email]);
 
 $validation = password_verify($pass, $hash);
 
@@ -22,22 +18,17 @@ $validation = password_verify($pass, $hash);
 
                 //identyfikacja
                 $mail = $_SESSION['email'];
-                $pyt_o_id="SELECT id FROM loginy WHERE login like '$mail'";
-                $wykonanie = $conn->query($pyt_o_id);
+                $pyt_o_id = $conn->prepare("SELECT id FROM loginy WHERE login like ?");
+                $pyt_o_id -> execute([$mail]);
+                $wykonanie = $pyt_o_id->fetch(PDO::FETCH_ASSOC);
+                $id = $wykonanie['id'];
 
-                if($wykonanie->num_rows > 0){
-                        while($linia = $wykonanie->fetch_assoc()) {
-                                $id = $linia['id'];
-                        }
-                }
                 //dane konta
-                $pyt_o_dane = "SELECT * FROM dane_konta WHERE id_loginu = '$id'";
-                $dane = $conn->query($pyt_o_dane);
-                if($dane->num_rows > 0){
-                        while($linia = $dane->fetch_assoc()) {
-                                $nick = $linia['nazwa'];
-                        }
-                }
+                $pyt_o_dane = $conn->prepare("SELECT nazwa FROM dane_konta WHERE id_loginu = ?");
+                $pyt_o_dane -> execute([$id]);
+                $wykonanie = $pyt_o_dane->fetch(PDO::FETCH_ASSOC);
+                $nick = $wykonanie['nazwa'];
+
                 $_SESSION['nickname'] = $nick;
                 // $sesja = $_SESSION['email'];
                 // $czas_sesji = time() + ();
@@ -48,5 +39,5 @@ $validation = password_verify($pass, $hash);
                 $_SESSION['wiadomosc_loginu'] = "Błedny email lub hasło!";
                 header("location: logowanie.php");
         }
-$conn->close();
+$conn = null;
 ?>

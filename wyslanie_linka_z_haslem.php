@@ -4,14 +4,13 @@ include_once("laczenieZbaza.php");
 //nabywca
 $email = $_POST["email"];
 
-$pyt1 = "SELECT login FROM loginy WHERE login like '$email'";
-$query1 = $conn->query($pyt1);
-
-    if($query1->num_rows > 0){
-        while($linia = $query1->fetch_assoc()) {
+$pyt1 = $conn -> prepare("SELECT login FROM loginy WHERE login like ?");
+$pyt1 -> execute([$email]);
+if($pyt1){
+    foreach($pyt1 as $linia){
         $mail_weryfikacja = $linia['login'];
-        }
     }
+}
 
 if($mail_weryfikacja == $email){
 
@@ -30,8 +29,8 @@ if($mail_weryfikacja == $email){
 
     if(mail($email, $tytul, $content, $headers)){
         //przypisanie tokenu
-        $pyt3 = "UPDATE loginy SET token_hasla = '$token' WHERE login like '$email'";
-        $query3 = $conn->query($pyt3);
+        $pyt3 = $conn->prepare("UPDATE loginy SET token_hasla = ? WHERE login like ?");
+        $pyt3 -> execute([$token, $email]);
     }
     else{
         $_SESSION['error'] = "Błąd z wysłaniem";
@@ -42,7 +41,7 @@ else{
     $_SESSION['error'] = "Błędny email";
     header("location: reset_hasla.php");
 }
-$conn->close();
+$conn = null;
 ?>
 <!DOCTYPE html>
 <html lang="pl">
