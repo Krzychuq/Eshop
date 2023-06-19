@@ -45,8 +45,9 @@ if( isset($login) && !empty($login) && isset($pass) && !empty($pass) ){
                         $id_login = $linia['id'];
                     }
                 }
-                $zapytanie3 = $conn -> prepare("INSERT INTO dane_konta (id_loginu) VALUES(?)");
-                $zapytanie3 -> execute([$id_login]);
+                $dostep = 0;
+                $zapytanie3 = $conn -> prepare("INSERT INTO dane_konta (id_loginu, dostep) VALUES(?,?)");
+                $zapytanie3 -> execute([$id_login,$dostep]);
 
              if ($zapytanie3 === FALSE) {
                  echo "Błąd dodania konta";

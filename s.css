@@ -19,7 +19,7 @@ body{
 
 }
 .contener{
-    padding-top: 2rem;
+    padding-top: 1rem;
     padding-bottom: 2rem; 
     flex: 1;
 }
@@ -28,8 +28,10 @@ header{
     flex-direction: row;
     padding: 10px;
 }
+
 /* ID's */
-#zmien_dane_div{
+#zmien_dane_div, #panel{
+    margin-top: 10px;
     text-align: center;
     padding: 10px;
     width: 100%;
@@ -393,8 +395,6 @@ header{
         width: 33%;
         padding: 20px;
         color: white;
-    }
-    .footer div:nth-child(2), .footer div:nth-child(3){
         border-left: 1px solid black;
         margin-top: 20px;
         margin-bottom: 20px;
@@ -408,6 +408,15 @@ header{
         .footer div img{
             cursor: pointer;
         }
+
+.menu_panelu{
+    display: flex;
+    flex-direction: row;
+}
+    .menu_panelu div{
+        flex: 20%;
+        text-align: center;
+    }
 /* mobile */
 
 @media only screen and (max-width: 1100px) {

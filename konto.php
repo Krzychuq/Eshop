@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v=1.2">
+    <link rel="stylesheet" href="s.css?v=1.1">
     <title>Sesja</title>
 </head>
 <body>
@@ -88,6 +88,14 @@ else{
 <div id="zmien_dane_div">
     <a href="edytuj_konto.php" id="zmien_dane"><button id="zmien_dane_button">Zmień dane</button></a>
 </div>
+<?php
+    $dostep = $_SESSION['dostep'];
+    if($dostep > 0){
+        echo "<div id='panel'><a href='panel.php' id='zmien_dane'><button id='zmien_dane_button'>Panel</button></a></div>";
+    }
+
+?>
+
 <?php 
     if(isset($_SESSION['wiadomosc_o_zdjeciu'])){
         echo $_SESSION['wiadomosc_o_zdjeciu'];

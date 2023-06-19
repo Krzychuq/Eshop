@@ -24,12 +24,16 @@ $validation = password_verify($pass, $hash);
                 $id = $wykonanie['id'];
 
                 //dane konta
-                $pyt_o_dane = $conn->prepare("SELECT nazwa FROM dane_konta WHERE id_loginu = ?");
+                $pyt_o_dane = $conn->prepare("SELECT nazwa, dostep FROM dane_konta WHERE id_loginu = ?");
                 $pyt_o_dane -> execute([$id]);
-                $wykonanie = $pyt_o_dane->fetch(PDO::FETCH_ASSOC);
-                $nick = $wykonanie['nazwa'];
+                $wykonanie = $pyt_o_dane->fetchAll();
+                foreach ($wykonanie as $linia){
+                        $nick = $linia['nazwa'];
+                        $dostep = $linia['dostep'];
+                }
 
                 $_SESSION['nickname'] = $nick;
+                $_SESSION['dostep'] = $dostep;
                 // $sesja = $_SESSION['email'];
                 // $czas_sesji = time() + ();
                 // setcookie($sesja,"/");

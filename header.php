@@ -1,9 +1,5 @@
-<script>
-  function wyszukania(){
-    
-  }
-</script>
 <header>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <div class='menu1'>
     <a href="index.php"><img src="svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
@@ -12,8 +8,10 @@
 
 <div class="menu2">
     <form class="form-wyszukania">
-        <input class="wyszukiwarka" type="text" size="30" onkeyup="wyszukania(this.value)" placeholder="Wyszukaj...">
-        <div id="wyniki"></div>
+        <input class="wyszukiwarka" type="text"  id="wyszukiwarka" onkeyup="wyszukanie(this.value)" placeholder="Wyszukaj...">
+        <div>
+            <p id="wyniki"></p>
+        </div>
     </form>
 </div>
 <div class='wyloguj'>
@@ -32,9 +30,24 @@
     }
 ?>
 </div>
+<script>
+function wyszukanie(str) {
+    if (str.length == 0){
+    document.getElementById("wyniki").innerHTML = "";
+    return;
+    } 
+    else{
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = function() {
+        document.getElementById("wyniki").innerHTML = this.responseText;
+        }
+    xmlhttp.open("GET", "wyszukiwarka.php?q=" + str);
+    xmlhttp.send();
+    }
+}
 
 
-
+</script>
 
 </header>
 <br>
