@@ -13,7 +13,7 @@ body{
     display: flex;
     flex-direction: column;
     background: url('svg/cool-background.svg'); 
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    font-family:'Segoe UI'; 
     color: black;
     margin: 0;
 
@@ -390,7 +390,7 @@ header{
     flex-direction: row;
 }
     .footer div{
-        font-family: Font1, "segoe ui";
+        font-family: Font2, "segoe ui";
         font-size: 20px;
         width: 33%;
         padding: 20px;
@@ -417,6 +417,27 @@ header{
         flex: 20%;
         text-align: center;
     }
+
+.panel{
+    font-family: arial;
+    font-size: 16px;
+}
+.panel h3{
+    cursor:default;
+}
+.tabela_produktow, .tabela_produktow td{
+    color: black;
+    background-color: #f5f5f54f;
+    border: 1px solid #000000b7;
+    padding: 3px;
+    margin: 2px;
+    border-collapse:collapse;
+}
+.tabela_produktow th{
+    padding: 4px;
+    
+}
+
 /* mobile */
 
 @media only screen and (max-width: 1100px) {

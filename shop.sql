@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Cze 15, 2023 at 02:16 PM
+-- Generation Time: Cze 20, 2023 at 12:14 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -36,17 +36,19 @@ CREATE TABLE `dane_konta` (
   `nr_tel` varchar(20) DEFAULT NULL,
   `miasto` varchar(100) DEFAULT NULL,
   `kraj` varchar(100) DEFAULT NULL,
-  `opis_konta` text DEFAULT NULL
+  `opis_konta` text DEFAULT NULL,
+  `dostep` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `dane_konta`
 --
 
-INSERT INTO `dane_konta` (`id`, `id_loginu`, `nazwa`, `avatar`, `data_urodzenia`, `nr_tel`, `miasto`, `kraj`, `opis_konta`) VALUES
-(1, 1, 'Krzychu', 'avatary/2023-05-17-16-42-07.png', '2004-05-03', '885332400', 'Wieruszów', 'Niger', 'Założyciel'),
-(4, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dane_konta` (`id`, `id_loginu`, `nazwa`, `avatar`, `data_urodzenia`, `nr_tel`, `miasto`, `kraj`, `opis_konta`, `dostep`) VALUES
+(1, 1, 'Krzychu', 'avatary/2023-05-17-16-42-07.png', '2004-05-03', '885332400', 'Wieruszów', 'Niger', 'Założyciel', 1),
+(4, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(5, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(6, 7, 's', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -69,10 +71,10 @@ CREATE TABLE `loginy` (
 --
 
 INSERT INTO `loginy` (`id`, `login`, `pass`, `data_rejestru`, `ostatnie_logowanie`, `token_hasla`, `data_zmiany_hasla`) VALUES
-(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2023-06-15 14:00:04', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09'),
-(2, 'nowy1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$c0plM0lRdzV5aWwwY29kQQ$I6CEs3PrwqnxD8kgxV52o7KPIrAPk86dFQzwVztUbqY', '2023-05-16 01:02:49', '2023-05-16 01:02:58', NULL, NULL),
-(3, 'krzychu1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$TTduOTV3ZzNZQjhpTjdSRg$t645NztZ3WK3AUsCnDEU3UpmuphJjg8NBMUAywS6xDI', '2023-05-24 00:03:01', NULL, NULL, NULL),
-(4, 'kurw1@w.pl', '$argon2i$v=19$m=65536,t=4,p=1$bVQvWUFEaDRjejNMU1ExeQ$pv7h8gW1X0tZZClupi7KiZka+V0OLWWWdIo+vPQM5t4', '2023-05-24 00:27:42', NULL, NULL, NULL);
+(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2023-06-20 08:20:26', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09'),
+(3, 'krzychu1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$TTduOTV3ZzNZQjhpTjdSRg$t645NztZ3WK3AUsCnDEU3UpmuphJjg8NBMUAywS6xDI', '2023-05-24 00:03:01', '2023-06-19 14:17:05', NULL, NULL),
+(4, 'kurw1@w.pl', '$argon2i$v=19$m=65536,t=4,p=1$bVQvWUFEaDRjejNMU1ExeQ$pv7h8gW1X0tZZClupi7KiZka+V0OLWWWdIo+vPQM5t4', '2023-05-24 00:27:42', NULL, NULL, NULL),
+(7, 'test1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YXJnZExsUDVKMUxkdlRmdw$pXTzJbJNc/kqGVz9T1Z2SQcxyV+R3zgx5kl5eW6+IPk', '2023-06-15 14:29:15', '2023-06-19 14:17:19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -83,11 +85,32 @@ INSERT INTO `loginy` (`id`, `login`, `pass`, `data_rejestru`, `ostatnie_logowani
 CREATE TABLE `produkty` (
   `id` int(11) NOT NULL,
   `nazwa` varchar(200) NOT NULL,
-  `cena` smallint(6) NOT NULL,
+  `cena` decimal(10,2) NOT NULL,
   `ilosc` smallint(6) NOT NULL,
   `rodzaj` varchar(50) NOT NULL,
   `rozmiar` varchar(20) NOT NULL,
-  `opis` text NOT NULL
+  `opis` text NOT NULL,
+  `zdjecie` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `produkty`
+--
+
+INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `rozmiar`, `opis`, `zdjecie`) VALUES
+(1, 'koszulka', 32.22, 2, '1', 'M', 'fajna', 'zdjecie/koszulka.jpg'),
+(2, 'spodnie', 85.99, 10, '2', 'L', 'Długie', 'zdjecie/spodnie.jpg'),
+(3, 'spodnie', 25.39, 15, '2', 'M', 'Ładne', 'null');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `rodzaj_produktu`
+--
+
+CREATE TABLE `rodzaj_produktu` (
+  `id` int(11) NOT NULL,
+  `nazwa` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
@@ -120,19 +143,19 @@ ALTER TABLE `produkty`
 -- AUTO_INCREMENT for table `dane_konta`
 --
 ALTER TABLE `dane_konta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `loginy`
 --
 ALTER TABLE `loginy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
