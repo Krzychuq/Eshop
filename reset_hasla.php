@@ -20,12 +20,6 @@ session_start();
             <input name='email' type="email" placeholder="Email">
         </div>
         <br>
-<?php 
-	if(isset($_SESSION['error'])){
-		echo $_SESSION['error'];
-		unset($_SESSION['error']);
-	}
-?>
 <br>
         <button type='submit' class="przycisk_zaloguj_zarejestruj">Wyślij</button>
 		
@@ -33,6 +27,12 @@ session_start();
 
 </section>
 </div>
+<?php 
+if(isset($_SESSION['error'])){
+    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
+    unset($_SESSION['error']);
+}
+?>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

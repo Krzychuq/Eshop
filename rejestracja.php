@@ -38,15 +38,6 @@
     <button id="przycisksub"  class="przycisk_zaloguj_zarejestruj" type="submit">Zarejestruj</button>
 
     <br style="margin-bottom: 1rem;">
-<?php
-// wyswietl blad
-if(isset($_SESSION['wiadomosc_rejestracji'])){
-  echo $_SESSION['wiadomosc_rejestracji'];
-  unset($_SESSION['wiadomosc_rejestracji']);
-  echo "<br>";
-}
-
-?>
 <!-- wytyczne hasla -->
     <div id="alert_haslo"> 
       <span>&#x1F6C8</span>
@@ -59,6 +50,13 @@ if(isset($_SESSION['wiadomosc_rejestracji'])){
 
 </section>
 </div>
+<?php 
+// wyswietl blad
+if(isset($_SESSION['wiadomosc_rejestracji'])){
+    echo "<div class='error'>" . "&#10005 ". $_SESSION["wiadomosc_rejestracji"] . "</div>";
+    unset($_SESSION['wiadomosc_rejestracji']);
+}
+?>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

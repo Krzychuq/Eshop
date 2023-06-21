@@ -96,13 +96,13 @@ else{
 
 ?>
 
-<?php 
-    if(isset($_SESSION['wiadomosc_o_zdjeciu'])){
-        echo $_SESSION['wiadomosc_o_zdjeciu'];
-        unset($_SESSION['wiadomosc_o_zdjeciu']);
-    }
-?>
 </div>
+<?php 
+if(isset($_SESSION['wiadomosc_o_zdjeciu'])){
+    echo "<div class='error'>" . "&#10005 ". $_SESSION["wiadomosc_o_zdjeciu"] . "</div>";
+    unset($_SESSION['wiadomosc_o_zdjeciu']);
+}
+?>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

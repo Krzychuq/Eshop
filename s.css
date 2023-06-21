@@ -403,6 +403,7 @@ header{
     }
         .footer div a{
             height: 28px;
+            width: fit-content;
             cursor: pointer;
         }
         .footer div img{
@@ -427,7 +428,7 @@ header{
 }
 .tabela_produktow, .tabela_produktow td{
     color: black;
-    background-color: #f5f5f54f;
+    background-color: #ffffff;
     border: 1px solid #000000b7;
     padding: 3px;
     margin: 2px;
@@ -438,6 +439,32 @@ header{
     
 }
 
+.button_refresh{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.error{
+    position: fixed;
+    background-color: #d41a1a8e;
+    padding: 20px;
+    width: max-content;
+    border-radius: 10px;
+    bottom: 10px;
+    left: 10px;
+}
+.showcase{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.showcase div{
+    flex:33;
+    text-align: center;
+}
+.lista_produktow_poziom{
+
+}
 /* mobile */
 
 @media only screen and (max-width: 1100px) {

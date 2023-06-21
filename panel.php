@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v=1.3">
+    <link rel="stylesheet" href="s.css?v=1.4">
     <title>Sesja</title>
 </head>
 <body>
@@ -20,18 +20,11 @@ session_start();
 <?php include_once("laczenieZbaza.php");?>
 <div style="text-align:center; margin-bottom:20px;">
     <a href="index.php"><img src="svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
-<?php 
-if(isset($_SESSION['error'])){
-  echo $_SESSION['error'];
-  unset($_SESSION['error']);
-  echo "<br>";
-}
-?>
 </div>
 <div class="menu_panelu">
 
 <div class="panel" id="panel1">
-    <h3 onclick="rozwin1()"  id="p1">Dodaj produkt &#11167</h3>
+    <h3 onclick="rozwin1()"  id="p1">Dodaj produkt</h3>
     <form action="dodaj_produkt.php" class="form_panel" method="post" id="form1" enctype="multipart/form-data">
         <input type="text" name="nazwa" placeholder="Nazwa">
         <input type="text" name="cena" placeholder="Cena">
@@ -45,7 +38,7 @@ if(isset($_SESSION['error'])){
 </div>
 
 <div class="panel" id="panel2">
-    <h3 id="p2" onclick="rozwin2()">Usuń produkt &#11167</h3>
+    <h3 id="p2" onclick="rozwin2()">Usuń produkt</h3>
     <form action="usun_produkt.php" class="form_panel" method="post" id="form2">
         <input type="text" name="id" placeholder="ID"><br>
         <button type="submit">Usuń</button>
@@ -53,8 +46,8 @@ if(isset($_SESSION['error'])){
 </div>
 
 <div class="panel" id="panel3" >
-    <h3 onclick="rozwin3()" id="p3">Aktualizuj produkt &#11167</h3>
-    <form action="akt_produkt.php" class="form_panel" method="post" id="form3">
+    <h3 onclick="rozwin3()" id="p3">Aktualizuj produkt</h3>
+    <form action="akt_produkt.php" class="form_panel" method="post" id="form3" enctype="multipart/form-data">
         <input type="text" name="id"  placeholder="Podaj ID">
         <input type="text" name="nazwa" placeholder="Nazwa">
         <input type="text" name="cena" placeholder="Cena">
@@ -68,7 +61,10 @@ if(isset($_SESSION['error'])){
 </div>
 
 <div class="panel" id="panel4">
+    <div style="display:flex; flex-direction:row; gap:2%; justify-content:center;">
     <h3 id="p4">Lista Produktów</h3>
+    <button class="button_refresh" onClick="window.location.reload();"><img src="svg/refresh.svg" alt="&#10227" width="20px" height="20px"></button>
+    </div>
     <table class="tabela_produktow">
         <tr>
             <th>ID</th>
@@ -91,7 +87,12 @@ foreach($pyt_produkt as $linia){
     echo "<td>" . $linia["rodzaj"] . "</td>";
     echo "<td>" . $linia["rozmiar"] . "</td>";
     echo "<td>" . $linia["opis"] . "</td>";
-    echo "<td>" . $linia["zdjecie"] . "</td>";
+    if( $linia["zdjecie"] == NULL ){
+        echo "<td>" . "Brak" . "</td>";
+    }
+    else{
+        echo "<td>" . "<img src=$linia[zdjecie] width=70px height=70px>" . "</td>";
+    }
     echo "</tr>";
 }
 echo "</table>";
@@ -100,5 +101,11 @@ echo "</table>";
     
 </div>
 </div>
+<?php 
+if(isset($_SESSION['error'])){
+    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
+    unset($_SESSION['error']);
+}
+?>
 </body>
 </html>

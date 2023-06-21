@@ -55,18 +55,17 @@ include_once("laczenieZbaza.php");
 
     <label for="opis">Napisz o sobie: </label>
     <textarea name="opis" id="opis" rows="11"  maxlength='372' placeholder="..." style="resize:none;"></textarea>
-
-<?php
-    if(isset($_SESSION['wiadomosc_konta'])){
-        echo $_SESSION['wiadomosc_konta'];
-        unset($_SESSION['wiadomosc_konta']);
-    }
-?>
     <button id="przycisk_zapisz" type="submit"><img src="svg/save.svg" width='30px' height='30px' alt="Zapisz"></button>
 
 </form>
 
 </div>
+<?php 
+if(isset($_SESSION['wiadomosc_konta'])){
+    echo "<div class='error'>" . "&#10005 ". $_SESSION["wiadomosc_konta"] . "</div>";
+    unset($_SESSION['wiadomosc_konta']);
+}
+?>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

@@ -6,15 +6,37 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v1.3">
+    <link rel="stylesheet" href="s.css?v1.1">
     <title>Sesja</title>
 </head>
 <body>
-<?php include_once("header.php")?>
+<?php 
+include_once("header.php");
+include_once("laczenieZbaza.php");
+?>
+
 <div class="contener">
-<div style="text-align: center;">
-    <h1>.</h1>
-    <img src="https://media.giphy.com/media/j7ktZ6mt6PEE8/giphy.gif" width="200px" height="auto" alt="gif">
+<div class="showcase">
+<?php
+$pyt_produkt = $conn -> prepare("SELECT nazwa, cena, zdjecie FROM produkty WHERE id < ?");
+$pyt_produkt -> execute([4]);
+
+while($linia = $pyt_produkt->fetch()){
+    echo "<div>";
+    echo "<img src=$linia[zdjecie] width=100px height=100px>";
+    echo "<p>$linia[nazwa]</p>";
+    echo "<p>$linia[cena] zł</p>";
+    echo "</div>";
+}
+?>
+</div>
+<div class="lista_produktow_poziom">
+
+    
+</div>
+
+<div class="lista_produktow_poziom">
+    
 </div>
 
 </div>
