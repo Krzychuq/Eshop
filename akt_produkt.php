@@ -45,7 +45,7 @@ $nazwa_zdjecia = $_FILES["zdjecie"]["name"];
 $zdjecietemp = $_FILES["zdjecie"]["tmp_name"];
 $rozszerzenie_zdjecia = mime_content_type($zdjecietemp);
 //sprawdzanie formatu
-if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" || $rozszerzenie_zdjecia == "image/jpeg"){
+if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" || $rozszerzenie_zdjecia == "image/jpeg" || $rozszerzenie_zdjecia == "image/webp"){
     if(is_uploaded_file($zdjecietemp)) {
 
         //nowa nazwa z datą

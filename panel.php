@@ -30,7 +30,15 @@ session_start();
         <input type="text" name="cena" placeholder="Cena">
         <input type="text" name="ilosc" placeholder="Ilość">
         <input type="text" name="rodzaj" placeholder="Rodzaj">
-        <input type="text" name="rozmiar" placeholder="Rozmiar">
+        <select name="rozmiar">
+            <option value="Uniwersalny">Uniwersalny</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+        </select>
         <input type="text" name="opis" placeholder="Opis">
         <input type="file" name="zdjecie" placeholder="Zdjecie">
         <button type="submit">Dodaj</button>

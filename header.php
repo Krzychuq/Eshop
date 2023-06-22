@@ -7,12 +7,13 @@
 </div>
 
 <div class="menu2">
+    <img src="svg/search.svg" width="22px" height="22px" alt="U+1f60d">
     <form class="form-wyszukania">
-        <input class="wyszukiwarka" type="text"  id="wyszukiwarka" onkeyup="wyszukanie(this.value)" placeholder="Wyszukaj...">
-        <div>
-            <p id="wyniki"></p>
-        </div>
+        <input class="wyszukiwarka" type="text"  id="wyszukiwarka" onkeyup="wyszukanie(this.value)" placeholder="Szukaj">
     </form>
+    <div>
+        <p id="wyniki"></p>
+    </div>
 </div>
 <div class='wyloguj'>
 <?php

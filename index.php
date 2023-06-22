@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v1.1">
+    <link rel="stylesheet" href="s.css?v1.3">
     <title>Sesja</title>
 </head>
 <body>
@@ -18,14 +18,17 @@ include_once("laczenieZbaza.php");
 <div class="contener">
 <div class="showcase">
 <?php
-$pyt_produkt = $conn -> prepare("SELECT nazwa, cena, zdjecie FROM produkty WHERE id < ?");
+$pyt_produkt = $conn -> prepare("SELECT nazwa, cena, zdjecie,link FROM produkty WHERE id < ?");
 $pyt_produkt -> execute([4]);
 
 while($linia = $pyt_produkt->fetch()){
+    $nazwa = ucfirst($linia["nazwa"]);
     echo "<div>";
-    echo "<img src=$linia[zdjecie] width=100px height=100px>";
-    echo "<p>$linia[nazwa]</p>";
-    echo "<p>$linia[cena] zł</p>";
+    echo "<a style='color: black; text-decoration:none;' href=$linia[link]>";
+    echo "<img src=$linia[zdjecie]>";
+    echo "<p style='font-size: 1.4rem;'>$nazwa</p>";
+    echo "<p style='font-size: 0.9rem; font-weight:bold;'>$linia[cena] PLN</p>";
+    echo "</a>";
     echo "</div>";
 }
 ?>
@@ -45,3 +48,4 @@ while($linia = $pyt_produkt->fetch()){
 </footer>
 </body>
 </html>
+<script src="slideshow.js"></script>
