@@ -24,10 +24,11 @@ if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" 
     $str = str_replace(" ", "-", $zmiana9);
     $litera = strtolower(chr(rand(65,91)));
     $generuj_indeks = rand(0,999999) . $litera;
-    $link = "http://localhost/forum/". $str . "-" .$generuj_indeks. ".php";
-    $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,rozmiar,opis,zdjecie,indeks_produktu,link) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?)');
+    $strona = $str . "-" .$generuj_indeks. ".php";
+    $link = "http://localhost/forum/produkty/". $strona;
+    $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,rozmiar,opis,zdjecie,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $dodanie_produktu -> execute([$nazwa, $cena, $ilosc, $rodzaj, $rozmiar, $opis, $sciezka_do_bazy,$generuj_indeks,$link]);
-    if(is_uploaded_file($zdjecietemp)) {
+    if(is_uploaded_file($zdjecietemp)){
         //nowa nazwa z datą
         $zdjecie_bez_roz = explode(".",$nazwa_zdjecia);
         $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . '.' . $zdjecie_bez_roz[1];
@@ -38,6 +39,10 @@ if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" 
         if(move_uploaded_file($zdjecietemp, $sciezka . $nowa_nazwa_zdjecia)) {
             $dodanie_produktu = $conn->prepare('UPDATE produkty SET zdjecie = ? WHERE id = ?');
             $dodanie_produktu -> execute([$sciezka_do_bazy, $id]);
+            include_once("conf_nowa_strona.php");
+            $nowa_strona_produktu = fopen($strona,"w");
+            $fwrite($nowa_strona_produktu, $kod_strony);
+            fclose($nowa_strona_produktu);
         }
         else {
             $_SESSION['error'] = "Nie udało sie umieścić zdjecia!";

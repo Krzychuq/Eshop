@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v=1.4">
+    <link rel="stylesheet" href="s.css?v=1.2">
     <title>Sesja</title>
 </head>
 <body>
@@ -48,7 +48,7 @@ session_start();
 <div class="panel" id="panel2">
     <h3 id="p2" onclick="rozwin2()">Usuń produkt</h3>
     <form action="usun_produkt.php" class="form_panel" method="post" id="form2">
-        <input type="text" name="id" placeholder="ID"><br>
+        <input type="text" name="id" placeholder="ID">
         <button type="submit">Usuń</button>
     </form>
 </div>

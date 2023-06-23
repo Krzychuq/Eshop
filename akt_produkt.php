@@ -5,8 +5,23 @@ $id = $_POST["id"];
 if(!empty($id) && isset($id)){
 if(!empty($_POST["nazwa"]) && isset($_POST["nazwa"])){
     $nazwa = $_POST["nazwa"];
-    $dodanie_produktu = $conn->prepare('UPDATE produkty SET nazwa = ? WHERE id = ?');
-    $dodanie_produktu -> execute([$nazwa, $id]);
+    $nowa_nazwa = strtolower($nazwa);
+    $zmiana1 = str_replace("ą", "a", $nowa_nazwa);
+    $zmiana2 = str_replace("ć", "c", $zmiana1);
+    $zmiana3 = str_replace("ę", "e", $zmiana2);
+    $zmiana4 = str_replace("ł", "l", $zmiana3);
+    $zmiana5 = str_replace("ń", "n", $zmiana4);
+    $zmiana6 = str_replace("ó", "o", $zmiana5);
+    $zmiana7 = str_replace("ś", "s", $zmiana6);
+    $zmiana8 = str_replace("ż", "z", $zmiana7);
+    $zmiana9 = str_replace("ź", "z", $zmiana8);
+    $str = str_replace(" ", "-", $zmiana9);
+    $litera = strtolower(chr(rand(65,91)));
+    $generuj_indeks = rand(0,999999) . $litera;
+    $strona = $str . "-" .$generuj_indeks. ".php";
+    $link = "http://localhost/forum/produkty/". $strona;
+    $dodanie_produktu = $conn->prepare('UPDATE produkty SET nazwa = ?,indeks_produktu = ?, link = ? WHERE id = ?');
+    $dodanie_produktu -> execute([$nazwa, $generuj_indeks, $link, $id]);
 }
 
 if(!empty($_POST["cena"]) && isset($_POST["cena"])){
