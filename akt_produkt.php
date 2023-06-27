@@ -45,7 +45,7 @@ if(!empty($_POST["rodzaj"]) && isset($_POST["rodzaj"])){
 
 if(!empty($_POST["rozmiar"]) && isset($_POST["rozmiar"])){
     $rozmiar = $_POST["rozmiar"];
-    $dodanie_produktu = $conn->prepare('UPDATE produkty SET rozmiar = ? WHERE id = ?');
+    $dodanie_produktu = $conn->prepare('UPDATE rozmiary_produktow SET rozmiar = ? WHERE id_produktu = ?');
     $dodanie_produktu -> execute([$rozmiar,$id]);
 }
 

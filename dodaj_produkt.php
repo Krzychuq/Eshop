@@ -26,8 +26,12 @@ if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" 
     $generuj_indeks = rand(0,999999) . $litera;
     $strona = $str . "-" .$generuj_indeks. ".php";
     $link = "http://localhost/forum/produkty/". $strona;
-    $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,rozmiar,opis,zdjecie,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $dodanie_produktu -> execute([$nazwa, $cena, $ilosc, $rodzaj, $rozmiar, $opis, $sciezka_do_bazy,$generuj_indeks,$link]);
+    $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,opis,zdjecie,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
+    $dodanie_produktu -> execute([$nazwa, $cena, $ilosc, $rodzaj, $opis, $sciezka_do_bazy,$generuj_indeks,$link]);
+    $id = $conn -> prepare('SELECT id FROM produkty WHERE indeks_produktu LIKE ?');
+    $id -> execute([$generuj_indeks]);
+    $dodaj_rozmiar = $conn->prepare('INSERT INTO rozmiary_produktow (id_produktu,rozmiar) VALUES(?, ?)');
+    $dodaj_rozmiar -> execute([$id, $rozmiar]);
     if(is_uploaded_file($zdjecietemp)){
         //nowa nazwa z datą
         $zdjecie_bez_roz = explode(".",$nazwa_zdjecia);

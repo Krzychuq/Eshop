@@ -86,14 +86,18 @@ session_start();
         </tr>
 <?php
 $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
-foreach($pyt_produkt as $linia){
+
+foreach($pyt_produkt as $linia){  
+    $pyt_rozmiar = $conn->prepare("SELECT rozmiar FROM rozmiary_produktow WHERE id_produktu = ?");
+    $pyt_rozmiar->execute([$linia["id"]]);
+    $rozmiar = $pyt_rozmiar->fetch();
     echo "<tr>";
     echo "<td>" . $linia["id"] . "</td>";
     echo "<td>" . $linia["nazwa"] . "</td>";
     echo "<td>" . $linia["cena"] . "</td>";
     echo "<td>" . $linia["ilosc"] . "</td>";
     echo "<td>" . $linia["rodzaj"] . "</td>";
-    echo "<td>" . $linia["rozmiar"] . "</td>";
+    echo "<td>" . $rozmiar[0] . "</td>";
     echo "<td>" . $linia["opis"] . "</td>";
     if( $linia["zdjecie"] == NULL ){
         echo "<td>" . "Brak" . "</td>";
@@ -104,6 +108,7 @@ foreach($pyt_produkt as $linia){
     echo "</tr>";
 }
 echo "</table>";
+$conn = null;
 ?>
 </div>
     
