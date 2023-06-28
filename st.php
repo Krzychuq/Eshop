@@ -10,7 +10,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v1.1">
+    <link rel="stylesheet" href="s.css?v1.2">
     <title>Sesja</title>
 </head>
 <body>
@@ -39,22 +39,25 @@ $rozmiary = $pyt_rozmiar->fetchAll();
     <div id="div2">
     <!-- info -->
         <?php
-        echo "<form action=dodaj_do_koszyka.php method=GET>";
-        echo "<label name='$dane[nazwa]' id=nazwa>".ucfirst($dane["nazwa"])."</label>";
-        echo "<label name='$dane[cena]' id=cena>$dane[cena] zł</label>";
-        echo "<label name='$dane[ilosc]' id=ilosc>Ilość: $dane[ilosc]</label>";
-        echo "<span>Rozmiary</span> "."<select id=rozmiar name=rozmiar>";
+        echo "<form action=dodaj_do_koszyka.php method=POST>";
+        echo "<input style='display:none;' name=indeks value=$indeks[0] type=text>";
+        echo "<p id=nazwa>".ucfirst($dane["nazwa"])."</p>";
+        echo "<p name=cena id=cena>$dane[cena] zł</p>";
+        echo "<p name=ilosc id=ilosc>Dostepna ilość: $dane[ilosc]</p>";
+        echo "<span>Rozmiary</span> "."<select id=rozmiar name=rozmiar >";
         foreach($rozmiary as $rozmiar){
             echo "<option value=$rozmiar[rozmiar]>".$rozmiar["rozmiar"]."</option>";
         }
         echo "</select>";
+        echo "<button type=submit >Kup teraz</button></form>";
         ?>
     </div>
 
     <div id="div3">
     <!-- opis -->
         <?php
-        echo "<p>".$dane["opis"]."</p>";
+        echo "<h2>Opis produktu</h2><br>";
+        echo "<p style='padding:1%; font-family:Segoe UI;'>".$dane["opis"]."</p>";
         ?>
     </div>
 </div>
@@ -65,3 +68,6 @@ $rozmiary = $pyt_rozmiar->fetchAll();
 </footer>
 </body>
 </html>
+<script>
+
+</script>
