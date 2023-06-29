@@ -22,12 +22,12 @@
     }
 
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){
-        echo "<a href='konto.php' id='konto'><img src='svg/account.svg' width='30px' height='30px' alt='konto'></a>";
+        echo "<a href='konto.php' id='konto'><img src='svg/account.svg' width='36px' height='36px' alt='konto'></a>";
     }
 
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){
         echo "<form  action='wyloguj.php'  method='POST'>
-                <button id='wyloguj'><img src='svg/logout.svg' width='30px' height='30px' alt='&#9032'></button> </form>";
+                <button id='wyloguj'><img src='svg/logout.svg' width='36px' height='36px' alt='&#9032'></button> </form>";
     }
 ?>
 </div>

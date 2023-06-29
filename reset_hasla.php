@@ -31,6 +31,7 @@ session_start();
 if(isset($_SESSION['error'])){
     echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
     unset($_SESSION['error']);
+    echo "<script src='blad.js'></script>";
 }
 ?>
 <footer>

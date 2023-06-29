@@ -26,7 +26,8 @@ body{
     min-height: 100vh; 
     display: flex;
     flex-direction: column;
-    background: url('svg/cool-background.svg'); 
+    background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+    /* background: url('svg/cool-background.svg');  */
     font-family:'Segoe UI'; 
     color: black;
     margin: 0;
@@ -133,14 +134,21 @@ header{
     color: white;
     padding: 7px;
     cursor: pointer;
+    transition: 1s;
 }
     #wyloguj:hover{
-        transition: 0.3s;
-        transform: scale(1.2);
+        transition: 0.8s;
+        transform: rotate(360deg) scale(1.1);
     }
 #konto{
-    padding: 7px;
+    padding: 6px;
+    transition: 1s;
 }
+#konto:hover{
+    transition: 0.8s;
+    transform: rotate(-360deg) scale(1.1);
+}
+
 /* Classes */
 .form-wyszukania{
     width: 100%;
@@ -283,8 +291,13 @@ header{
     text-align: center;
     background-color: #ffffffef;
     border-radius: 10px;
-    border: solid 1px #ad0e4bb7;
+    border: none;
+    transition: 0.4s;
 }
+    .menu2:active{
+        transition: 1s;
+        transform: scale(1.1);
+    }
 
 .zdjecie_profilowe{
     margin-left: auto;
@@ -405,7 +418,7 @@ header{
     height: 20%;
     border-top-left-radius: 31px;
     border-top-right-radius: 31px;
-    background-color: rgba(156, 0, 60, 0.880);
+    background-color: rgba(0, 0, 0, 0.925);
     display: flex;
     flex-direction: row;
 }
@@ -469,6 +482,8 @@ header{
     border: 1px solid #000000b7;
     padding: 3px;
     margin: 2px;
+    font-size: 14px;
+    font-weight: bold;
     border-collapse:collapse;
 }
 .tabela_produktow th{
@@ -476,20 +491,31 @@ header{
     background-color: #c7c7c7;
     
 }
-
+.lista_produktow{
+    display:flex; 
+    flex-direction:row; 
+    gap:2%; 
+    justify-content:center;
+}
 .button_refresh{
     background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: 0.2s;
 }
+    .button_refresh:hover{
+        transition: 0.2s;
+        transform: scale(1.1);
+    }
 .error{
     position: fixed;
-    background-color: #d41a1a8e;
+    background-color: #d41a1aec;
     padding: 20px;
     width: max-content;
     border-radius: 10px;
     bottom: 10px;
     left: 10px;
+    transition: 1s;
 }
 .showcase{
     display: flex;
@@ -514,9 +540,9 @@ header{
     width: 280px;
     height: 310px;
 }
-.lista_produktow_poziom{
+/* .lista_produktow_poziom{
 
-}
+} */
 .grid_produkt{
     width: 100%;
     height: max-content;
@@ -559,7 +585,7 @@ header{
 .grid_produkt div:nth-child(2) #rozmiar{
     font-size: 17px;
     height: auto;
-    width: 60px;
+    width: max-content;
     text-align: center;
     border: none;
     background: transparent;
@@ -567,13 +593,27 @@ header{
     cursor: pointer;
     padding: 5px;
 }
+/* ssssssssssssssssssssssssssss */
+#div1 {
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+    height: auto;
+    overflow: hidden;
+  }
+ #div1 img {
+    transform-origin: center center;
+    object-fit: cover;
+    cursor: zoom-in;
+}
+/* ssssssssssssssss */
 .grid_produkt div:nth-child(2) button{
     margin-top: 25%;
     width: 80%;
     height: 7vh;
     font-size: 1.1rem;
     background-color: #ee2c4c;
-    color: #e7e7e7;
+    color: #fdfdfd;
     border: none;
     border-radius: 3px;
     box-shadow: 3px 3px 1px #0000004b;

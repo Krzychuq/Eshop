@@ -101,6 +101,7 @@ else{
 if(isset($_SESSION['wiadomosc_o_zdjeciu'])){
     echo "<div class='error'>" . "&#10005 ". $_SESSION["wiadomosc_o_zdjeciu"] . "</div>";
     unset($_SESSION['wiadomosc_o_zdjeciu']);
+    echo "<script src='blad.js'></script>";
 }
 ?>
 <footer>

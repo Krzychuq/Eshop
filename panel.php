@@ -24,7 +24,7 @@ session_start();
 <div class="menu_panelu">
 
 <div class="panel" id="panel1">
-    <h3 onclick="rozwin1()"  id="p1">Dodaj produkt</h3>
+    <h3   id="p1">Dodaj produkt</h3>
     <form action="dodaj_produkt.php" class="form_panel" method="post" id="form1" enctype="multipart/form-data">
         <input type="text" name="nazwa" placeholder="Nazwa">
         <input type="text" name="cena" placeholder="Cena">
@@ -43,10 +43,29 @@ session_start();
         <input type="file" name="zdjecie" placeholder="Zdjecie">
         <button type="submit">Dodaj</button>
     </form>
+    <br>
+    <table style="margin-left:auto; margin-right:auto;" class="tabela_produktow">
+        <tr>
+            <th>Numer</th>
+            <th>Rodzaj</th>
+        </tr>
+    <?php
+    $pyt_rodz = $conn->query("SELECT * FROM rodzaj_produktu")->fetchAll();
+
+    foreach($pyt_rodz as $linia){
+        echo "<tr>";
+        echo "<td>" . $linia["id"] . "</td>";
+        echo "<td>" . $linia["nazwa"] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+    
+    
+    ?>
 </div>
 
 <div class="panel" id="panel2">
-    <h3 id="p2" onclick="rozwin2()">Usuń produkt</h3>
+    <h3 id="p2" >Usuń produkt</h3>
     <form action="usun_produkt.php" class="form_panel" method="post" id="form2">
         <input type="text" name="id" placeholder="ID">
         <button type="submit">Usuń</button>
@@ -54,7 +73,7 @@ session_start();
 </div>
 
 <div class="panel" id="panel3" >
-    <h3 onclick="rozwin3()" id="p3">Aktualizuj produkt</h3>
+    <h3  id="p3">Aktualizuj produkt</h3>
     <form action="akt_produkt.php" class="form_panel" method="post" id="form3" enctype="multipart/form-data">
         <input type="text" name="id"  placeholder="Podaj ID">
         <input type="text" name="nazwa" placeholder="Nazwa">
@@ -69,7 +88,7 @@ session_start();
 </div>
 
 <div class="panel" id="panel4">
-    <div style="display:flex; flex-direction:row; gap:2%; justify-content:center;">
+    <div class="lista_produktow">
     <h3 id="p4">Lista Produktów</h3>
     <button class="button_refresh" onClick="window.location.reload();"><img src="svg/refresh.svg" alt="&#10227" width="20px" height="20px"></button>
     </div>
@@ -108,7 +127,6 @@ foreach($pyt_produkt as $linia){
     echo "</tr>";
 }
 echo "</table>";
-$conn = null;
 ?>
 </div>
     
@@ -118,7 +136,9 @@ $conn = null;
 if(isset($_SESSION['error'])){
     echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
     unset($_SESSION['error']);
+    echo "<script src='blad.js'></script>";
 }
+$conn = null;
 ?>
 </body>
 </html>

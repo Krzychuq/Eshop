@@ -55,6 +55,7 @@
 if(isset($_SESSION['wiadomosc_rejestracji'])){
     echo "<div class='error'>" . "&#10005 ". $_SESSION["wiadomosc_rejestracji"] . "</div>";
     unset($_SESSION['wiadomosc_rejestracji']);
+    echo "<script src='blad.js'></script>";
 }
 ?>
 <footer>

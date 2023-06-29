@@ -1,5 +1,7 @@
 <?php
 include_once('laczenieZbaza.php');
+if(!empty($_POST["nazwa"])){
+
 $nazwa = $_POST["nazwa"];
 $cena = $_POST["cena"];
 $ilosc = $_POST["ilosc"];
@@ -60,7 +62,7 @@ else{
     $_SESSION['error']= "Zdjęcie może być tylko w formacie jpg, jpeg, png, webp !";
     header("location: panel.php");
 }
-header("location: panel.php");
 $conn = null;
-
+}
+header("location: panel.php");
 ?>
