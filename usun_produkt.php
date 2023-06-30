@@ -2,11 +2,13 @@
 session_start();
 include_once('laczenieZbaza.php');
 $id = $_POST["id"];
-$zdjecie_pyt= $conn->prepare("SELECT zdjecie FROM produkty WHERE id = ?");
-$zdjecie_pyt -> execute([$id]);
-$zdjecie_do_usuniecia = $zdjecie_pyt -> fetch();
-if($zdjecie_do_usuniecia){
-    $usuniecie_zdjecia = unlink($zdjecie_do_usuniecia[0]);
+$pyt= $conn->prepare("SELECT zdjecie, link FROM produkty WHERE id = ?");
+$pyt -> execute([$id]);
+$wyniki = $pyt -> fetch();
+if($pyt->rowCount()){
+    $usuniecie_zdjecia = unlink($wyniki["zdjecie"]);
+    $n1 = explode("http://localhost/forum/", $wyniki["link"]);
+    $plik_usun = unlink($n1[1]);
     $usunr = $conn -> prepare("DELETE FROM rozmiary_produktow WHERE id_produktu = ?");
     $usunr -> execute([$id]);
     $usunp = $conn -> prepare("DELETE FROM produkty WHERE id = ?");

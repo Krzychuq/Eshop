@@ -109,14 +109,14 @@ $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
 foreach($pyt_produkt as $linia){  
     $pyt_rozmiar = $conn->prepare("SELECT rozmiar FROM rozmiary_produktow WHERE id_produktu = ?");
     $pyt_rozmiar->execute([$linia["id"]]);
-    $rozmiar = $pyt_rozmiar->fetch();
+    $rozmiar = $pyt_rozmiar->fetch(PDO::FETCH_ASSOC);
     echo "<tr>";
     echo "<td>" . $linia["id"] . "</td>";
     echo "<td>" . $linia["nazwa"] . "</td>";
     echo "<td>" . $linia["cena"] . "</td>";
     echo "<td>" . $linia["ilosc"] . "</td>";
     echo "<td>" . $linia["rodzaj"] . "</td>";
-    echo "<td>" . $rozmiar[0] . "</td>";
+    echo "<td>" . $rozmiar["rozmiar"] . "</td>";
     echo "<td>" . $linia["opis"] . "</td>";
     if( $linia["zdjecie"] == NULL ){
         echo "<td>" . "Brak" . "</td>";
