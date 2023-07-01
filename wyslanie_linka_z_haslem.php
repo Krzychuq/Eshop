@@ -53,7 +53,7 @@ $conn = null;
 </head>
 <body>
 <?php include_once("header.php");?>
-<div style="content">
+<div class="contener">
 <section class="wrap-sign-up-in">
     <div class='zaloguj'>
         <div class="divy-grid">

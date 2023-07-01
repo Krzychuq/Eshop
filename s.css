@@ -247,7 +247,7 @@ header{
 }
 .przycisk_zaloguj_zarejestruj{
     margin-top: 7px;
-    background-color: rgb(214, 65, 122);
+    background-color: rgb(206, 206, 206);
     box-shadow: 0 0 10px black;
     border: none;
     border-radius: 10px;
@@ -260,6 +260,10 @@ header{
     transition: 0.5s;
     cursor: pointer;
 }
+    .przycisk_zaloguj_zarejestruj:hover{
+        background-color: rgb(163, 247, 53);
+        transition: 0.2s;
+    }
     .przycisk_zaloguj_zarejestruj:active{
         transform: scale(0.9);
         transition: 0.5s;
@@ -321,7 +325,7 @@ header{
         transition: 0.3s;
     }
     .rejestracja a:hover{
-        color: rgb(206, 2, 80);
+        color: rgb(77, 206, 2);
         font-size: 15px;
         transition: 0.3s;
     }
@@ -331,7 +335,7 @@ header{
 }
 
 .wrap-sign-up-in{
-    background-color: rgba(7, 7, 7, 0.829);
+    background-color: rgba(7, 7, 7, 0.897);
     width: fit-content;
     margin-left: auto;
     margin-right: auto;   
@@ -608,9 +612,9 @@ header{
 }
 /* ssssssssssssssss */
 .grid_produkt div:nth-child(2) button{
-    margin-top: 25%;
+    margin-top: 10%;
     width: 80%;
-    height: 7vh;
+    height: 6vh;
     font-size: 1.1rem;
     background-color: #ee2c4c;
     color: #fdfdfd;

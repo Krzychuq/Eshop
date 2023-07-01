@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v1.3">
+    <link rel="stylesheet" href="s.css?v1.1">
     <title>Sesja</title>
 </head>
 <body>
@@ -19,7 +19,7 @@ include_once("laczenieZbaza.php");
 <div class="showcase">
 <?php
 $pyt_produkt = $conn -> prepare("SELECT nazwa, cena, zdjecie,link FROM produkty WHERE id < ?");
-$pyt_produkt -> execute([4]);
+$pyt_produkt -> execute([9]);
 
 while($linia = $pyt_produkt->fetch()){
     $nazwa = ucfirst($linia["nazwa"]);

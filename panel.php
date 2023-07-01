@@ -112,7 +112,7 @@ foreach($pyt_produkt as $linia){
     $rozmiar = $pyt_rozmiar->fetch(PDO::FETCH_ASSOC);
     echo "<tr>";
     echo "<td>" . $linia["id"] . "</td>";
-    echo "<td>" . $linia["nazwa"] . "</td>";
+    echo "<td>" . "<a style='color:black;' href=" .$linia["link"].">".$linia["nazwa"] . "</a></td>";
     echo "<td>" . $linia["cena"] . "</td>";
     echo "<td>" . $linia["ilosc"] . "</td>";
     echo "<td>" . $linia["rodzaj"] . "</td>";
