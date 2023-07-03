@@ -18,8 +18,8 @@ include_once("laczenieZbaza.php");
 <div class="contener">
 <div class="showcase">
 <?php
-$pyt_produkt = $conn -> prepare("SELECT nazwa, cena, zdjecie,link FROM produkty WHERE id < ?");
-$pyt_produkt -> execute([9]);
+$pyt_produkt = $conn -> prepare("SELECT nazwa, cena, zdjecie,link FROM produkty WHERE id BETWEEN ? AND ?");
+$pyt_produkt -> execute([50,53]);
 
 while($linia = $pyt_produkt->fetch()){
     $nazwa = ucfirst($linia["nazwa"]);

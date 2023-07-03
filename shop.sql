@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Cze 29, 2023 at 08:21 AM
+-- Generation Time: Lip 03, 2023 at 02:13 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -45,7 +45,7 @@ CREATE TABLE `dane_konta` (
 --
 
 INSERT INTO `dane_konta` (`id`, `id_loginu`, `nazwa`, `avatar`, `data_urodzenia`, `nr_tel`, `miasto`, `kraj`, `opis_konta`, `dostep`) VALUES
-(1, 1, 'Krzychu', 'avatary/2023-05-17-16-42-07.png', '2004-05-03', '885332400', 'Wieruszów', 'Niger', 'Założyciel', 1),
+(1, 1, 'Krzychu', 'avatary/2023-05-17-16-42-07.png', '2004-05-03', '885332400', 'Wieruszów', 'Polska', 'Założyciel', 1),
 (4, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (5, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (6, 7, 's', NULL, NULL, NULL, NULL, NULL, NULL, 0);
@@ -99,11 +99,9 @@ CREATE TABLE `produkty` (
 --
 
 INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`, `link`) VALUES
-(1, 'koszulka', 32.22, 2, '1', 'Czarna męska koszulka z kolorowym napisem CROPP z przodu.\r\n\r\nuszyta w 100% z bawełny\r\nkrótkie rękawy\r\nregularny krój\r\nnadruk z efektem holo\r\n\r\n\r\nLPP, właściciel marki Cropp, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.\r\n\r\nKliknij tutaj aby dowiedzieć się więcej o naszym partnerstwie z CmiA. \r\n\r\nWięcej na:\r\n\r\nwww.cottonmadeinafrica.org/en\r\n\r\nAn initiative of the Aid by Trade Foundation', 'zdjecia_produktow/2023-06-21-15-30-06.jpg', '952182t', 'http://localhost/forum/koszulka-952182t.php'),
-(2, 'spodnie', 213.32, 10, '2', 'Długie', 'zdjecia_produktow/2023-06-21-15-29-58.jpg', '140337b', 'http://localhost/forum/spodnie-140337b.php'),
-(3, 'kurtka', 99.23, 21, '3', 'czarna', 'zdjecia_produktow/2023-06-21-12-28-43.jpg', '72788p', 'http://localhost/forum/kurtka-72788p.php'),
-(5, 'plecak', 140.00, 6, '4', 'Vans', 'zdjecia_produktow/2023-06-22-14-43-05.webp', '809535d', 'http://localhost/forum/plecak-809535d.php'),
-(6, 'plecak', 109.99, 4, '4', 'Vans', 'zdjecia_produktow/2023-06-22-14-43-12.jpg', '294106j', 'http://localhost/forum/plecak-294106j.php');
+(50, 'koszulka', 42.99, 20, '4', 'Fajna', 'zdjecia_produktow/2023-07-01-16-39-27.jpg', '489815t', 'http://localhost/forum/produkty/koszulka-489815t.php'),
+(51, 'plecak', 92.99, 3, '0', 'Fajna', 'zdjecia_produktow/2023-07-01-14-46-50.jpg', '324373k', 'http://localhost/forum/produkty/czapka-z-daszkiem-324373k.php'),
+(52, 'kurtka', 109.99, 21, '4', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-03-07-23-38.webp', '757012d', 'http://localhost/forum/produkty/kurtka-757012d.php');
 
 -- --------------------------------------------------------
 
@@ -148,13 +146,10 @@ CREATE TABLE `rozmiary_produktow` (
 --
 
 INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`) VALUES
-(1, 1, 'S'),
-(2, 2, 'L'),
-(3, 2, 'S'),
-(4, 3, 'M'),
-(5, 5, 'Uniwersalny'),
-(6, 6, 'Uniwersalny'),
-(7, 1, 'M');
+(34, 50, 'M'),
+(35, 51, 'Uniwersalny'),
+(36, 50, 'S'),
+(37, 52, 'L');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -211,13 +206,13 @@ ALTER TABLE `loginy`
 -- AUTO_INCREMENT for table `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `rozmiary_produktow`
 --
 ALTER TABLE `rozmiary_produktow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Constraints for dumped tables

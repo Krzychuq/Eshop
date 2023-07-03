@@ -2,7 +2,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <div class='menu1'>
-    <a href="index.php"><img src="../svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
+    <a href="../index.php"><img src="../svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
 
 </div>
 
