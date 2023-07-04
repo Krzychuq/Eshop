@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 03, 2023 at 02:13 PM
+-- Generation Time: Lip 04, 2023 at 02:40 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -99,9 +99,9 @@ CREATE TABLE `produkty` (
 --
 
 INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`, `link`) VALUES
-(50, 'koszulka', 42.99, 20, '4', 'Fajna', 'zdjecia_produktow/2023-07-01-16-39-27.jpg', '489815t', 'http://localhost/forum/produkty/koszulka-489815t.php'),
-(51, 'plecak', 92.99, 3, '0', 'Fajna', 'zdjecia_produktow/2023-07-01-14-46-50.jpg', '324373k', 'http://localhost/forum/produkty/czapka-z-daszkiem-324373k.php'),
-(52, 'kurtka', 109.99, 21, '4', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-03-07-23-38.webp', '757012d', 'http://localhost/forum/produkty/kurtka-757012d.php');
+(50, 'koszulka czerwona', 42.99, 20, '4', 'Fajna', 'zdjecia_produktow/2023-07-01-16-39-27.jpg', '853088h', 'http://localhost/forum/produkty/koszulka-czerwona-853088h.php'),
+(51, 'czapka', 92.99, 3, '0', 'Fajna', 'zdjecia_produktow/2023-07-01-14-46-50.jpg', '85571o', 'http://localhost/forum/produkty/czapka-85571o.php'),
+(52, 'kurtka kamuflage', 109.99, 21, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php');
 
 -- --------------------------------------------------------
 
@@ -149,7 +149,9 @@ INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`) VALUES
 (34, 50, 'M'),
 (35, 51, 'Uniwersalny'),
 (36, 50, 'S'),
-(37, 52, 'L');
+(37, 52, 'M'),
+(38, 52, 'S'),
+(39, 50, 'XL');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -212,7 +214,7 @@ ALTER TABLE `produkty`
 -- AUTO_INCREMENT for table `rozmiary_produktow`
 --
 ALTER TABLE `rozmiary_produktow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Constraints for dumped tables

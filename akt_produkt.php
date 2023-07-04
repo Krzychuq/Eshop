@@ -4,6 +4,7 @@ include_once('laczenieZbaza.php');
 $id = $_POST["id"];
 if(!empty($id) && isset($id)){
 if(!empty($_POST["nazwa"]) && isset($_POST["nazwa"])){
+
     $nazwa = $_POST["nazwa"];
     $nowa_nazwa = strtolower($nazwa);
     $zmiana1 = str_replace("ą", "a", $nowa_nazwa);
@@ -16,12 +17,20 @@ if(!empty($_POST["nazwa"]) && isset($_POST["nazwa"])){
     $zmiana8 = str_replace("ż", "z", $zmiana7);
     $zmiana9 = str_replace("ź", "z", $zmiana8);
     $str = str_replace(" ", "-", $zmiana9);
-    $litera = strtolower(chr(rand(65,91)));
-    $generuj_indeks = rand(0,999999) . $litera;
-    $strona = $str . "-" .$generuj_indeks. ".php";
+
+    $pyt = $conn -> prepare("SELECT indeks_produktu,link FROM produkty WHERE id = ?");
+    $pyt -> execute([$id]);
+    $indeks = $pyt -> fetch();
+
+    $strona = $str . "-" . $indeks["indeks_produktu"] . ".php";
+    $nowa_strona_nazwa = "produkty/" . $strona;
+    $stara_strona = explode('http://localhost/forum/', $indeks["link"]);
+
+    rename($stara_strona[1], $nowa_strona_nazwa);
     $link = "http://localhost/forum/produkty/". $strona;
+
     $dodanie_produktu = $conn->prepare('UPDATE produkty SET nazwa = ?,indeks_produktu = ?, link = ? WHERE id = ?');
-    $dodanie_produktu -> execute([$nazwa, $generuj_indeks, $link, $id]);
+    $dodanie_produktu -> execute([$nazwa, $indeks["indeks_produktu"], $link, $id]);
 }
 
 if(!empty($_POST["cena"]) && isset($_POST["cena"])){
