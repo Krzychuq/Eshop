@@ -482,7 +482,7 @@ header{
     }
 .tabela_produktow, .tabela_produktow td{
     color: black;
-    width: max-content;
+    width: 100%;
     background-color: #ffffff;
     border: 1px solid #000000b7;
     padding: 3px;
