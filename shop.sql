@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 04, 2023 at 02:40 PM
+-- Generation Time: Lip 06, 2023 at 02:49 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -101,7 +101,8 @@ CREATE TABLE `produkty` (
 INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`, `link`) VALUES
 (50, 'koszulka czerwona', 42.99, 20, '4', 'Fajna', 'zdjecia_produktow/2023-07-01-16-39-27.jpg', '853088h', 'http://localhost/forum/produkty/koszulka-czerwona-853088h.php'),
 (51, 'czapka', 92.99, 3, '0', 'Fajna', 'zdjecia_produktow/2023-07-01-14-46-50.jpg', '85571o', 'http://localhost/forum/produkty/czapka-85571o.php'),
-(52, 'kurtka kamuflage', 109.99, 21, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php');
+(52, 'kurtka kamuflage', 109.99, 21, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php'),
+(54, 'spodnie-street', 300.99, 35, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', 'zdjecia_produktow/2023-07-06-13-34-30.jpg', '966862i', 'http://localhost/forum/produkty/spodnie-street-966862i.php');
 
 -- --------------------------------------------------------
 
@@ -138,20 +139,27 @@ INSERT INTO `rodzaj_produktu` (`id`, `nazwa`) VALUES
 CREATE TABLE `rozmiary_produktow` (
   `id` int(11) NOT NULL,
   `id_produktu` int(11) NOT NULL,
-  `rozmiar` varchar(20) NOT NULL
+  `rozmiar` varchar(20) NOT NULL,
+  `ilosc` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `rozmiary_produktow`
 --
 
-INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`) VALUES
-(34, 50, 'M'),
-(35, 51, 'Uniwersalny'),
-(36, 50, 'S'),
-(37, 52, 'M'),
-(38, 52, 'S'),
-(39, 50, 'XL');
+INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`, `ilosc`) VALUES
+(34, 50, 'M', 0),
+(35, 51, 'Uniwersalny', 0),
+(36, 50, 'S', 0),
+(37, 52, 'M', 0),
+(38, 52, 'S', 0),
+(39, 50, 'XL', 0),
+(41, 54, 'S', 6),
+(42, 54, 'M', 6),
+(43, 54, 'L', 6),
+(44, 54, 'XL', 6),
+(45, 54, 'XXL', 6),
+(47, 54, 'XS', 5);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -208,13 +216,13 @@ ALTER TABLE `loginy`
 -- AUTO_INCREMENT for table `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `rozmiary_produktow`
 --
 ALTER TABLE `rozmiary_produktow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables

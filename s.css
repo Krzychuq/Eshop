@@ -26,7 +26,7 @@ body{
     min-height: 100vh; 
     display: flex;
     flex-direction: column;
-    background: linear-gradient(109.6deg, rgb(255, 255, 255) 11.2%, rgb(233, 233, 233) 100.2%);
+    background: rgb(136, 128, 95);
     /* background: url('svg/cool-background.svg');  */
     font-family:'Segoe UI'; 
     color: black;
@@ -474,12 +474,33 @@ header{
 }
 .form_panel button{
     cursor: pointer;
-    border: #161616 1px solid;
-    background-color: rgb(64, 218, 3);
+    border: none;
+    background-color: #73b410;
+    border-radius: 10px;
+    height: 4vh;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 1rem;
+    color: rgb(243, 243, 243);
 }
     #form2 button{
-        background-color: rgb(255, 38, 38);
+        background-color: #af0900;
     }
+.rozmiary{
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    grid-template-rows: repeat(7, 1fr);
+    grid-column-gap: 3px;
+    grid-row-gap: 0px;
+}
+.rozmiary label{
+    width: fit-content;
+}
+.rozmiary input{
+    width: 100%;
+}
 .tabela_produktow, .tabela_produktow td{
     color: black;
     width: 100%;

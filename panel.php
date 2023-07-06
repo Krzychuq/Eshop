@@ -29,9 +29,9 @@ session_start();
     <form action="dodaj_produkt.php" class="form_panel" method="post" id="form1" enctype="multipart/form-data">
         <input type="text" name="nazwa" placeholder="Nazwa">
         <input type="text" name="cena" placeholder="Cena">
-        <input type="text" name="ilosc" placeholder="Ilość">
-        <select name="rodzaj">
-            <option value="">Rodzaj</option>
+
+        <select name="rodzaj"> 
+        <option value="">Rodzaj</option>
         <?php
             $pyt_rodz = $conn->query("SELECT * FROM rodzaj_produktu")->fetchAll();
 
@@ -40,19 +40,29 @@ session_start();
             }    
         ?>
         </select>
-
-        <select name="rozmiar">
-            <option value="">Rozmiar</option>
-            <option value="Uniwersalny">Uniwersalny</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-        </select>
-        <input type="text" name="opis" placeholder="Opis">
+        <input type=" " name="opis" placeholder="Opis">
         <input type="file" name="zdjecie" placeholder="Zdjecie">
+        <p style="font-weight:bold;">Rozmiary:</p>
+
+        <div class="rozmiary">
+
+        <label for="XS">XS</label>
+        <input type="number" name="XS" placeholder="Ilość">
+        <label for="S">S</label>
+        <input type="number" name="S" placeholder="Ilość">
+        <label for="M">M</label>
+        <input type="number" name="M" placeholder="Ilość">
+        <label for="L">L</label>
+        <input type="number" name="L" placeholder="Ilość">
+        <label for="XL">XL</label>
+        <input type="number" name="XL" placeholder="Ilość">
+        <label for="XXL">XXL</label>
+        <input type="number" name="XXL" placeholder="Ilość">
+        <label for="Uniwersalny">Uni</label>
+        <input type="number" name="Uniwersalny" placeholder="Ilość">
+
+        </div>
+        <br>
         <button type="submit">Dodaj</button>
     </form>
 
@@ -62,25 +72,8 @@ session_start();
     <!-- Usun produkt -->
     <h3 id="p2" >Usuń produkt</h3>
     <form action="usun_produkt.php" class="form_panel" method="post" id="form2">
-        <input type="text" name="id" placeholder="ID">
+        <input type="text" name="id" placeholder="ID"><br>
         <button type="submit">Usuń</button>
-    </form>
-    <br>
-    <h3 id="p3">Dodaj rozmiar</h3>
-    <!-- Dodaj rozmiar -->
-    <form action="dodaj_rozmiar.php" class="form_panel" method="post">
-        <input type="text" name="id" placeholder="ID">
-        <select name="rozmiar">
-            <option value="">Rozmiar</option>
-            <option value="Uniwersalny">Uniwersalny</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-        </select>
-        <button type="submit">Dodaj</button>
     </form>
 </div>
 
@@ -101,18 +94,29 @@ session_start();
         ?>
         </select>
 
-        <select name="rozmiar">
-            <option value="">Rozmiar</option>
-            <option value="Uniwersalny">Uniwersalny</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-        </select>
-        <input type="text" name="opis" placeholder="Opis">
+        <input type=" " name="opis" placeholder="Opis">
         <input type="file" name="zdjecie" placeholder="Zdjecie">
+        <p style="font-weight:bold;">Rozmiary:</p>
+
+        <div class="rozmiary">
+            
+        <label for="XS">XS</label>
+        <input type="number" name="XS" placeholder="Ilość">
+        <label for="S">S</label>
+        <input type="number" name="S" placeholder="Ilość">
+        <label for="M">M</label>
+        <input type="number" name="M" placeholder="Ilość">
+        <label for="L">L</label>
+        <input type="number" name="L" placeholder="Ilość">
+        <label for="XL">XL</label>
+        <input type="number" name="XL" placeholder="Ilość">
+        <label for="XXL">XXL</label>
+        <input type="number" name="XXL" placeholder="Ilość">
+        <label for="Uniwersalny">Uni</label>
+        <input type="number" name="Uniwersalny" placeholder="Ilość">
+
+        </div>
+        <br>
         <button type="submit">Aktualizuj</button>
     </form>
 </div>
@@ -131,8 +135,7 @@ session_start();
             <th>Cena</th>
             <th>Ilosc</th>
             <th>Rodzaj</th>
-            <th>Rozmiar</th>
-            <th>Opis</th>
+            <th>Rozmiary</th>
             <th>Zdjecie</th>
         </tr>
 <?php
@@ -153,7 +156,6 @@ foreach($pyt_produkt as $linia){
         echo  " |".$kolejny['rozmiar'] ."| ";
     }
     echo "</td>";
-    echo "<td>" . $linia["opis"] . "</td>";
     if( $linia["zdjecie"] == NULL ){
         echo "<td>" . "Brak" . "</td>";
     }

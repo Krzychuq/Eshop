@@ -40,10 +40,43 @@ if(!empty($_POST["cena"]) && isset($_POST["cena"])){
 }
 
 
-if(!empty($_POST["ilosc"]) && isset($_POST["ilosc"])){
-    $ilosc = $_POST["ilosc"];
-    $dodanie_produktu = $conn->prepare('UPDATE produkty SET ilosc = ? WHERE id = ?');
-    $dodanie_produktu -> execute([$ilosc,$id]);
+if(!empty($_POST["XS"]) && isset($_POST["XS"])){
+    $dodaj_rozmiar1 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
+    $dodaj_rozmiar1 -> execute([$_POST["XS"], $id, "XS"]);
+}
+if(!empty($_POST["S"]) && isset($_POST["S"])){
+    $dodaj_rozmiar2 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
+    $dodaj_rozmiar2 -> execute([$_POST["S"], $id, "S"]);
+}
+if(!empty($_POST["M"]) && isset($_POST["M"])){
+    $dodaj_rozmiar3 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
+    $dodaj_rozmiar3 -> execute([$_POST["M"], $id, "M"]);
+}
+if(!empty($_POST["L"]) && isset($_POST["L"])){
+    $dodaj_rozmiar4 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
+    $dodaj_rozmiar4 -> execute([$_POST["L"], $id, "L" ]);
+}
+if(!empty($_POST["XL"]) && isset($_POST["XL"])){
+    $dodaj_rozmiar5 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
+    $dodaj_rozmiar5 -> execute([$_POST["XL"], $id, "XL" ]);
+}
+if(!empty($_POST["XXL"]) && isset($_POST["XXL"])){
+    $dodaj_rozmiar6 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
+    $dodaj_rozmiar6 -> execute([ $_POST["XXL"], $id, "XXL"]);
+}
+if(!empty($_POST["Uniwersalny"]) && isset($_POST["Uniwersalny"])){
+    $dodaj_rozmiar7 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
+    $dodaj_rozmiar7 -> execute([$_POST["Uniwersalny"]], $id, "Uniwersalny" );
+}
+if(!empty($_POST["XS"]) || !empty($_POST["S"]) || !empty($_POST["M"]) || !empty($_POST["L"]) || !empty($_POST["XL"]) || !empty($_POST["XXL"]) || !empty($_POST["Uniwersalny"])){
+    $pyt_ilosc = $conn -> prepare("SELECT ilosc FROM rozmiary_produktow WHERE id_produktu = ?");
+    $pyt_ilosc -> execute([$id]);
+    $suma = 0;
+    while ($linia = $pyt_ilosc->fetch()) {
+        $suma += $linia[0];
+    }
+    $akt_ilosc = $conn -> prepare("UPDATE produkty SET ilosc = ? WHERE id = ?");
+    $akt_ilosc -> execute([$suma, $id]);
 }
 
 if(!empty($_POST["rodzaj"]) && isset($_POST["rodzaj"])){
