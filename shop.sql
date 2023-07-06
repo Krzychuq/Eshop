@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 06, 2023 at 02:49 PM
--- Wersja serwera: 10.4.28-MariaDB
--- Wersja PHP: 8.2.4
+-- Generation Time: Jul 06, 2023 at 11:24 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,19 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `dane_konta`
+-- Table structure for table `dane_konta`
 --
 
 CREATE TABLE `dane_konta` (
   `id` int(11) NOT NULL,
   `id_loginu` int(11) NOT NULL,
-  `nazwa` varchar(50) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
+  `nazwa` varchar(50) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `data_urodzenia` date DEFAULT NULL,
-  `nr_tel` varchar(20) DEFAULT NULL,
-  `miasto` varchar(100) DEFAULT NULL,
-  `kraj` varchar(100) DEFAULT NULL,
-  `opis_konta` text DEFAULT NULL,
+  `nr_tel` varchar(20) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `miasto` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `kraj` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `opis_konta` text COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `dostep` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
@@ -53,16 +53,16 @@ INSERT INTO `dane_konta` (`id`, `id_loginu`, `nazwa`, `avatar`, `data_urodzenia`
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `loginy`
+-- Table structure for table `loginy`
 --
 
 CREATE TABLE `loginy` (
   `id` int(11) NOT NULL,
-  `login` varchar(50) NOT NULL,
-  `pass` varchar(100) NOT NULL,
+  `login` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL,
+  `pass` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
   `data_rejestru` datetime NOT NULL,
   `ostatnie_logowanie` datetime DEFAULT NULL,
-  `token_hasla` char(20) DEFAULT NULL,
+  `token_hasla` char(20) COLLATE utf8mb4_polish_ci DEFAULT NULL,
   `data_zmiany_hasla` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
@@ -71,7 +71,7 @@ CREATE TABLE `loginy` (
 --
 
 INSERT INTO `loginy` (`id`, `login`, `pass`, `data_rejestru`, `ostatnie_logowanie`, `token_hasla`, `data_zmiany_hasla`) VALUES
-(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2023-06-23 08:32:49', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09'),
+(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2023-07-06 21:39:28', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09'),
 (3, 'krzychu1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$TTduOTV3ZzNZQjhpTjdSRg$t645NztZ3WK3AUsCnDEU3UpmuphJjg8NBMUAywS6xDI', '2023-05-24 00:03:01', '2023-06-19 14:17:05', NULL, NULL),
 (4, 'kurw1@w.pl', '$argon2i$v=19$m=65536,t=4,p=1$bVQvWUFEaDRjejNMU1ExeQ$pv7h8gW1X0tZZClupi7KiZka+V0OLWWWdIo+vPQM5t4', '2023-05-24 00:27:42', NULL, NULL, NULL),
 (7, 'test1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YXJnZExsUDVKMUxkdlRmdw$pXTzJbJNc/kqGVz9T1Z2SQcxyV+R3zgx5kl5eW6+IPk', '2023-06-15 14:29:15', '2023-06-19 14:17:19', NULL, NULL);
@@ -79,19 +79,19 @@ INSERT INTO `loginy` (`id`, `login`, `pass`, `data_rejestru`, `ostatnie_logowani
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `produkty`
+-- Table structure for table `produkty`
 --
 
 CREATE TABLE `produkty` (
   `id` int(11) NOT NULL,
-  `nazwa` varchar(200) NOT NULL,
+  `nazwa` varchar(200) COLLATE utf8mb4_polish_ci NOT NULL,
   `cena` decimal(10,2) NOT NULL,
   `ilosc` smallint(6) NOT NULL,
-  `rodzaj` varchar(50) NOT NULL,
-  `opis` text NOT NULL,
-  `zdjecie` varchar(255) DEFAULT NULL,
-  `indeks_produktu` varchar(8) DEFAULT NULL,
-  `link` varchar(255) DEFAULT NULL
+  `rodzaj` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL,
+  `opis` text COLLATE utf8mb4_polish_ci NOT NULL,
+  `zdjecie` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `indeks_produktu` varchar(8) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `link` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
@@ -99,20 +99,19 @@ CREATE TABLE `produkty` (
 --
 
 INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`, `link`) VALUES
-(50, 'koszulka czerwona', 42.99, 20, '4', 'Fajna', 'zdjecia_produktow/2023-07-01-16-39-27.jpg', '853088h', 'http://localhost/forum/produkty/koszulka-czerwona-853088h.php'),
-(51, 'czapka', 92.99, 3, '0', 'Fajna', 'zdjecia_produktow/2023-07-01-14-46-50.jpg', '85571o', 'http://localhost/forum/produkty/czapka-85571o.php'),
-(52, 'kurtka kamuflage', 109.99, 21, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php'),
-(54, 'spodnie-street', 300.99, 35, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', 'zdjecia_produktow/2023-07-06-13-34-30.jpg', '966862i', 'http://localhost/forum/produkty/spodnie-street-966862i.php');
+(52, 'kurtka kamuflage', '109.99', 9, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php'),
+(54, 'czarne spodnie', '300.99', 35, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', 'zdjecia_produktow/2023-07-06-13-34-30.jpg', '966862i', 'http://localhost/forum/produkty/czarne-spodnie-966862i.php'),
+(55, 'plecak vans', '154.99', 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', 'zdjecia_produktow/2023-07-06-23-01-15.jpg', '98554t', 'http://localhost/forum/produkty/plecak-vans-98554t.php');
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `rodzaj_produktu`
+-- Table structure for table `rodzaj_produktu`
 --
 
 CREATE TABLE `rodzaj_produktu` (
   `id` int(11) NOT NULL,
-  `nazwa` varchar(40) NOT NULL
+  `nazwa` varchar(40) COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
@@ -133,13 +132,13 @@ INSERT INTO `rodzaj_produktu` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `rozmiary_produktow`
+-- Table structure for table `rozmiary_produktow`
 --
 
 CREATE TABLE `rozmiary_produktow` (
   `id` int(11) NOT NULL,
   `id_produktu` int(11) NOT NULL,
-  `rozmiar` varchar(20) NOT NULL,
+  `rozmiar` varchar(20) COLLATE utf8mb4_polish_ci NOT NULL,
   `ilosc` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
@@ -148,49 +147,46 @@ CREATE TABLE `rozmiary_produktow` (
 --
 
 INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`, `ilosc`) VALUES
-(34, 50, 'M', 0),
-(35, 51, 'Uniwersalny', 0),
-(36, 50, 'S', 0),
-(37, 52, 'M', 0),
-(38, 52, 'S', 0),
-(39, 50, 'XL', 0),
+(37, 52, 'M', 4),
+(38, 52, 'S', 5),
 (41, 54, 'S', 6),
 (42, 54, 'M', 6),
 (43, 54, 'L', 6),
 (44, 54, 'XL', 6),
 (45, 54, 'XXL', 6),
-(47, 54, 'XS', 5);
+(47, 54, 'XS', 5),
+(48, 55, 'Uniwersalny', 5);
 
 --
--- Indeksy dla zrzutów tabel
+-- Indexes for dumped tables
 --
 
 --
--- Indeksy dla tabeli `dane_konta`
+-- Indexes for table `dane_konta`
 --
 ALTER TABLE `dane_konta`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `loginy`
+-- Indexes for table `loginy`
 --
 ALTER TABLE `loginy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `produkty`
+-- Indexes for table `produkty`
 --
 ALTER TABLE `produkty`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `rodzaj_produktu`
+-- Indexes for table `rodzaj_produktu`
 --
 ALTER TABLE `rodzaj_produktu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `rozmiary_produktow`
+-- Indexes for table `rozmiary_produktow`
 --
 ALTER TABLE `rozmiary_produktow`
   ADD PRIMARY KEY (`id`),
@@ -216,13 +212,13 @@ ALTER TABLE `loginy`
 -- AUTO_INCREMENT for table `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `rozmiary_produktow`
 --
 ALTER TABLE `rozmiary_produktow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Constraints for dumped tables

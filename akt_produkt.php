@@ -21,7 +21,6 @@ if(!empty($_POST["nazwa"]) && isset($_POST["nazwa"])){
     $pyt = $conn -> prepare("SELECT indeks_produktu,link FROM produkty WHERE id = ?");
     $pyt -> execute([$id]);
     $indeks = $pyt -> fetch();
-
     $strona = $str . "-" . $indeks["indeks_produktu"] . ".php";
     $nowa_strona_nazwa = "produkty/" . $strona;
     $stara_strona = explode('http://localhost/forum/', $indeks["link"]);
@@ -142,8 +141,7 @@ if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" 
     }
 }   
 else{
-    $_SESSION['error'] = "Zdjęcie może być tylko w formacie jpg, jpeg, png !";
-    
+    $_SESSION['error'] = "Zdjęcie może być tylko w formacie jpg, jpeg, png, webp !"; 
 }
 }
 header("location: panel.php");

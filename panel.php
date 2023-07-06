@@ -40,7 +40,7 @@ session_start();
             }    
         ?>
         </select>
-        <input type=" " name="opis" placeholder="Opis">
+        <textarea type="text" name="opis" placeholder="Opis" style="resize: vertical;"></textarea>
         <input type="file" name="zdjecie" placeholder="Zdjecie">
         <p style="font-weight:bold;">Rozmiary:</p>
 
@@ -94,7 +94,7 @@ session_start();
         ?>
         </select>
 
-        <input type=" " name="opis" placeholder="Opis">
+        <textarea name="opis" placeholder="Opis" style="resize: vertical;"></textarea>
         <input type="file" name="zdjecie" placeholder="Zdjecie">
         <p style="font-weight:bold;">Rozmiary:</p>
 
@@ -175,6 +175,11 @@ if(isset($_SESSION['error'])){
     echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
     unset($_SESSION['error']);
     echo "<script src='blad.js'></script>";
+}
+if(isset($_SESSION['success'])){
+    echo "<div class='success'>" . "&#10003 ". $_SESSION["success"] . "</div>";
+    unset($_SESSION['success']);
+    echo "<script src='powiadomienie.js'></script>";
 }
 $conn = null;
 ?>

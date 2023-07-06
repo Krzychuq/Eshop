@@ -15,6 +15,27 @@ $ilosc_L = $_POST["L"];
 $ilosc_XL = $_POST["XL"];
 $ilosc_XXL = $_POST["XXL"];
 $ilosc_Uniwersalny = $_POST["Uniwersalny"];
+if(empty($ilosc_Uniwersalny)){
+    $ilosc_Uniwersalny = 0;
+}
+if(empty($ilosc_XS)){
+    $ilosc_XS = 0;
+}
+if(empty($ilosc_S)){
+    $ilosc_S = 0;
+}
+if(empty($ilosc_M)){
+    $ilosc_M = 0;
+}
+if(empty($ilosc_L)){
+    $ilosc_L = 0;
+}
+if(empty($ilosc_XL)){
+    $ilosc_XL = 0;
+}
+if(empty($ilosc_XXL)){
+    $ilosc_XXL = 0;
+}
 
 $opis = $_POST["opis"];
 $nazwa_zdjecia = $_FILES["zdjecie"]["name"];
@@ -57,7 +78,7 @@ if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" 
         //dodanie produktu do bazy
         $suma = $ilosc_XS + $ilosc_S + $ilosc_M + $ilosc_L + $ilosc_XL + $ilosc_XXL + $ilosc_Uniwersalny; 
         $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,opis,zdjecie,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
-        $dodanie_produktu -> execute([$str, $cena, $suma, $rodzaj, $opis, $sciezka_do_bazy,$generuj_indeks,$link]);
+        $dodanie_produktu -> execute([$litery_male, $cena, $suma, $rodzaj, $opis, $sciezka_do_bazy,$generuj_indeks,$link]);
         $pyt_id = $conn -> prepare('SELECT id FROM produkty WHERE indeks_produktu LIKE ?');
         $pyt_id -> execute([$generuj_indeks]);
         $id = $pyt_id -> fetch(PDO::FETCH_ASSOC);
@@ -122,7 +143,7 @@ else{
     $conn = null;
     header("location: panel.php");
 }
-
+$_SESSION['success'] = "Dodano produkt";
 $conn = null;
 header("location: panel.php");
 ?>

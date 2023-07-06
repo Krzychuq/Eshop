@@ -8,3 +8,4 @@ function zniknieciebledu(){
     }
 } 
 const myTimeout = setTimeout(zniknieciebledu, 3000);
+

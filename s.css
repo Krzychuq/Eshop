@@ -479,6 +479,7 @@ header{
     border-radius: 10px;
     height: 4vh;
     width: 50%;
+    margin-top: 2vh;
     margin-left: auto;
     margin-right: auto;
     font-weight: bold;
@@ -543,6 +544,16 @@ header{
     left: 10px;
     transition: 1s;
 }
+.success{
+    position: fixed;
+    background-color: #4bcc18ec;
+    padding: 20px;
+    width: max-content;
+    border-radius: 10px;
+    bottom: 10px;
+    left: 10px;
+    transition: 1s;
+}
 .showcase{
     display: flex;
     flex-direction: row;
@@ -563,7 +574,7 @@ header{
     padding: 20px;
 }
 .showcase img{
-    width: 280px;
+    width: auto;
     height: 310px;
 }
 /* .lista_produktow_poziom{
