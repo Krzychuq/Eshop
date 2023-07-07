@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2023 at 11:24 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Lip 07, 2023 at 02:49 PM
+-- Wersja serwera: 10.4.28-MariaDB
+-- Wersja PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,19 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dane_konta`
+-- Struktura tabeli dla tabeli `dane_konta`
 --
 
 CREATE TABLE `dane_konta` (
   `id` int(11) NOT NULL,
   `id_loginu` int(11) NOT NULL,
-  `nazwa` varchar(50) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `nazwa` varchar(50) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   `data_urodzenia` date DEFAULT NULL,
-  `nr_tel` varchar(20) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `miasto` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `kraj` varchar(100) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `opis_konta` text COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `nr_tel` varchar(20) DEFAULT NULL,
+  `miasto` varchar(100) DEFAULT NULL,
+  `kraj` varchar(100) DEFAULT NULL,
+  `opis_konta` text DEFAULT NULL,
   `dostep` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
@@ -53,16 +53,16 @@ INSERT INTO `dane_konta` (`id`, `id_loginu`, `nazwa`, `avatar`, `data_urodzenia`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loginy`
+-- Struktura tabeli dla tabeli `loginy`
 --
 
 CREATE TABLE `loginy` (
   `id` int(11) NOT NULL,
-  `login` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL,
-  `pass` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
+  `login` varchar(50) NOT NULL,
+  `pass` varchar(100) NOT NULL,
   `data_rejestru` datetime NOT NULL,
   `ostatnie_logowanie` datetime DEFAULT NULL,
-  `token_hasla` char(20) COLLATE utf8mb4_polish_ci DEFAULT NULL,
+  `token_hasla` char(20) DEFAULT NULL,
   `data_zmiany_hasla` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
@@ -79,19 +79,19 @@ INSERT INTO `loginy` (`id`, `login`, `pass`, `data_rejestru`, `ostatnie_logowani
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produkty`
+-- Struktura tabeli dla tabeli `produkty`
 --
 
 CREATE TABLE `produkty` (
   `id` int(11) NOT NULL,
-  `nazwa` varchar(200) COLLATE utf8mb4_polish_ci NOT NULL,
+  `nazwa` varchar(200) NOT NULL,
   `cena` decimal(10,2) NOT NULL,
   `ilosc` smallint(6) NOT NULL,
-  `rodzaj` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL,
-  `opis` text COLLATE utf8mb4_polish_ci NOT NULL,
-  `zdjecie` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `indeks_produktu` varchar(8) COLLATE utf8mb4_polish_ci DEFAULT NULL,
-  `link` varchar(255) COLLATE utf8mb4_polish_ci DEFAULT NULL
+  `rodzaj` varchar(50) NOT NULL,
+  `opis` text NOT NULL,
+  `zdjecie` varchar(255) DEFAULT NULL,
+  `indeks_produktu` varchar(8) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
@@ -99,19 +99,19 @@ CREATE TABLE `produkty` (
 --
 
 INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`, `link`) VALUES
-(52, 'kurtka kamuflage', '109.99', 9, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php'),
-(54, 'czarne spodnie', '300.99', 35, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', 'zdjecia_produktow/2023-07-06-13-34-30.jpg', '966862i', 'http://localhost/forum/produkty/czarne-spodnie-966862i.php'),
-(55, 'plecak vans', '154.99', 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', 'zdjecia_produktow/2023-07-06-23-01-15.jpg', '98554t', 'http://localhost/forum/produkty/plecak-vans-98554t.php');
+(52, 'kurtka kamuflage', 250.00, 13, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php'),
+(54, 'czarne spodnie', 300.99, 35, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', 'zdjecia_produktow/2023-07-06-13-34-30.jpg', '966862i', 'http://localhost/forum/produkty/czarne-spodnie-966862i.php'),
+(55, 'plecak vans', 154.99, 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', 'zdjecia_produktow/2023-07-06-23-01-15.jpg', '98554t', 'http://localhost/forum/produkty/plecak-vans-98554t.php');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rodzaj_produktu`
+-- Struktura tabeli dla tabeli `rodzaj_produktu`
 --
 
 CREATE TABLE `rodzaj_produktu` (
   `id` int(11) NOT NULL,
-  `nazwa` varchar(40) COLLATE utf8mb4_polish_ci NOT NULL
+  `nazwa` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
@@ -132,13 +132,13 @@ INSERT INTO `rodzaj_produktu` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rozmiary_produktow`
+-- Struktura tabeli dla tabeli `rozmiary_produktow`
 --
 
 CREATE TABLE `rozmiary_produktow` (
   `id` int(11) NOT NULL,
   `id_produktu` int(11) NOT NULL,
-  `rozmiar` varchar(20) COLLATE utf8mb4_polish_ci NOT NULL,
+  `rozmiar` varchar(20) NOT NULL,
   `ilosc` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
@@ -147,7 +147,7 @@ CREATE TABLE `rozmiary_produktow` (
 --
 
 INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`, `ilosc`) VALUES
-(37, 52, 'M', 4),
+(37, 52, 'M', 8),
 (38, 52, 'S', 5),
 (41, 54, 'S', 6),
 (42, 54, 'M', 6),
@@ -158,35 +158,35 @@ INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`, `ilosc`) VALUE
 (48, 55, 'Uniwersalny', 5);
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `dane_konta`
+-- Indeksy dla tabeli `dane_konta`
 --
 ALTER TABLE `dane_konta`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `loginy`
+-- Indeksy dla tabeli `loginy`
 --
 ALTER TABLE `loginy`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `produkty`
+-- Indeksy dla tabeli `produkty`
 --
 ALTER TABLE `produkty`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rodzaj_produktu`
+-- Indeksy dla tabeli `rodzaj_produktu`
 --
 ALTER TABLE `rodzaj_produktu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rozmiary_produktow`
+-- Indeksy dla tabeli `rozmiary_produktow`
 --
 ALTER TABLE `rozmiary_produktow`
   ADD PRIMARY KEY (`id`),

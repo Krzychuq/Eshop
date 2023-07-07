@@ -42,30 +42,72 @@ if(!empty($_POST["cena"]) && isset($_POST["cena"])){
 if(!empty($_POST["XS"]) && isset($_POST["XS"])){
     $dodaj_rozmiar1 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
     $dodaj_rozmiar1 -> execute([$_POST["XS"], $id, "XS"]);
+    if($dodaj_rozmiar1 -> rowCount() == 0){
+        $_SESSION['error'] = "Nie ma takiego rozmiaru";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 if(!empty($_POST["S"]) && isset($_POST["S"])){
     $dodaj_rozmiar2 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
     $dodaj_rozmiar2 -> execute([$_POST["S"], $id, "S"]);
+    if($dodaj_rozmiar2 -> rowCount() == 0){
+        $_SESSION['error'] = "Nie ma takiego rozmiaru";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 if(!empty($_POST["M"]) && isset($_POST["M"])){
     $dodaj_rozmiar3 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
     $dodaj_rozmiar3 -> execute([$_POST["M"], $id, "M"]);
+    if($dodaj_rozmiar3 -> rowCount() == 0){
+        $_SESSION['error'] = "Nie ma takiego rozmiaru";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 if(!empty($_POST["L"]) && isset($_POST["L"])){
     $dodaj_rozmiar4 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
     $dodaj_rozmiar4 -> execute([$_POST["L"], $id, "L" ]);
+    if($dodaj_rozmiar4 -> rowCount() == 0){
+        $_SESSION['error'] = "Nie ma takiego rozmiaru";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 if(!empty($_POST["XL"]) && isset($_POST["XL"])){
     $dodaj_rozmiar5 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
     $dodaj_rozmiar5 -> execute([$_POST["XL"], $id, "XL" ]);
+    if($dodaj_rozmiar5 -> rowCount() == 0){
+        $_SESSION['error'] = "Nie ma takiego rozmiaru";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 if(!empty($_POST["XXL"]) && isset($_POST["XXL"])){
     $dodaj_rozmiar6 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
     $dodaj_rozmiar6 -> execute([ $_POST["XXL"], $id, "XXL"]);
+    if($dodaj_rozmiar6 -> rowCount() == 0){
+        $_SESSION['error'] = "Nie ma takiego rozmiaru";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 if(!empty($_POST["Uniwersalny"]) && isset($_POST["Uniwersalny"])){
     $dodaj_rozmiar7 = $conn->prepare('UPDATE rozmiary_produktow SET ilosc = ? WHERE id_produktu = ? AND rozmiar LIKE ?');
     $dodaj_rozmiar7 -> execute([$_POST["Uniwersalny"]], $id, "Uniwersalny" );
+    if($dodaj_rozmiar7 -> rowCount() == 0){
+        $_SESSION['error'] = "Nie ma takiego rozmiaru";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 if(!empty($_POST["XS"]) || !empty($_POST["S"]) || !empty($_POST["M"]) || !empty($_POST["L"]) || !empty($_POST["XL"]) || !empty($_POST["XXL"]) || !empty($_POST["Uniwersalny"])){
     $pyt_ilosc = $conn -> prepare("SELECT ilosc FROM rozmiary_produktow WHERE id_produktu = ?");
@@ -131,6 +173,7 @@ if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" 
         if(move_uploaded_file($zdjecietemp, $sciezka . $nowa_nazwa_zdjecia)) {
             $dodanie_produktu = $conn->prepare('UPDATE produkty SET zdjecie = ? WHERE id = ?');
             $dodanie_produktu -> execute([$sciezka_do_bazy, $id]);
+            $_SESSION['success'] = "Zaaktualizowano produkt";
         }
         else {
             $_SESSION['error'] = "Nie udało sie umieścić zdjecia!";

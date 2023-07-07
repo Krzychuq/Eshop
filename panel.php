@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v=1.1">
+    <link rel="stylesheet" href="s.css?v=1.2">
     <title>Sesja</title>
 </head>
 <body>
@@ -62,7 +62,6 @@ session_start();
         <input type="number" name="Uniwersalny" placeholder="Ilość">
 
         </div>
-        <br>
         <button type="submit">Dodaj</button>
     </form>
 
@@ -72,9 +71,26 @@ session_start();
     <!-- Usun produkt -->
     <h3 id="p2" >Usuń produkt</h3>
     <form action="usun_produkt.php" class="form_panel" method="post" id="form2">
-        <input type="text" name="id" placeholder="ID"><br>
+        <input type="text" name="id" placeholder="ID">
         <button type="submit">Usuń</button>
     </form>
+    <br>
+    <h3 style="font-weight:bold;">Usuń rozmiar</h3>
+        <form action="">
+            <input type="text" name="id" placeholder="ID" style="width:50%;"><br>
+            <select name="rozmiar" style="width:50%;">
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+                <option value="Uniwersalny">Uni</option>
+            </select>
+        </form>
+    <br>
+    <button type="submit">Usuń</button>
+    
 </div>
 
 <div class="panel" id="panel3">
@@ -84,7 +100,6 @@ session_start();
         <input type="text" name="id"  placeholder="Podaj ID">
         <input type="text" name="nazwa" placeholder="Nazwa">
         <input type="text" name="cena" placeholder="Cena">
-        <input type="text" name="ilosc" placeholder="Ilość">
         <select name="rodzaj">
             <option value="">Rodzaj</option>
         <?php
@@ -116,7 +131,6 @@ session_start();
         <input type="number" name="Uniwersalny" placeholder="Ilość">
 
         </div>
-        <br>
         <button type="submit">Aktualizuj</button>
     </form>
 </div>

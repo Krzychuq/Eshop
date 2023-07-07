@@ -135,7 +135,7 @@ else{
     $_SESSION['error']= "Zdjęcie może być tylko w formacie jpg, jpeg, png, webp !";
     header("location: panel.php");
 }
-
+$_SESSION['success'] = "Dodano produkt";
 }
 
 else{
@@ -143,7 +143,7 @@ else{
     $conn = null;
     header("location: panel.php");
 }
-$_SESSION['success'] = "Dodano produkt";
+
 $conn = null;
 header("location: panel.php");
 ?>
