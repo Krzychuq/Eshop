@@ -5,7 +5,7 @@ $id = $_POST["id"];
 $pyt= $conn->prepare("SELECT zdjecie, link FROM produkty WHERE id = ?");
 $pyt -> execute([$id]);
 $wyniki = $pyt -> fetch();
-if($pyt->rowCount()){
+if($wyniki){
     $usuniecie_zdjecia = unlink($wyniki["zdjecie"]);
     $n1 = explode("http://localhost/forum/", $wyniki["link"]);
     $plik_usun = unlink($n1[1]);

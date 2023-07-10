@@ -457,13 +457,25 @@ header{
     color: white;
 }
 .menu_panelu input:focus, .menu_panelu textarea:focus, .menu_panelu select:focus{
-    outline: #1a97d1 2px solid;
+    outline: #d1b82b 1px solid;
     outline-offset: -1px;
     border-radius: 2px;
-    background-color: rgb(213, 243, 255);
+    background-color: rgb(255, 245, 213);
 }
-    .menu_panelu div{
-        flex: 20%;
+    .menu_panelu #panel1{
+        flex: 22.5%;
+        text-align: center;
+    }
+    .menu_panelu #panel2{
+        flex: 15%;
+        text-align: center;
+    }
+    .menu_panelu #panel3{
+        flex: 22.5%;
+        text-align: center;
+    }
+    .menu_panelu #panel4{
+        flex: 40%;
         text-align: center;
     }
 
@@ -481,10 +493,14 @@ header{
     margin-left: auto;
     margin-right: auto;
 }
-.form_panel button{
+.form_panel input, .form_panel select{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.zielony_przycisk, .czerwony_przycisk{
     cursor: pointer;
     border: none;
-    background-color: #73b410;
     border-radius: 10px;
     height: 4vh;
     width: 50%;
@@ -496,22 +512,25 @@ header{
     color: rgb(243, 243, 243);
     transition: 0.5s;
 }
-    .form_panel button:hover{
+    .zielony_przycisk{
+        background-color: #73b410;
+    }
+    .zielony_przycisk:hover{
         background-color: #5c910d;
         transition: 0.5s;
     }
-    .form_panel button:active{
+    .zielony_przycisk:active{
         transform: scale(0.9);
     }
-    #form2 button{
+    .czerwony_przycisk{
         background-color: #af0900;
         transition: 0.5s;
     }
-    #form2 button:hover{
+    .czerwony_przycisk:hover{
         background-color: #830701;
         transition: 0.5s;
     }
-    #form2 button:active{
+    .czerwony_przycisk:active{
         transform: scale(0.9);
     }
 .rozmiary{
@@ -527,16 +546,23 @@ header{
 .rozmiary input{
     width: 100%;
 }
-.tabela_produktow, .tabela_produktow td{
+.tabela_produktow{
     color: black;
     width: 100%;
     background-color: #ffffff;
     border: 1px solid #000000b7;
     padding: 3px;
     margin: 2px;
+    font-size: 16px;
+    font-weight: bold;
+    border-collapse:collapse;
+}
+.tabela_produktow tr td{
+    border: 1px solid #000000b7;
     font-size: 14px;
     font-weight: bold;
     border-collapse:collapse;
+    width: max-content;
 }
 .tabela_produktow th{
     padding: 4px;

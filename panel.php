@@ -12,7 +12,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v=1.2">
+    <link rel="stylesheet" href="s.css?v=1.3">
     <title>Sesja</title>
 </head>
 <body>
@@ -40,7 +40,7 @@ session_start();
             }    
         ?>
         </select>
-        <textarea type="text" name="opis" placeholder="Opis" style="resize: vertical;"></textarea>
+        <textarea type="text" name="opis" placeholder="Opis" style="resize: vertical; min-height:60px;"></textarea>
         <input type="file" name="zdjecie" placeholder="Zdjecie">
         <p style="font-weight:bold;">Rozmiary:</p>
 
@@ -62,7 +62,7 @@ session_start();
         <input type="number" name="Uniwersalny" placeholder="Ilość">
 
         </div>
-        <button type="submit">Dodaj</button>
+        <button type="submit" class="zielony_przycisk">Dodaj</button>
     </form>
 
 </div>
@@ -71,14 +71,15 @@ session_start();
     <!-- Usun produkt -->
     <h3 id="p2" >Usuń produkt</h3>
     <form action="usun_produkt.php" class="form_panel" method="post" id="form2">
-        <input type="text" name="id" placeholder="ID">
-        <button type="submit">Usuń</button>
+        <input type="text" name="id" placeholder="ID" >
+        <button type="submit" class="czerwony_przycisk">Usuń</button>
     </form>
     <br>
+    <!-- Usuń rozmiar -->
     <h3 style="font-weight:bold;">Usuń rozmiar</h3>
-        <form action="">
-            <input type="text" name="id" placeholder="ID" style="width:50%;"><br>
-            <select name="rozmiar" style="width:50%;">
+        <form action="usun_rozmiar.php" class="form_panel" method="post" id="form5">
+            <input type="text" name="id" placeholder="ID" >
+            <select name="rozmiar" >
                 <option value="XS">XS</option>
                 <option value="S">S</option>
                 <option value="M">M</option>
@@ -87,10 +88,25 @@ session_start();
                 <option value="XXL">XXL</option>
                 <option value="Uniwersalny">Uni</option>
             </select>
+            <button type="submit" class="czerwony_przycisk">Usuń</button>
         </form>
     <br>
-    <button type="submit">Usuń</button>
-    
+    <!-- Dodaj rozmiar -->
+    <br>
+    <h3>Dodaj rozmiar</h3>
+    <form action="dodaj_rozmiar.php" class="form_panel" method="post" id="form6">
+        <input type="text" name="id" placeholder="ID">
+        <select name="rozmiar">
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+                <option value="Uniwersalny">Uni</option>
+            </select>
+            <button type="submit" class="zielony_przycisk">Dodaj</button>
+    </form>
 </div>
 
 <div class="panel" id="panel3">
@@ -109,7 +125,7 @@ session_start();
         ?>
         </select>
 
-        <textarea name="opis" placeholder="Opis" style="resize: vertical;"></textarea>
+        <textarea name="opis" placeholder="Opis" style="resize: vertical; min-height:60px;"></textarea>
         <input type="file" name="zdjecie" placeholder="Zdjecie">
         <p style="font-weight:bold;">Rozmiary:</p>
 
@@ -131,7 +147,7 @@ session_start();
         <input type="number" name="Uniwersalny" placeholder="Ilość">
 
         </div>
-        <button type="submit">Aktualizuj</button>
+        <button type="submit" class="zielony_przycisk">Aktualizuj</button>
     </form>
 </div>
 
@@ -174,7 +190,7 @@ foreach($pyt_produkt as $linia){
         echo "<td>" . "Brak" . "</td>";
     }
     else{
-        echo "<td>" . "<img src=$linia[zdjecie] width=70px height=70px>" . "</td>";
+        echo "<td>" . "<img src=$linia[zdjecie] width=90px height=90px>" . "</td>";
     }
     echo "</tr>";
 }
