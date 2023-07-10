@@ -21,7 +21,7 @@ $pyt_prod= $conn -> prepare('SELECT nazwa,cena,ilosc,opis,zdjecie FROM produkty 
 $indeks_produktu = end($indeks3);
 $pyt_prod->execute([$indeks_produktu]);
 $dane = $pyt_prod->fetch();
-$pyt_rozmiar= $conn -> prepare('SELECT rozmiary_produktow.rozmiar, rozmiary_produktow.ilosc FROM rozmiary_produktow inner join produkty on rozmiary_produktow.id_produktu = produkty.id WHERE produkty.indeks_produktu like ?');
+$pyt_rozmiar= $conn -> prepare('SELECT rozmiary_produktow.rozmiar, rozmiary_produktow.ilosc FROM rozmiary_produktow inner join produkty on rozmiary_produktow.id_produktu = produkty.id WHERE produkty.indeks_produktu like ? ORDER BY RIGHT (rozmiary_produktow.rozmiar,1) desc');
 $pyt_rozmiar->execute([$indeks_produktu]);
 $zdjecie_prod = "../". $dane["zdjecie"];
 $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);

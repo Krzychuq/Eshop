@@ -47,19 +47,19 @@ session_start();
         <div class="rozmiary">
 
         <label for="XS">XS</label>
-        <input type="number" name="XS" placeholder="Ilość">
+        <input type="number" min=0 name="XS" placeholder="Ilość">
         <label for="S">S</label>
-        <input type="number" name="S" placeholder="Ilość">
+        <input type="number" min=0 name="S" placeholder="Ilość">
         <label for="M">M</label>
-        <input type="number" name="M" placeholder="Ilość">
+        <input type="number" min=0 name="M" placeholder="Ilość">
         <label for="L">L</label>
-        <input type="number" name="L" placeholder="Ilość">
+        <input type="number" min=0 name="L" placeholder="Ilość">
         <label for="XL">XL</label>
-        <input type="number" name="XL" placeholder="Ilość">
+        <input type="number" min=0 name="XL" placeholder="Ilość">
         <label for="XXL">XXL</label>
-        <input type="number" name="XXL" placeholder="Ilość">
+        <input type="number" min=0 name="XXL" placeholder="Ilość">
         <label for="Uniwersalny">Uni</label>
-        <input type="number" name="Uniwersalny" placeholder="Ilość">
+        <input type="number" min=0 name="Uniwersalny" placeholder="Ilość">
 
         </div>
         <button type="submit" class="zielony_przycisk">Dodaj</button>
@@ -96,6 +96,7 @@ session_start();
     <h3>Dodaj rozmiar</h3>
     <form action="dodaj_rozmiar.php" class="form_panel" method="post" id="form6">
         <input type="text" name="id" placeholder="ID">
+        <input type="number" min=0 name="ilosc" placeholder="Ilość">
         <select name="rozmiar">
                 <option value="XS">XS</option>
                 <option value="S">S</option>
@@ -132,19 +133,19 @@ session_start();
         <div class="rozmiary">
             
         <label for="XS">XS</label>
-        <input type="number" name="XS" placeholder="Ilość">
+        <input type="number" min=0 name="XS" placeholder="Ilość">
         <label for="S">S</label>
-        <input type="number" name="S" placeholder="Ilość">
+        <input type="number" min=0 name="S" placeholder="Ilość">
         <label for="M">M</label>
-        <input type="number" name="M" placeholder="Ilość">
+        <input type="number" min=0 name="M" placeholder="Ilość">
         <label for="L">L</label>
-        <input type="number" name="L" placeholder="Ilość">
+        <input type="number" min=0 name="L" placeholder="Ilość">
         <label for="XL">XL</label>
-        <input type="number" name="XL" placeholder="Ilość">
+        <input type="number" min=0 name="XL" placeholder="Ilość">
         <label for="XXL">XXL</label>
-        <input type="number" name="XXL" placeholder="Ilość">
+        <input type="number" min=0 name="XXL" placeholder="Ilość">
         <label for="Uniwersalny">Uni</label>
-        <input type="number" name="Uniwersalny" placeholder="Ilość">
+        <input type="number" min=0 name="Uniwersalny" placeholder="Ilość">
 
         </div>
         <button type="submit" class="zielony_przycisk">Aktualizuj</button>

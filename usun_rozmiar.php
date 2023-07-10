@@ -26,4 +26,5 @@ else{
     $_SESSION['error'] = "Wpisz ID";
 }
 $conn = null;
+header("location: panel.php");
 ?>
