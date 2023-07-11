@@ -1,4 +1,4 @@
-<header>
+<header class="naglowek">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <div class='menu1'>
@@ -18,7 +18,7 @@
 <div class='wyloguj'>
 <?php
     if( !isset( $_SESSION['email'] ) && empty( $_SESSION['email'] ) ){
-        echo "<a href='../logowanie.php' class='linki'>Zaloguj</a>";
+        echo "<a href='logowanie.php' id='log_in'><img src='svg/log_in.svg' width='36px' height='36px' alt='zaloguj'></a>";
     }
 
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){

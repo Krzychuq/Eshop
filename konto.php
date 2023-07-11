@@ -36,51 +36,37 @@ session_start();
     $wykonanie = $pyt_o_dane->fetchAll();
 
     foreach ($wykonanie as $linia){
-        $profilowe = $linia['avatar'];
-        $nick = $linia['nazwa'];
-        $uro = $linia['data_urodzenia'];
+        $imie = $linia['imie'];
+        $nazwisko = $linia['nazwisko'];
         $tel = $linia['nr_tel'];
+        $ulica = $linia['ulica'];
         $miasto = $linia['miasto'];
+        $kod_pocztowy = $linia['kod_pocztowy'];
         $kraj = $linia['kraj'];
-        $opis = $linia['opis_konta'];
+        $dostep = $linia['dostep'];
     }
     $conn = null;
     
 ?>
 
 <div class="profil">
-
-<?php 
-if(!empty($profilowe)){
-    echo "<img src=$profilowe class=zdjecie_profilowe>"; 
-}
-else{
-    echo "<img src=https://www.kindpng.com/picc/m/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png class=zdjecie_profilowe>";
-}
-
-
-
-?>
-
+    <img src="https://www.kindpng.com/picc/m/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png" class="zdjecie_profilowe">
 </div><br>
 
 <div class="info_profilu">
-    <?php
-if(!empty($nick)){
-    echo "<p style='border-top-right-radius: 5px; border-top-left-radius: 5px; font-size:30px; text-align:center;'>$nick</p>";
-}
-else{
-    echo "<p style='border-top-right-radius: 5px; border-top-left-radius: 5px; font-size:30px; text-align:center;'>$_SESSION[email]</p>";
-}
+<?php
+    echo "<p style='border-top-right-radius: 5px; border-top-left-radius: 5px; font-size:18px;'>Email: $_SESSION[email]</p>";
+    if($dostep == 1){
+        echo "<p>"."Administrator"."</p>";
+    }
 ?>
-<p>Urodziny: <?php echo $uro?></p>
+<p>Imię: <?php echo $imie ?></p>
+<p>Nazwisko: <?php echo $nazwisko ?></p>
 <p>Numer telefonu: <?php echo $tel ?></p>
 <p>Miasto: <?php echo $miasto ?></p>
+<p>Kod pocztowy: <?php echo $kod_pocztowy ?></p>
 <p>Kraj: <?php echo $kraj ?></p>
 
-<div class='opis_konta'>
-    <p style="border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; color:white; background-color:black;">O mnie: <br> <?php echo $opis ?></p>
-</div>
 
 </div><br>
 </section class="wrap-konta">

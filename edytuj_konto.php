@@ -22,24 +22,24 @@ include_once("laczenieZbaza.php");
 ?>
 <div class="contener">
 
-<form action="zapis_danych_konta.php" class="form_konta" enctype="multipart/form-data" method="POST">
+<form action="zapis_danych_konta.php" class="form_konta" method="POST">
 
-    <label for="nazwa">Wpisz swój nick: </label>
-    <input type="text" maxlength="50" name="nazwa" placeholder="..." >
+    <label for="imie">Imie: </label>
+    <input type="text" maxlength="50" name="imie" placeholder="..." >
 
-    <label for="photo">Zmień zdjęcie profilowe:</label>
-    <input type="file" name="photo">
+    <label for="nazwisko">Nazwisko: </label>
+    <input type="text" name="nazwisko">
 
-    <label for="">Kiedy się urodziłeś? </label>
-    <input type="date" name="data_uro">
+    <label for="kod_pocztowy">Kod pocztowy: </label>
+    <input type="text" name="kod_pocztowy">
 
     <label for="tel">Podaj numer telefonu: </label>
     <input type="tel" pattern="[0-9]{9}" maxlength="9" placeholder="np. 123456789" name="tel">
 
-    <label for="miasto">Podaj z jakiego miasta jesteś: </label>
+    <label for="miasto">Miasto: </label>
     <input type="text" maxlength="100" name="miasto" placeholder="..." >
 
-    <label for="kraj">Podaj swoją narodowość: </label>
+    <label for="kraj">Kraj: </label>
     <select type="text" maxlength="100" name="kraj">
         <option value="">...</option>
     <?php
@@ -51,11 +51,8 @@ include_once("laczenieZbaza.php");
     
     fclose($file);
     ?>
-    </select>
-
-    <label for="opis">Napisz o sobie: </label>
-    <textarea name="opis" id="opis" rows="11"  maxlength='372' placeholder="..." style="resize:none;"></textarea>
-    <button id="przycisk_zapisz" type="submit"><img src="svg/save.svg" width='30px' height='30px' alt="Zapisz"></button>
+    </select><br>
+    <button type="submit" style="font-size: 19px;">Zapisz</button>
 
 </form>
 

@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v1.1">
+    <link rel="stylesheet" href="s.css?v1.2">
     <title>Sesja</title>
 </head>
 <body>

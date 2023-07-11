@@ -26,7 +26,7 @@ body{
     min-height: 100vh; 
     display: flex;
     flex-direction: column;
-    background: darkgoldenrod;
+    background: #fbc936;
     /* background: url('svg/cool-background.svg');  */
     font-family:'Segoe UI'; 
     color: black;
@@ -37,9 +37,10 @@ body{
     padding-bottom: 2rem; 
     flex: 1;
 }
-header{
+.naglowek{
     display: flex;
     flex-direction: row;
+    align-items: center;
     padding: 10px;
     background-color: rgb(17, 17, 17);
 }
@@ -136,18 +137,15 @@ header{
     cursor: pointer;
     transition: 1s;
 }
-    #wyloguj:hover{
-        transition: 0.8s;
-        transform: rotate(360deg) scale(1.1);
-    }
-#konto{
+#konto, #log_in, #wiadomosc{
     padding: 6px;
     transition: 1s;
 }
-#konto:hover{
-    transition: 0.8s;
-    transform: rotate(-360deg) scale(1.1);
-}
+    #wyloguj:hover, #konto:hover, #log_in:hover, #wiadomosc:hover{
+        transition: 0.8s;
+        transform: rotate(360deg) scale(1.1);
+    }
+
 
 /* Classes */
 .form-wyszukania{
@@ -164,57 +162,57 @@ header{
 
 }
 
-.linki {
-    align-items: center;
-    background-color: #000000ea;
-    border: 2px solid #111;
-    border-radius: 8px;
-    box-sizing: border-box;
-    color: #ffffff;
-    cursor: pointer;
-    display: flex;
-    font-size: 14px;
+.dymek{
+    border-radius: 22px;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.form_dymek{
+    justify-content:center;
+    align-items: center; 
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form_dymek label{
     font-weight: bold;
-    height: 34px;
-    justify-content: center;
-    line-height: 24px;
-    min-width: 25%;
-    max-width: 40%;
-    padding: 0 5px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  .linki:after {
-    background-color: #00000048;
-    border-radius: 8px;
-    content: "";
-    display: block;
-    height: 34px;
-    left: 0;
+    font-size: 1.2rem;
+}
+.form_dymek input, .form_dymek textarea{
     width: 100%;
-    position: absolute;
-    top: -2px;
-    transform: translate(8px, 8px);
-    transition: transform .2s ease-out;
-    z-index: -1;
+    font-size: 0.9rem;
+}
+.form_dymek div{text-align: center;}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.close_button {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
   }
   
-  .linki:hover:after {
-    transform: translate(0, 0);
-  }
-  
-  .linki:active {
-    background-color: #cccccc;
-    outline: 0;
-  }
-  
-  .linki:hover {
-    outline: 0;
+  .close_button:hover,
+  .close_button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
   }
 
 
@@ -247,10 +245,10 @@ header{
 }
 .przycisk_zaloguj_zarejestruj{
     margin-top: 7px;
-    background-color: rgb(206, 206, 206);
+    background-color: rgb(255, 255, 255);
     box-shadow: 0 0 10px black;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
     width: 60%;
     color: #161616;
     height: 40px;
@@ -261,7 +259,7 @@ header{
     cursor: pointer;
 }
     .przycisk_zaloguj_zarejestruj:hover{
-        background-color: rgb(163, 247, 53);
+        background-color: rgb(143, 137, 137);
         transition: 0.2s;
     }
     .przycisk_zaloguj_zarejestruj:active{
@@ -277,11 +275,13 @@ header{
     display: flex;
     column-gap: 20px;
     justify-content: right;
+    align-items: center;
     flex: 20%;
     padding-right: 14px;
 }
 
 .menu1{
+    align-items: center;
     float: left;
     flex: 30%;
 }
@@ -448,6 +448,7 @@ header{
             cursor: pointer;
         }
 
+
 .menu_panelu{
     background-color: #0e0e0edc;
     padding: 10px;
@@ -457,10 +458,10 @@ header{
     color: white;
 }
 .menu_panelu input:focus, .menu_panelu textarea:focus, .menu_panelu select:focus{
+    background-color: rgb(255, 245, 213);
     outline: #d1b82b 1px solid;
     outline-offset: -1px;
     border-radius: 2px;
-    background-color: rgb(255, 245, 213);
 }
     .menu_panelu #panel1{
         flex: 22.5%;
@@ -741,7 +742,12 @@ header{
         font-size: 1.1rem;
         border: none;
         outline: none;
-        box-shadow: 0px 0px 3px 1px #111;
+    }
+    .kontakt div textarea:focus{
+        background-color: rgb(255, 245, 213);
+        outline: #d1b82b 1px solid;
+        outline-offset: -1px;
+        
     }
     .kontakt div label{font-size: 1em;}
     .kontakt #wiad{

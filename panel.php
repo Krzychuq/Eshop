@@ -16,11 +16,29 @@ session_start();
     <title>Sesja</title>
 </head>
 <body>
-<div class="contener">
+<header class="naglowek">
 <?php include_once("laczenieZbaza.php");?>
-<div style="text-align:center; margin-bottom:20px;">
+<div class='menu1'>
     <a href="index.php"><img src="svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
 </div>
+<div class='wyloguj'>
+    <a href="wiadomosci_klientow.php" id='wiadomosc'><img src="svg/email_panel.svg" alt="wiadomosci" width="36px" height="36px"></a>
+<?php
+
+    if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){
+        echo "<a href='konto.php' id='konto'><img src='svg/account.svg' width='36px' height='36px' alt='konto'></a>";
+    }
+
+    if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){
+        echo "<form  action='wyloguj.php'  method='POST'>
+                <button id='wyloguj'><img src='svg/logout.svg' width='36px' height='36px' alt='&#9032'></button> </form>";
+    }
+?>
+</div>
+
+</header>
+<br>
+<div class="contener">
 <div class="menu_panelu">
 
 <div class="panel" id="panel1">
