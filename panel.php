@@ -59,7 +59,10 @@ session_start();
         ?>
         </select>
         <textarea type="text" name="opis" placeholder="Opis" style="resize: vertical; min-height:60px;"></textarea>
-        <input type="file" name="zdjecie" placeholder="Zdjecie">
+        <input type="file" name="zdjecie1">
+        <input type="file" name="zdjecie2">
+        <input type="file" name="zdjecie3">
+        <input type="file" name="zdjecie4">
         <p style="font-weight:bold;">Rozmiary:</p>
 
         <div class="rozmiary">
@@ -145,7 +148,10 @@ session_start();
         </select>
 
         <textarea name="opis" placeholder="Opis" style="resize: vertical; min-height:60px;"></textarea>
-        <input type="file" name="zdjecie" placeholder="Zdjecie">
+        <input type="file" name="zdjecie1">
+        <input type="file" name="zdjecie2">
+        <input type="file" name="zdjecie3">
+        <input type="file" name="zdjecie4">
         <p style="font-weight:bold;">Rozmiary:</p>
 
         <div class="rozmiary">
@@ -185,11 +191,11 @@ session_start();
             <th>Ilosc</th>
             <th>Rodzaj</th>
             <th>Rozmiary</th>
-            <th>Zdjecie</th>
+            <th>Zdjecia</th>
         </tr>
 <?php
 $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
-
+$licznik_zdjec = 0;
 foreach($pyt_produkt as $linia){  
     $pyt_rozmiar = $conn->prepare("SELECT rozmiar FROM rozmiary_produktow WHERE id_produktu = ?");
     $pyt_rozmiar->execute([$linia["id"]]);
@@ -205,12 +211,25 @@ foreach($pyt_produkt as $linia){
         echo  " |".$kolejny['rozmiar'] ."| ";
     }
     echo "</td>";
-    if( $linia["zdjecie"] == NULL ){
+    if($linia["zdjecie1"] != NULL){
+        $licznik_zdjec++;
+    }
+    if($linia["zdjecie2"] != NULL){
+        $licznik_zdjec++;
+    }
+    if($linia["zdjecie3"] != NULL){
+        $licznik_zdjec++;
+    }
+    if($linia["zdjecie4"] != NULL){
+        $licznik_zdjec++;
+    }
+    if( $licznik_zdjec == 0 ){
         echo "<td>" . "Brak" . "</td>";
     }
     else{
-        echo "<td>" . "<img src=$linia[zdjecie] width=90px height=90px>" . "</td>";
+        echo "<td>" . $licznik_zdjec . " z 4" . "</td>";
     }
+    $licznik_zdjec = 0;
     echo "</tr>";
 }
 echo "</table>";

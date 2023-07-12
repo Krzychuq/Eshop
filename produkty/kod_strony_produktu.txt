@@ -17,13 +17,13 @@ $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP
 $indeks1 = explode('http://localhost/forum/produkty/', $actual_link);
 $indeks2 = explode('.php',$indeks1[1]);
 $indeks3 = explode('-',$indeks2[0]);
-$pyt_prod= $conn -> prepare('SELECT nazwa,cena,ilosc,opis,zdjecie FROM produkty WHERE indeks_produktu like ?');
+$pyt_prod= $conn -> prepare('SELECT nazwa,cena,ilosc,opis,zdjecie1,zdjecie2,zdjecie3,zdjecie4 FROM produkty WHERE indeks_produktu like ?');
 $indeks_produktu = end($indeks3);
 $pyt_prod->execute([$indeks_produktu]);
 $dane = $pyt_prod->fetch();
 $pyt_rozmiar= $conn -> prepare('SELECT rozmiary_produktow.rozmiar, rozmiary_produktow.ilosc FROM rozmiary_produktow inner join produkty on rozmiary_produktow.id_produktu = produkty.id WHERE produkty.indeks_produktu like ? ORDER BY RIGHT (rozmiary_produktow.rozmiar,1) desc');
 $pyt_rozmiar->execute([$indeks_produktu]);
-$zdjecie_prod = "../". $dane["zdjecie"];
+$zdjecie_prod = "../". $dane["zdjecie1"];
 $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
 ?>
 

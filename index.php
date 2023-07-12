@@ -18,13 +18,13 @@ include_once("laczenieZbaza.php");
 <div class="contener">
 <div class="showcase">
 <?php
-$pyt_produkt = $conn -> query("SELECT nazwa, cena, zdjecie,link FROM produkty LIMIT 3");
+$pyt_produkt = $conn -> query("SELECT nazwa, cena, zdjecie1,link FROM produkty LIMIT 3");
 
 while($linia = $pyt_produkt->fetch()){
     $nazwa = ucfirst($linia["nazwa"]);
     echo "<div>";
     echo "<a style='color: black; text-decoration:none;' href=$linia[link]>";
-    echo "<img src=$linia[zdjecie]>";
+    echo "<img src=$linia[zdjecie1]>";
     echo "<p style='font-size: 1.4rem;'>$nazwa</p>";
     echo "<p style='font-size: 0.9rem; font-weight:bold;'>$linia[cena] PLN</p>";
     echo "</a>";

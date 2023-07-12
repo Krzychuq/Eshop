@@ -61,6 +61,9 @@ session_start();
 <?php
 $pyt_wiadomosci = $conn->query("SELECT * FROM wiadomosci_klientow")->fetchAll();
 $id_maila = 0;
+
+$usun = $conn -> prepare('DELETE FROM wiadomosci_klientow WHERE id = ?');
+
 foreach($pyt_wiadomosci as $linia){  
 
     $mailID = "klik" . $id_maila;
@@ -71,8 +74,12 @@ foreach($pyt_wiadomosci as $linia){
     echo "<td>" . "<button  class=klik id=$mailID data-em = '$linia[email]' style='border:none; background: transparent; font-weight:bold; font-size:14px; cursor:pointer; color: blue;'>" . $linia["email"] . "</button>" . "</td>";
     echo "<td>" . $linia["nr_zamowienia"] . "</td>";
     echo "<td>" . $linia["wiadomosc"] . "</td>";
-    echo "<td>" . "<button data-usun='$linia[id]' >Usuń</button>" . "</td>"; //do zrobienia
+    echo "<td>" . "<form method='POST'>" . "<button name=".$mailID." class='przycisk_usun_mały'>Usuń</button>" . "</form>" . "</td>"; //do zrobienia
     echo "</tr>";
+    if(isset($_POST[$mailID])) {
+        $usun -> execute([$linia["id"]]);
+        header("Refresh:0");
+    }
     $id_maila += 1;
 }
 echo "</table>";

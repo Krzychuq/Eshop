@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 11, 2023 at 02:49 PM
+-- Generation Time: Lip 12, 2023 at 02:19 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -45,7 +45,7 @@ CREATE TABLE `dane_konta` (
 --
 
 INSERT INTO `dane_konta` (`id`, `id_loginu`, `imie`, `nazwisko`, `ulica`, `nr_tel`, `miasto`, `kod_pocztowy`, `kraj`, `dostep`) VALUES
-(1, 1, 'Krzychu', '', 'Warszawska 3', '885332400', 'Wieruszów', '', 'Polska', 1);
+(1, 1, 'Krzychu', 'Grecki', 'Warszawska 3', '885332400', 'Wieruszów', '98-400', 'Polska', 1);
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,10 @@ CREATE TABLE `produkty` (
   `ilosc` smallint(6) NOT NULL,
   `rodzaj` varchar(50) NOT NULL,
   `opis` text NOT NULL,
-  `zdjecie` varchar(255) DEFAULT NULL,
+  `zdjecie1` varchar(200) DEFAULT NULL,
+  `zdjecie2` varchar(200) DEFAULT NULL,
+  `zdjecie3` varchar(200) DEFAULT NULL,
+  `zdjecie4` varchar(200) DEFAULT NULL,
   `indeks_produktu` varchar(8) DEFAULT NULL,
   `link` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
@@ -92,10 +95,10 @@ CREATE TABLE `produkty` (
 -- Dumping data for table `produkty`
 --
 
-INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`, `link`) VALUES
-(52, 'kurtka kamuflage', 250.00, 12, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php'),
-(54, 'czarne spodnie', 300.99, 23, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', 'zdjecia_produktow/2023-07-06-13-34-30.jpg', '966862i', 'http://localhost/forum/produkty/czarne-spodnie-966862i.php'),
-(55, 'plecak vans', 154.99, 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', 'zdjecia_produktow/2023-07-06-23-01-15.jpg', '98554t', 'http://localhost/forum/produkty/plecak-vans-98554t.php');
+INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie1`, `zdjecie2`, `zdjecie3`, `zdjecie4`, `indeks_produktu`, `link`) VALUES
+(52, 'kurtka kamuflage', 250.00, 12, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', NULL, NULL, NULL, '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php'),
+(54, 'czarne spodnie', 300.99, 23, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', 'zdjecia_produktow/2023-07-06-13-34-30.jpg', NULL, NULL, NULL, '966862i', 'http://localhost/forum/produkty/czarne-spodnie-966862i.php'),
+(55, 'plecak vans', 154.99, 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', 'zdjecia_produktow/2023-07-06-23-01-15.jpg', NULL, NULL, NULL, '98554t', 'http://localhost/forum/produkty/plecak-vans-98554t.php');
 
 -- --------------------------------------------------------
 
@@ -165,15 +168,6 @@ CREATE TABLE `wiadomosci_klientow` (
   `nr_zamowienia` int(11) NOT NULL,
   `wiadomosc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `wiadomosci_klientow`
---
-
-INSERT INTO `wiadomosci_klientow` (`id`, `imie`, `nazwisko`, `email`, `nr_zamowienia`, `wiadomosc`) VALUES
-(1, 'Krzychu', 'Go', 'email@1.pl', 3214914, 'In a RGB color space, hex #fbc936 is composed of 98.4% red, 78.8% green and 21.2% blue. Whereas in a CMYK color space, it is composed of 0% cyan, 19.9% magenta, 78.5% yellow and 1.6% black. It has a hue angle of 44.8 degrees, a saturation of 96.1% and a lightness of 59.8%. #fbc936 color hex could be obtained by blending #ffff6c with #f79300. Closest websafe color is: #ffcc33.'),
-(2, 'Janek', 'Kowal', 'janek1@.pl', 421894219, 'There are several ways to run a SELECT query using PDO, that differ mainly by the presence of parameters, type of parameters, and the result type. I will show examples for the every case so you can choose one that suits you best.\r\n\r\nJust make sure you\'ve got a properly configured PDO connection variable that needs in order to run SQL queries with PDO and to inform you of the possible errors.'),
-(3, 'Krzychu', 'Kowal', 'krzysiu.krzys65@gmail.com', 942619, 'Kawa – napój sporządzany z palonych, a następnie zmielonych lub poddanych instantyzacji ziaren kawowca, zwykle podawany na gorąco. Pochodzi z Etiopii, w Europie pojawiła się około XVI wieku. Jedna z najpopularniejszych używek na świecie i główne źródło kofeiny.');
 
 --
 -- Indeksy dla zrzutów tabel
