@@ -1,12 +1,12 @@
 <header class="naglowek">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <div class='menu1'>
     <a href="index.php"><img src="svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
 
 </div>
 
-<div class="menu2">
+<div class="menu2" onclick="powieksz_wyszukiwanie()">
     <img src="svg/search.svg" width="22px" height="22px" alt="U+1f60d">
     <form class="form-wyszukania">
         <input class="wyszukiwarka" type="text"  id="wyszukiwarka" onkeyup="wyszukanie(this.value)" placeholder="Szukaj">
@@ -32,6 +32,11 @@
 ?>
 </div>
 <script>
+wyszukiwarka = document.getElementsByClassName("menu2")[0];
+function powieksz_wyszukiwanie(){
+    wyszukiwarka.style.transform = "scale(1.2)";
+}
+
 function wyszukanie(str) {
     if (str.length == 0){
     document.getElementById("wyniki").innerHTML = "";

@@ -6,7 +6,8 @@ session_start();
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='../s.css?v1.1'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel='stylesheet' href='../s.css?v1.4'>
     <title>Sesja</title>
 </head>
 <body>
@@ -17,31 +18,41 @@ $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP
 $indeks1 = explode('http://localhost/forum/produkty/', $actual_link);
 $indeks2 = explode('.php',$indeks1[1]);
 $indeks3 = explode('-',$indeks2[0]);
-$pyt_prod= $conn -> prepare('SELECT nazwa,cena,ilosc,opis,zdjecie1 FROM produkty WHERE indeks_produktu like ?');
+$pyt_prod= $conn -> prepare('SELECT nazwa,cena,ilosc,opis,zdjecie1,zdjecie2,zdjecie3,zdjecie4 FROM produkty WHERE indeks_produktu like ?');
 $indeks_produktu = end($indeks3);
 $pyt_prod->execute([$indeks_produktu]);
 $dane = $pyt_prod->fetch();
 $pyt_rozmiar= $conn -> prepare('SELECT rozmiary_produktow.rozmiar, rozmiary_produktow.ilosc FROM rozmiary_produktow inner join produkty on rozmiary_produktow.id_produktu = produkty.id WHERE produkty.indeks_produktu like ? ORDER BY RIGHT (rozmiary_produktow.rozmiar,1) desc');
 $pyt_rozmiar->execute([$indeks_produktu]);
-$zdjecie_prod = "../". $dane["zdjecie1"];
+$zdjecie_prod1 = "../". $dane["zdjecie1"];
+$zdjecie_prod2 = "../". $dane["zdjecie2"];
+$zdjecie_prod3 = "../". $dane["zdjecie3"];
+$zdjecie_prod4 = "../". $dane["zdjecie4"];
 $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
 ?>
 
 <div class='contener'>
 
 <div class='grid_produkt'>
+    <div id='div2'>
+        <!-- zdjecia do wyboru produktu -->
+            <?php if($dane["zdjecie1"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod1 id=prod1 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
+            <?php if($dane["zdjecie2"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod2 id=prod2 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
+            <?php if($dane["zdjecie3"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod3 id=prod3 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
+            <?php if($dane["zdjecie4"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod4 id=prod4 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
+        </div>
     <div id='div1'>
-    <!-- photo produktu -->
-        <?php echo "<img src=$zdjecie_prod id=prod width=400px height=auto alt=zdjecie/produktu>"; ?>
+    <!-- zdjecie głowne produktu -->
+        <?php echo "<img src=$zdjecie_prod1 id=prod width=400px height=auto alt=zdjecie/produktu>"; ?>
     </div>
 
-    <div id="div2">
+    <div id="div3">
     <!-- info -->
         <?php
         echo "<form action=../dodaj_do_koszyka.php method=POST>";
         echo "<input style=display:none; name=indeks value=$indeks_produktu type=text>";
         echo "<p id=nazwa>".ucfirst($nazwa_prod)."</p>";
-        echo "<p name=cena id=cena>".$dane["cena"]. "zł</p>";
+        echo "<p name=cena id=cena>".$dane["cena"]. " PLN</p>";
         echo "<p name=ilosc id=ilosc>Dostepna ilość: ".$dane["ilosc"]."</p>";
         echo "<span>Rozmiary</span> "."<select id=rozmiar name=rozmiar >";
         while ($rozmiar = $pyt_rozmiar->fetch()) {
@@ -53,7 +64,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         ?>
     </div>
 
-    <div id="div3">
+    <div id="div4">
     <!-- opis -->
         <?php
         echo "<h2>Opis produktu</h2><br>";
@@ -62,9 +73,26 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
     </div>
 </div>
 
+<div class="podobne_produkty">
+<?php
+    $podobne_produkty = $conn -> query('SELECT nazwa, cena, zdjecie1,link FROM produkty LIMIT 5');
+    while($linia = $podobne_produkty->fetch()){
+        $nazwa = ucfirst($linia["nazwa"]);
+        $link = "../".$linia["zdjecie1"];
+        echo "<div>";
+        echo "<a style='color: black; text-decoration:none;' href=$linia[link]>";
+        echo "<img src=$link>";
+        echo "<p style='font-size: 1.2rem;'>$nazwa</p>";
+        echo "<p style='font-size: 0.9rem; font-weight:bold;'>$linia[cena] PLN</p>";
+        echo "</a>";
+        echo "</div>";
+    }
+?>
+</div>
+
 </div>
 <footer>
-    <?php include_once('../footer_produkty.html'); ?>
+    <?php include_once('../footer_produkty.html'); $conn = null;?>
 </footer>
 </body>
 </html>
@@ -76,14 +104,19 @@ container.addEventListener('mousemove', onZoom);
 container.addEventListener('mouseover', onZoom);
 container.addEventListener('mouseleave', offZoom);
 
+$(".pick_pic").click(function(){
+    zdjecie = document.getElementById(this.id);
+    const zrodlo = zdjecie.getAttribute("src");
+    var glowne_zdjecie = document.getElementById("prod");
+    const zmiana_zdjecia = $(glowne_zdjecie).attr('src', zrodlo);
+    
+});
 function onZoom(e) {
     const x = e.clientX - e.target.offsetLeft;
     const y = e.clientY - e.target.offsetTop;
 
-    // console.log(x, y)
-
     img.style.transformOrigin = `${x}px ${y}px`;
-    img.style.transform = 'scale(1.8)';
+    img.style.transform = 'scale(1.7)';
 }
 
 function offZoom(e) {

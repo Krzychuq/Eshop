@@ -71,10 +71,10 @@ foreach($pyt_wiadomosci as $linia){
     echo "<td>" . $linia["id"] . "</td>";
     echo "<td>" . $linia["imie"] . "</td>";
     echo "<td>" . $linia["nazwisko"] . "</td>";
-    echo "<td>" . "<button  class=klik id=$mailID data-em = '$linia[email]' style='border:none; background: transparent; font-weight:bold; font-size:14px; cursor:pointer; color: blue;'>" . $linia["email"] . "</button>" . "</td>";
+    echo "<td>" . "<button  class=klik id=$mailID data-em = '$linia[email]' style='border:none; background: transparent; font-weight:bold; font-size:14px; cursor:pointer; color: green;'>" . $linia["email"] . "</button>" . "</td>";
     echo "<td>" . $linia["nr_zamowienia"] . "</td>";
     echo "<td>" . $linia["wiadomosc"] . "</td>";
-    echo "<td>" . "<form method='POST'>" . "<button name=".$mailID." class='przycisk_usun_mały'>Usuń</button>" . "</form>" . "</td>"; //do zrobienia
+    echo "<td>" . "<form method='POST'>" . "<button name=".$mailID." onclick=usun() class=przycisk_usun_mały >Usuń</button>" . "</form>" . "</td>"; //do zrobienia
     echo "</tr>";
     if(isset($_POST[$mailID])) {
         $usun -> execute([$linia["id"]]);
@@ -120,7 +120,9 @@ $conn = null;
 </body>
 </html>
 <script>
-
+    function usun(){
+        return confirm('Potwierdź');
+    }
     // Get the modal
     var modal = document.getElementById("popup");
 

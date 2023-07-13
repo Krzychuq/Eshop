@@ -92,15 +92,37 @@ session_start();
     <!-- Usun produkt -->
     <h3 id="p2" >Usuń produkt</h3>
     <form action="usun_produkt.php" class="form_panel" method="post" id="form2">
-        <input type="text" name="id" placeholder="ID" >
-        <button type="submit" class="czerwony_przycisk">Usuń</button>
+        <select name="id">
+
+        <option value="">ID</option>
+        <?php
+            $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
+            foreach($pyt_produkt as $linia){
+                echo "<option value =". $linia["id"] .">" . $linia["id"] . "</option>";
+            }  
+        ?>
+
+        </select>
+        <button type="submit" onclick="return confirm('Potwierdź');" class="czerwony_przycisk">Usuń</button>
     </form>
     <br>
     <!-- Usuń rozmiar -->
     <h3 style="font-weight:bold;">Usuń rozmiar</h3>
         <form action="usun_rozmiar.php" class="form_panel" method="post" id="form5">
-            <input type="text" name="id" placeholder="ID" >
+            <select name="id">
+
+            <option value="">ID</option>
+            <?php
+                $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
+                foreach($pyt_produkt as $linia){
+                    echo "<option value =". $linia["id"] .">" . $linia["id"] . "</option>";
+                }  
+            ?>
+
+            </select>
+
             <select name="rozmiar" >
+                <option value="">Rozmiar</option>
                 <option value="XS">XS</option>
                 <option value="S">S</option>
                 <option value="M">M</option>
@@ -109,25 +131,38 @@ session_start();
                 <option value="XXL">XXL</option>
                 <option value="Uniwersalny">Uni</option>
             </select>
-            <button type="submit" class="czerwony_przycisk">Usuń</button>
+            <button type="submit" onclick="return confirm('Potwierdź');" class="czerwony_przycisk">Usuń</button>
         </form>
     <br>
     <!-- Dodaj rozmiar -->
     <br>
     <h3>Dodaj rozmiar</h3>
     <form action="dodaj_rozmiar.php" class="form_panel" method="post" id="form6">
-        <input type="text" name="id" placeholder="ID">
+        <select name="id">
+
+        <option value="">ID</option>
+        <?php
+            $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
+            foreach($pyt_produkt as $linia){
+                echo "<option value =". $linia["id"] .">" . $linia["id"] . "</option>";
+            }  
+        ?>
+
+        </select>
+
         <input type="number" min=0 name="ilosc" placeholder="Ilość">
         <select name="rozmiar">
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-                <option value="Uniwersalny">Uni</option>
-            </select>
-            <button type="submit" class="zielony_przycisk">Dodaj</button>
+            <option value="">Rozmiar</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="Uniwersalny">Uni</option>
+        </select>
+
+        <button type="submit" class="zielony_przycisk">Dodaj</button>
     </form>
 </div>
 
@@ -135,7 +170,17 @@ session_start();
     <!-- Aktualizuj produkt -->
     <h3  id="p4">Aktualizuj produkt</h3>
     <form action="akt_produkt.php" class="form_panel" method="post" id="form3" enctype="multipart/form-data">
-        <input type="text" name="id"  placeholder="Podaj ID">
+        <select name="id">
+
+        <option value="">ID</option>
+        <?php
+            $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
+            foreach($pyt_produkt as $linia){
+                echo "<option value =". $linia["id"] .">" . $linia["id"] . "</option>";
+            }  
+        ?>
+
+        </select>
         <input type="text" name="nazwa" placeholder="Nazwa">
         <input type="text" name="cena" placeholder="Cena">
         <select name="rodzaj">
@@ -194,7 +239,6 @@ session_start();
             <th>Zdjecia</th>
         </tr>
 <?php
-$pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
 $licznik_zdjec = 0;
 foreach($pyt_produkt as $linia){  
     $pyt_rozmiar = $conn->prepare("SELECT rozmiar FROM rozmiary_produktow WHERE id_produktu = ?");
@@ -202,7 +246,7 @@ foreach($pyt_produkt as $linia){
     echo "<tr>";
     echo "<td>" . $linia["id"] . "</td>";
     echo "<td>" . $linia["indeks_produktu"] . "</td>";
-    echo "<td>" . "<a style='color:black;' href=" .$linia["link"].">".$linia["nazwa"] . "</a></td>";
+    echo "<td>" . "<a style='color: green; text-decoration:underline dashed;' href=" .$linia["link"].">".$linia["nazwa"] . "</a></td>";
     echo "<td>" . $linia["cena"] . "</td>";
     echo "<td>" . $linia["ilosc"] . "</td>";
     echo "<td>" . $linia["rodzaj"] . "</td>";
