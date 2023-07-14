@@ -756,7 +756,7 @@ body{
 .podobne_produkty{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 100vw;
     min-height: 200px;
     height: max-content;
     background-color: rgba(255, 255, 255, 0.815);
@@ -764,9 +764,19 @@ body{
     align-items: center;
     justify-content: center;
     gap: 3%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;  
+/* https://css-tricks.com/can-get-pretty-far-making-slider-just-html-css/ */
+}
+.podobne_produkty div{
+    flex-shrink: 0;
+}
+.podobne_produkty > div{
+    scroll-snap-align: start;
 }
 .podobne_produkty img{
-    width: 300px;
+    width: fit-content;
     height: 300px;
     border-radius: 10px;
 }

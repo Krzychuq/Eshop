@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 12, 2023 at 02:19 PM
+-- Generation Time: Lip 14, 2023 at 10:45 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -98,7 +98,10 @@ CREATE TABLE `produkty` (
 INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie1`, `zdjecie2`, `zdjecie3`, `zdjecie4`, `indeks_produktu`, `link`) VALUES
 (52, 'kurtka kamuflage', 250.00, 12, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', 'zdjecia_produktow/2023-07-04-09-11-14.jpg', NULL, NULL, NULL, '757012d', 'http://localhost/forum/produkty/kurtka-kamuflage-757012d.php'),
 (54, 'czarne spodnie', 300.99, 23, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', 'zdjecia_produktow/2023-07-06-13-34-30.jpg', NULL, NULL, NULL, '966862i', 'http://localhost/forum/produkty/czarne-spodnie-966862i.php'),
-(55, 'plecak vans', 154.99, 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', 'zdjecia_produktow/2023-07-06-23-01-15.jpg', NULL, NULL, NULL, '98554t', 'http://localhost/forum/produkty/plecak-vans-98554t.php');
+(55, 'plecak vans', 154.99, 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', 'zdjecia_produktow/2023-07-06-23-01-15.jpg', NULL, NULL, NULL, '98554t', 'http://localhost/forum/produkty/plecak-vans-98554t.php'),
+(57, 'czarny plecak', 180.00, 13, '7', 'Czarny męski plecak o prostej, klasycznej formie. Idealny na co dzień: do szkoły, na uczelnię, do pracy.\r\n\r\ngłówna komora oraz zewnętrzna kieszeń zapinane na suwaki\r\ndługie szelki z możliwością regulacji\r\nwewnętrzna kieszeń na laptopa\r\nniewielka naszywka z przodu', 'zdjecia_produktow/2023-07-13-07-57-47.jpg', NULL, NULL, NULL, '996025d', 'http://localhost/forum/produkty/czarny-plecak-996025d.php'),
+(58, 'koszulka', 70.00, 25, '2', 'KOSZULKA OVERSIZE STRONG POINT   \r\n\r\nMamy dla Was koszulkę idealną. Luźny, najmodniejszy krój, perfekcyjna długość, przewiewna bawełna, genialna dzianina. Będziecie zachwycone!  \r\n\r\nDelikatne, wyszywane logo w kolorze produktu sprawia, że koszulkę możecie nosić do niemal każdej stylizacji', 'zdjecia_produktow/2023-07-13-09-12-21-1.jpg', 'zdjecia_produktow/2023-07-13-09-12-21-2.jpg', 'zdjecia_produktow/2023-07-13-09-12-21-3.jpg', 'zdjecia_produktow/2023-07-13-09-12-21-4.jpg', '327894f', 'http://localhost/forum/produkty/koszulka-327894f.php'),
+(62, 'bluza', 890.00, 14, '10', 'cfy', 'zdjecia_produktow/2023-07-13-13-57-31-1.jpg', NULL, NULL, NULL, '513819u', 'http://localhost/forum/produkty/bluza-513819u.php');
 
 -- --------------------------------------------------------
 
@@ -124,7 +127,9 @@ INSERT INTO `rodzaj_produktu` (`id`, `nazwa`) VALUES
 (5, 'kurtkaM'),
 (6, 'kurtkaZ'),
 (7, 'plecak'),
-(8, 'torebka');
+(8, 'torebka'),
+(9, 'bluzaM'),
+(10, 'bluzaZ');
 
 -- --------------------------------------------------------
 
@@ -152,7 +157,20 @@ INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`, `ilosc`) VALUE
 (51, 54, 'XS', 2),
 (52, 54, 'S', 4),
 (53, 54, 'L', 2),
-(54, 54, 'XL', 5);
+(54, 54, 'XL', 5),
+(56, 57, 'Uniwersalny', 13),
+(57, 58, 'XS', 3),
+(58, 58, 'S', 4),
+(59, 58, 'M', 7),
+(60, 58, 'L', 2),
+(61, 58, 'XL', 5),
+(62, 58, 'XXL', 4),
+(69, 62, 'XS', 6),
+(70, 62, 'S', 1),
+(71, 62, 'M', 1),
+(72, 62, 'L', 2),
+(73, 62, 'XL', 2),
+(74, 62, 'XXL', 2);
 
 -- --------------------------------------------------------
 
@@ -230,19 +248,19 @@ ALTER TABLE `loginy`
 -- AUTO_INCREMENT for table `produkty`
 --
 ALTER TABLE `produkty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `rozmiary_produktow`
 --
 ALTER TABLE `rozmiary_produktow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `wiadomosci_klientow`
 --
 ALTER TABLE `wiadomosci_klientow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

@@ -7,7 +7,7 @@ session_start();
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <link rel='stylesheet' href='../s.css?v1.4'>
+    <link rel='stylesheet' href='../s.css?v1.1'>
     <title>Sesja</title>
 </head>
 <body>
@@ -40,7 +40,8 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
             <?php if($dane["zdjecie2"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod2 id=prod2 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
             <?php if($dane["zdjecie3"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod3 id=prod3 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
             <?php if($dane["zdjecie4"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod4 id=prod4 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
-        </div>
+    </div>
+    
     <div id='div1'>
     <!-- zdjecie głowne produktu -->
         <?php echo "<img src=$zdjecie_prod1 id=prod width=400px height=auto alt=zdjecie/produktu>"; ?>
@@ -73,22 +74,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
     </div>
 </div>
 
-<div class="podobne_produkty">
-<?php
-    $podobne_produkty = $conn -> query('SELECT nazwa, cena, zdjecie1,link FROM produkty LIMIT 5');
-    while($linia = $podobne_produkty->fetch()){
-        $nazwa = ucfirst($linia["nazwa"]);
-        $link = "../".$linia["zdjecie1"];
-        echo "<div>";
-        echo "<a style='color: black; text-decoration:none;' href=$linia[link]>";
-        echo "<img src=$link>";
-        echo "<p style='font-size: 1.2rem;'>$nazwa</p>";
-        echo "<p style='font-size: 0.9rem; font-weight:bold;'>$linia[cena] PLN</p>";
-        echo "</a>";
-        echo "</div>";
-    }
-?>
-</div>
+<?php include_once('../podobne_produkty.php');?>
 
 </div>
 <footer>
