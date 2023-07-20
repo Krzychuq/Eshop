@@ -299,10 +299,7 @@ body{
     border: none;
     transition: 1.1s;
 }
-    .menu2:active{
-        transition: 1s;
-        transform: scale(1.1);
-    }
+
 
 .zdjecie_profilowe{
     margin-left: auto;
@@ -753,30 +750,67 @@ body{
     transform: scale(0.9);
     transition: 0s;
 }
-.podobne_produkty{
+.podobne_produkty {
+    margin-top: 10px;
     display: flex;
-    flex-direction: row;
-    width: 100vw;
-    min-height: 200px;
-    height: max-content;
-    background-color: rgba(255, 255, 255, 0.815);
-    padding: 20px;
     align-items: center;
     justify-content: center;
-    gap: 3%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;  
-/* https://css-tricks.com/can-get-pretty-far-making-slider-just-html-css/ */
-}
+    position: relative;
+  }
+  .podobne_produkty .ui-card {
+    height: auto;
+    width: max-content;
+    border-radius: 10px;
+    padding:10px;
+    position: relative;
+    z-index: 1;
+    transform: scale(0.6) translateY(-2rem);
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+    background: #ffffff;
+    transition: 1s;
+  }
+  .podobne_produkty .ui-card:after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    border-radius: 100%;
+    background-color: rgba(0,0,0,0.3);
+    bottom: -5rem;
+    filter: blur(4px);
+  }
+  .podobne_produkty .ui-card:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 3rem;
+    font-weight: 300;
+    color: #fff;
+  }
+  .podobne_produkty .ui-card.active {
+    z-index: 3;
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition: 1s;
+  }
+  .podobne_produkty .ui-card.prev,
+  .podobne_produkty .ui-card.next {
+    z-index: 2;
+    transform: scale(0.8) translateY(-1rem) translateX(0);
+    opacity: 0.6;
+    pointer-events: auto;
+    transition: 1s;
+  }
 .podobne_produkty div{
     flex-shrink: 0;
-}
-.podobne_produkty > div{
     scroll-snap-align: start;
 }
 .podobne_produkty img{
-    width: fit-content;
+    width: 300px;
     height: 300px;
     border-radius: 10px;
 }

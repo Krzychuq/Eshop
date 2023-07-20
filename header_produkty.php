@@ -9,7 +9,7 @@
 <div class="menu2">
     <img src="../svg/search.svg" width="22px" height="22px" alt="U+1f60d">
     <form class="form-wyszukania">
-        <input class="wyszukiwarka" type="text"  id="wyszukiwarka" onkeyup="wyszukanie(this.value)" placeholder="Szukaj">
+        <input class="wyszukiwarka" onfocusin="powieksz_wyszukiwanie()" onfocusout="zmniejsz_wyszukiwanie()" type="text"  id="wyszukiwarka" onkeyup="wyszukanie(this.value)" placeholder="Szukaj">
     </form>
     <div>
         <p id="wyniki"></p>
@@ -32,6 +32,14 @@
 ?>
 </div>
 <script>
+wyszukiwarka = document.getElementsByClassName("menu2")[0];
+
+function powieksz_wyszukiwanie(){
+    wyszukiwarka.style.transform = "scale(1.1)";
+}
+function zmniejsz_wyszukiwanie(){
+    wyszukiwarka.style.transform = "scale(1)";
+}
 function wyszukanie(str) {
     if (str.length == 0){
     document.getElementById("wyniki").innerHTML = "";
