@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v1.3">
+    <link rel="stylesheet" href="s.css?v1.1">
     <title>Sesja</title>
 </head>
 <body>
@@ -17,6 +17,8 @@ include_once("laczenieZbaza.php");
 
 <div class="contener">
 <div class="showcase">
+    <p class="showcase_tytul">Nowości</p>
+    <div class="showcase_flex">
 <?php
 $pyt_produkt = $conn -> query("SELECT nazwa, cena, zdjecie1,link FROM produkty LIMIT 3");
 
@@ -25,12 +27,13 @@ while($linia = $pyt_produkt->fetch()){
     echo "<div>";
     echo "<a style='color: black; text-decoration:none;' href=$linia[link]>";
     echo "<img src=$linia[zdjecie1]>";
-    echo "<p style='font-size: 1.4rem;'>$nazwa</p>";
-    echo "<p style='font-size: 0.9rem; font-weight:bold;'>$linia[cena] PLN</p>";
+    echo "<p class='showcase_flex_nazwa'>$nazwa</p>";
+    echo "<p class='showcase_flex_cena'>$linia[cena] PLN</p>";
     echo "</a>";
     echo "</div>";
 }
 ?>
+    </div>
 </div>
 <div class="lista_produktow_poziom">
 

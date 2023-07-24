@@ -7,10 +7,8 @@ session_start();
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <link rel='stylesheet' href='../slick-1.8.1/slick/slick.css'>
-    <link rel='stylesheet' href='../s.css?v1.2'>
-    <script type="text/javascript" src="../slick-1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="../flickity.min.js"></script>
+    <link rel='stylesheet' href='../s.css?v1.3'>
     <title>Sesja</title>
 </head>
 <body>

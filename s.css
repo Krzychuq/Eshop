@@ -607,27 +607,41 @@ body{
     transition: 1s;
 }
 .showcase{
-    display: flex;
-    flex-direction: row;
+    overflow: hidden;
     width: 100%;
     min-height: 200px;
     height: max-content;
     background-color: white;
     padding: 12px;
-    padding-left: 40px;
-    padding-right: 40px;
-    gap: 10%;
+
 }
-.showcase div{
+.showcase_tytul{
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.showcase_flex{
+    display: flex;
+    flex-direction: row;
+    gap: 3%;
+}
+.showcase_flex_nazwa{
+    font-size: 1.4rem;
+}
+.showcase_flex_cena{
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.showcase_flex div{
     margin-left: auto;
     margin-right: auto;
-    width: 28%;
+    width: fit-content;
     text-align: left;
-    padding: 20px;
 }
-.showcase img{
-    width: auto;
-    height: 310px;
+.showcase_flex div img{
+    width: 300px;
+    height: 300px;
 }
 /* .lista_produktow_poziom{
 
@@ -640,7 +654,7 @@ body{
     grid-template-rows: 1fr 0.5fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    background-color: #ffffffe5;
+    background-color: rgb(255, 255, 255);
     padding: 5px;
     margin-left: auto;
     margin-right: auto;
@@ -663,7 +677,8 @@ body{
 }
 .grid_produkt #div3{
     grid-area: 1 / 3 / 2 / 4;
-    width: 60%;
+    margin-left: 3%;
+    width: 80%;
 }
 .grid_produkt #div3 form{
     display: flex;
@@ -752,64 +767,76 @@ body{
 }
 .podobne_produkty {
     margin-top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
     position: relative;
-  }
-  .podobne_produkty .ui-card {
-    height: auto;
-    width: max-content;
-    border-radius: 10px;
-    padding:10px;
-    position: relative;
-    z-index: 1;
-    transform: scale(0.6) translateY(-2rem);
-    opacity: 0;
-    cursor: pointer;
-    pointer-events: none;
-    background: #ffffff;
-    transition: 1s;
-  }
-  .podobne_produkty .ui-card:after {
-    content: '';
-    position: absolute;
-    height: 2px;
-    width: 100%;
-    border-radius: 100%;
-    background-color: rgba(0,0,0,0.3);
-    bottom: -5rem;
-    filter: blur(4px);
-  }
-  .podobne_produkty .ui-card:before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    font-size: 3rem;
-    font-weight: 300;
-    color: #fff;
-  }
-  .podobne_produkty .ui-card.active {
-    z-index: 3;
-    transform: scale(1) translateY(0) translateX(0);
-    opacity: 1;
-    pointer-events: auto;
-    transition: 1s;
-  }
-  .podobne_produkty .ui-card.prev,
-  .podobne_produkty .ui-card.next {
-    z-index: 2;
-    transform: scale(0.8) translateY(-1rem) translateX(0);
-    opacity: 0.6;
-    pointer-events: auto;
-    transition: 1s;
-  }
-.podobne_produkty div{
-    flex-shrink: 0;
-    scroll-snap-align: start;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
 }
-.podobne_produkty img{
+.podobne_produkty #tytul_polecane{
+    font-size: 1.7rem;
+    text-align: center;
+    padding: 5px;
+}
+.podobne_produkty .button_prev{
+    position: absolute;
+    top:50%;
+    width: fit-content;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: auto;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+    transition: 0.5s;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.podobne_produkty .button_prev:hover{
+    transition: 0.5s;
+    transform: scale(1.1);
+}
+.podobne_produkty .button_prev:active{
+    transition: 0.2s;
+    transform: scale(1);
+}
+.podobne_produkty .button_next{
+    position: absolute;
+    top:50%;
+    left: 94%;
+    width: fit-content;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: auto;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.podobne_produkty .button_next:hover{
+    transition: 0.5s;
+    transform: scale(1.1);
+}
+.podobne_produkty .button_next:active{
+    transition: 0.2s;
+    transform: scale(1);
+}
+.podobne_produkty ul{
+    position: relative;
+    align-items: center;
+    list-style-type: none;
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.podobne_produkty ul img{
     width: 300px;
     height: 300px;
     border-radius: 10px;
@@ -875,6 +902,16 @@ body{
 /* mobile */
 
 @media only screen and (max-width: 1100px) {
+    .showcase_flex div img{
+        width: 260px;
+        height: 260px;
+    }
+    .showcase_flex_nazwa{
+        font-size: 1.1rem;
+    }
+    .showcase_flex_cena{
+        font-size: 0.8rem;
+    }
     .linki{
         font-size: 14px;
         padding: 6px;
@@ -888,13 +925,23 @@ body{
      }
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .linki {
     padding: 0 60px;
   }
+  .showcase_flex div img{
+    width: 170px;
+    height: 170px;
+ }
+ .showcase_flex_nazwa{
+    font-size: 0.8rem;
+}
+.showcase_flex_cena{
+    font-size: 0.5rem;
+}
 }
 
-@media (max-width: 530px){
+@media only screen and (max-width: 530px){
 
     .zaloguj{
         width: 230px;
