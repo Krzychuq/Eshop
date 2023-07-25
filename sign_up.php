@@ -58,21 +58,21 @@ if( isset($login) && !empty($login) && isset($pass) && !empty($pass) ){
          }
         }
         else{
-            $_SESSION['wiadomosc_rejestracji'] = "Hasło nie zgadza się z wytycznymi!";
+            $_SESSION['error'] = "Hasło nie zgadza się z wytycznymi!";
             header("location: rejestracja.php");
         }
         
     }
 
     else{
-        $_SESSION['wiadomosc_rejestracji'] = 'Hasła nie są takie same!';
+        $_SESSION['error'] = 'Hasła nie są takie same!';
         header("location: rejestracja.php");
     }
     
 }
 
 else{
-    $_SESSION['wiadomosc_rejestracji'] = 'Wpisz email i hasło!';
+    $_SESSION['error'] = 'Wpisz email i hasło!';
     header("location: rejestracja.php");
 }
 ?>

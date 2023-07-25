@@ -58,9 +58,15 @@ include_once("laczenieZbaza.php");
 
 </div>
 <?php 
-if(isset($_SESSION['wiadomosc_konta'])){
-    echo "<div class='error'>" . "&#10005 ". $_SESSION["wiadomosc_konta"] . "</div>";
-    unset($_SESSION['wiadomosc_konta']);
+if(isset($_SESSION['error'])){
+    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
+    unset($_SESSION['error']);
+    echo "<script src='blad.js'></script>";
+}
+if(isset($_SESSION['success'])){
+    echo "<div class='success'>" . "&#10003 ". $_SESSION["success"] . "</div>";
+    unset($_SESSION['success']);
+    echo "<script src='powiadomienie.js'></script>";
 }
 ?>
 <footer>
@@ -68,3 +74,4 @@ if(isset($_SESSION['wiadomosc_konta'])){
 </footer>
 </body>
 </html>
+<script src="loading.js"></script>

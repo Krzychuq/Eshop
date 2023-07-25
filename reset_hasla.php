@@ -39,3 +39,4 @@ if(isset($_SESSION['error'])){
 </footer>
 </body>
 </html>
+<script src="loading.js"></script>

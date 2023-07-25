@@ -6,10 +6,10 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v=1.2">
+    <link rel="stylesheet" href="s.css?v=1.5">
     <title>Sesja</title>
 </head>
-<body>
+<body> 
 <?php include_once("header.php")?>
 <div class="contener">
 <section class="wrap-sign-up-in">
@@ -28,25 +28,24 @@ session_start();
         <br>
         
         <button type='submit' class="przycisk_zaloguj_zarejestruj">Zaloguj się</button>
-        <br>
-        <?php
-            if(isset($_SESSION['wiadomosc_loginu'])){
-                echo $_SESSION['wiadomosc_loginu'];
-                unset($_SESSION['wiadomosc_loginu']);
-            }
-        ?>
     </form>
     
     <div class="rejestracja">
         <p style="padding-bottom: 5px;">Nie pamiętasz hasła? <a href="reset_hasla.php"> Kliknij</a></p>
         <p>Nie masz konta? <a href="rejestracja.php"> Zarejestruj się</a></p>
-        
-        
     </div>
 </section>
+<?php
+if(isset($_SESSION['error'])){
+    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
+    unset($_SESSION['error']);
+    echo "<script src='blad.js'></script>";
+}
+?>
 </div>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>
 </body>
 </html>
+<script src="loading.js"></script>

@@ -297,3 +297,5 @@ $conn = null;
 ?>
 </body>
 </html>
+
+<script src="loading.js"></script>

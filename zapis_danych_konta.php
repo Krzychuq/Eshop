@@ -45,7 +45,7 @@ if(!empty($_POST["kraj"])){
     $pyt_o_kraj = $conn->prepare("UPDATE dane_konta SET kraj = ? WHERE id_loginu = ?");
     $pyt_o_kraj -> execute([$kraj, $id]);
 }
-
+$_SESSION['success'] = "Zapisano dane";
 $conn = null;
 header('location:konto.php');
 ?>

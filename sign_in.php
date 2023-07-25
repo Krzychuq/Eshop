@@ -3,6 +3,7 @@ session_start();
 include_once("laczenieZbaza.php");
 $email = $_POST['email'];
 $pass = $_POST['pass'];
+if(!empty($pass)){
 $pytanieEmail = $conn->prepare('SELECT pass FROM loginy WHERE login like ?');
 $pytanieEmail->execute([$email]);
 $pass_baza = $pytanieEmail->fetch(PDO::FETCH_ASSOC);
@@ -24,24 +25,26 @@ $validation = password_verify($pass, $hash);
                 $id = $wykonanie['id'];
 
                 //dane konta
-                $pyt_o_dane = $conn->prepare("SELECT nazwa, dostep FROM dane_konta WHERE id_loginu = ?");
+                $pyt_o_dane = $conn->prepare("SELECT dostep FROM dane_konta WHERE id_loginu = ?");
                 $pyt_o_dane -> execute([$id]);
                 $wykonanie = $pyt_o_dane->fetchAll();
                 foreach ($wykonanie as $linia){
-                        $nick = $linia['nazwa'];
                         $dostep = $linia['dostep'];
                 }
-
-                $_SESSION['nickname'] = $nick;
+                $conn = null;
                 $_SESSION['dostep'] = $dostep;
-                // $sesja = $_SESSION['email'];
-                // $czas_sesji = time() + ();
-                // setcookie($sesja,"/");
+                $czas_sesji = time() + 86400;
+                $_SESSION['expire'] = $czas_sesji;
                 header("location: index.php");
         }
         else{
-                $_SESSION['wiadomosc_loginu'] = "Błedny email lub hasło!";
+                $_SESSION['error'] = "Błedny email lub hasło!";
                 header("location: logowanie.php");
         }
-$conn = null;
+}
+else{
+        $_SESSION['error'] = "Wpisz hasło!";
+        header("location: logowanie.php");
+}
+
 ?>

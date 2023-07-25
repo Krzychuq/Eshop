@@ -1,5 +1,13 @@
 <?php
 session_start();
+if(isset($_SESSION['email'])) {
+    $czas_aktualny = time();
+    
+    if ($czas_aktualny > $_SESSION['expire']) {
+        session_unset();
+        session_destroy();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pl">

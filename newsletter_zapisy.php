@@ -47,3 +47,4 @@ if(isset($_SESSION['success'])){
 </footer>
 </body>
 </html>
+<script src="loading.js"></script>

@@ -25,6 +25,8 @@ echo "</div>";
 <script>
   let liczba = 0;
 function pozycjaplus(){
+dlugosc = document.getElementsByClassName("list_prod")[0].offsetWidth;
+if( dlugosc < 1890){
   if(liczba <= -930){
     liczba = 0;
     przesuniecie = liczba + "px";
@@ -35,6 +37,8 @@ function pozycjaplus(){
     przesuniecie = liczba + "px";
     document.getElementsByClassName("list_prod")[0].style.left = przesuniecie;
   }
+}
+
 }
 function pozycjaminus(){
   if(liczba != 0){

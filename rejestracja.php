@@ -52,10 +52,10 @@
 </div>
 <?php 
 // wyswietl blad
-if(isset($_SESSION['wiadomosc_rejestracji'])){
-    echo "<div class='error'>" . "&#10005 ". $_SESSION["wiadomosc_rejestracji"] . "</div>";
-    unset($_SESSION['wiadomosc_rejestracji']);
-    echo "<script src='blad.js'></script>";
+if(isset($_SESSION['error'])){
+  echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
+  unset($_SESSION['error']);
+  echo "<script src='blad.js'></script>";
 }
 ?>
 <footer>
@@ -80,4 +80,5 @@ var haslop = document.getElementById("haslop");
 }
 
 </script>
+<script src="loading.js"></script>
 </html>
