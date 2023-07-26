@@ -137,11 +137,11 @@ body{
     cursor: pointer;
     transition: 1s;
 }
-#konto, #log_in, #wiadomosc{
+#konto, #log_in, #wiadomosc, #koszyk{
     padding: 6px;
     transition: 1s;
 }
-    #wyloguj:hover, #konto:hover, #log_in:hover, #wiadomosc:hover{
+    #wyloguj:hover, #konto:hover, #log_in:hover, #wiadomosc:hover, #koszyk:hover{
         transition: 0.8s;
         transform: rotate(360deg) scale(1.1);
     }

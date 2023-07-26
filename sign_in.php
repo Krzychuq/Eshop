@@ -16,7 +16,8 @@ $validation = password_verify($pass, $hash);
 
         if($validation == true){
                 $_SESSION['email'] = $email;
-
+                $tablica= array('');
+                setcookie('koszyk',json_encode($tablica), time() + (86400*2), "/");
                 //identyfikacja
                 $mail = $_SESSION['email'];
                 $pyt_o_id = $conn->prepare("SELECT id FROM loginy WHERE login like ?");
@@ -34,7 +35,9 @@ $validation = password_verify($pass, $hash);
                 $conn = null;
                 $_SESSION['dostep'] = $dostep;
                 $czas_sesji = time() + 86400;
+                $czas_cookie = time() + (86400*7);
                 $_SESSION['expire'] = $czas_sesji;
+                setcookie( "uzytkownik", $_SESSION['email'], $czas_cookie,"/" );
                 header("location: index.php");
         }
         else{
