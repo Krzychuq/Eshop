@@ -51,7 +51,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
     <div id="div3">
     <!-- info -->
         <?php
-        echo "<form action='../dodaj_do_koszyka.php' method=POST>";
+        echo "<form action='' method=POST>";
         echo "<input name=indeks value=$indeks_produktu type=hidden>";
         echo "<p id=nazwa>".ucfirst($nazwa_prod)."</p>";
         echo "<p id=cena>".$dane["cena"]. " PLN</p>";
@@ -113,3 +113,4 @@ function offZoom(e) {
 
 
 </script>
+<?php include_once('../dodaj_do_koszyka.php');?>

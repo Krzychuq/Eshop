@@ -16,8 +16,7 @@ $validation = password_verify($pass, $hash);
 
         if($validation == true){
                 $_SESSION['email'] = $email;
-                $tablica= array('');
-                setcookie('koszyk',json_encode($tablica), time() + (86400*2), "/");
+                $_SESSION['koszyk'] = '';
                 //identyfikacja
                 $mail = $_SESSION['email'];
                 $pyt_o_id = $conn->prepare("SELECT id FROM loginy WHERE login like ?");

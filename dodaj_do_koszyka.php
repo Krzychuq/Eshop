@@ -6,9 +6,13 @@ $_SESSION['indeks_produktu'] = $indeks;
 $_SESSION['rozmiar_produktu'] = $rozmiar;
 $indeks = $_SESSION['indeks_produktu'];
 $rozmiar = $_SESSION['rozmiar_produktu'];
-print_r($_COOKIE);
-
-array_push($koszyk_dec, $indeks, $rozmiar );
-$koszyk_dec = json_decode(, true);
-// print_r(json_decode($_COOKIE['koszyk'], true));
+if(empty($_SESSION['koszyk'])){
+    $koszyk[$indeks] = $rozmiar; 
+    $_SESSION['koszyk'] = $koszyk;
+}
+else{
+    $push_array = array($indeks => $rozmiar);
+    $laczenie_array = array_merge_recursive($_SESSION['koszyk'], $push_array);
+    $_SESSION['koszyk'] = $laczenie_array;
+}
 ?>
