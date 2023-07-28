@@ -895,7 +895,14 @@ body{
         outline: none;
     }
 
+.produkt_z_koszyka{
+    display: flex;
+    flex-direction: row;
+}
 
+
+
+    
 /* loading */
 .lds-ellipsis {
     display: inline-block;
