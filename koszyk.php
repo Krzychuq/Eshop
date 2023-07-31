@@ -25,6 +25,7 @@ include_once("laczenieZbaza.php");
 
 <div class="contener">
 <?php
+print_r($_SESSION['koszyk']);
 if(!empty($_SESSION['koszyk'])){
 foreach($_SESSION['koszyk'] as $kod => $rozmiar) {
   if(!empty($kod)){

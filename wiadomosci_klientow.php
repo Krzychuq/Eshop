@@ -23,7 +23,7 @@ session_start();
     <a href="index.php"><img src="svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
 </div>
 <div class='wyloguj'>
-    <a href="wiadomosci_klientow.php" id='wiadomosc'><img src="svg/email_panel.svg" alt="wiadomosci" width="36px" height="36px"></a>
+    <a href="panel.php" id='wiadomosc'><img src="svg/panel.svg" alt="panel" width="36px" height="36px"></a>
 <?php
 
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){
@@ -151,5 +151,4 @@ $conn = null;
     }
     }
     });
-
 </script>

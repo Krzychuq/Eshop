@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 14, 2023 at 10:45 PM
+-- Generation Time: Lip 31, 2023 at 03:41 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -68,7 +68,7 @@ CREATE TABLE `loginy` (
 --
 
 INSERT INTO `loginy` (`id`, `login`, `pass`, `data_rejestru`, `ostatnie_logowanie`, `token_hasla`, `data_zmiany_hasla`) VALUES
-(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2023-07-11 09:24:26', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09');
+(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2023-07-31 15:31:39', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09');
 
 -- --------------------------------------------------------
 
@@ -188,6 +188,13 @@ CREATE TABLE `wiadomosci_klientow` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `wiadomosci_klientow`
+--
+
+INSERT INTO `wiadomosci_klientow` (`id`, `imie`, `nazwisko`, `email`, `nr_zamowienia`, `wiadomosc`) VALUES
+(7, 'Krzychu', 'Grecki', 'costam@o2.pl', 3214914, 'After creating the product gallery page, we need to work on the PHP code to perform the cart actions. They are add-to-cart, remove a single item from the cart, clear the complete cart and similar.\r\n\r\nIn the above code, I have added the HTML option to add the product to the shopping cart from the product gallery. When the user clicks the ‘Add to Cart’ button, the HTML form passes the product id to the backend PHP script.\r\n\r\nIn PHP, I receive and process the cart action with a switch control statement. I have created PHP switch cases to handle the add-to-cart, remove-single, empty-cart actions.');
+
+--
 -- Indeksy dla zrzutów tabel
 --
 
@@ -260,7 +267,7 @@ ALTER TABLE `rozmiary_produktow`
 -- AUTO_INCREMENT for table `wiadomosci_klientow`
 --
 ALTER TABLE `wiadomosci_klientow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

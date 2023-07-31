@@ -122,3 +122,4 @@ $('#rozmiar option').each(function() {
 });
 });
 </script>
+<?php include_once('../dodaj_do_koszyka.php');?>

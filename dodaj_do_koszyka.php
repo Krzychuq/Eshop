@@ -9,10 +9,10 @@ $indeks = $_SESSION['indeks_produktu'];
 $rozmiar = $_SESSION['rozmiar_produktu'];
 $ilosc = 1;
 if(empty($_SESSION['koszyk'])){
-    $koszyk = array($indeks, $rozmiar, $ilosc); 
+    $koszyk= array($indeks, $rozmiar, $ilosc, $limit);
     $_SESSION['koszyk'] = array($koszyk);
 }
-else{    
+elseif(!empty($_SESSION['koszyk'])){    
     for($i=0; $i < sizeof($_SESSION['koszyk']); $i++){
         if(in_array($indeks,$_SESSION['koszyk'][$i])){
             $nowa_ilosc = $_SESSION['koszyk'][$i][2];
@@ -20,7 +20,7 @@ else{
             $_SESSION['koszyk'][$i][2] = $nowa_ilosc;
         }
         else{
-            $push_array = array($indeks, $rozmiar, $ilosc);
+            $push_array = array($indeks, $rozmiar, $ilosc,$limit);
             array_push($_SESSION['koszyk'], $push_array);
             break;
         }

@@ -1,4 +1,3 @@
-
 document.getElementsByTagName('body')[0].insertAdjacentHTML('afterbegin','<div id=loading></div>');
 var liczba_formularzy = document.getElementsByTagName('form').length;
 if(liczba_formularzy > 0){
