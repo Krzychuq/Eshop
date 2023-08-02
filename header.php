@@ -1,15 +1,15 @@
 <header class="naglowek">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="wyszukiwarka.js"></script>
 
 <div class='menu1'>
     <a href="index.php"><img src="svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
 
 </div>
-
-<div class="menu2" >
+<div class="menu2">
     <img src="svg/search.svg" width="22px" height="22px" alt="U+1f60d">
-    <form class="form-wyszukania">
-        <input class="wyszukiwarka" onfocusin="powieksz_wyszukiwanie()" onfocusout="zmniejsz_wyszukiwanie()" type="text"  id="wyszukiwarka" onkeyup="wyszukanie(this.value)" placeholder="Szukaj">
+    <form class="form-wyszukania" action=''>
+        <input class="wyszukiwarka" name onfocusin="powieksz_wyszukiwanie()" onfocusout="zmniejsz_wyszukiwanie()" type="text" name='wyszukiwarka' id="wyszukiwarka" onkeyup='wyszukanie(this.value)' placeholder="Szukaj">
     </form>
     <div>
         <p id="wyniki"></p>
@@ -37,23 +37,10 @@ function powieksz_wyszukiwanie(){
 function zmniejsz_wyszukiwanie(){
     wyszukiwarka.style.transform = "scale(1)";
 }
-
-function wyszukanie(str) {
-    if (str.length == 0){
-    document.getElementById("wyniki").innerHTML = "";
-    return;
-    } 
-    else{
-        const xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function() {
-        document.getElementById("wyniki").innerHTML = this.responseText;
-        }
-    xmlhttp.open("GET", "wyszukiwarka.php?q=" + str);
-    xmlhttp.send();
-    }
+function ustawValue(){
+    inpTekst = document.getElementById('wyszukiwarka').value;
+    document.getElementById('wyszukiwarka').setAttribute('value', inpTekst);
 }
-
-
 </script>
 
 </header>

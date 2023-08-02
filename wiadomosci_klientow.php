@@ -1,7 +1,9 @@
 <?php
 session_start();
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email']) ){
-        //nic
+        if($_SESSION['dostep'] !== 1){
+            header("location: index.php");
+        }
     }
     else{
         header("location: index.php");

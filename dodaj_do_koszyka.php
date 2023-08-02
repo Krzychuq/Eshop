@@ -10,18 +10,20 @@ if(empty($_SESSION['koszyk'])){
 }
 else{    
     for($i=0; $i < sizeof($_SESSION['koszyk']); $i++){
-        echo in_array($indeks, $_SESSION['koszyk'][$i]);
-
+        $powtorzenie = in_array($indeks, $_SESSION['koszyk'][$i]);
+        if($powtorzenie == TRUE){
+            $tablica = $i;
+        }
     }
-    // if(){
-    //     $nowa_ilosc = $_SESSION['koszyk'][$i][2];
-    //     $nowa_ilosc += 1;
-    //     $_SESSION['koszyk'][$i][2] = $nowa_ilosc;
-    // }
-    // else{
-        // $push_array = array($indeks, $rozmiar, $ilosc, $limit);
-        // array_push($_SESSION['koszyk'], $push_array);
-    // }
+    if($powtorzenie == TRUE){
+        $nowa_ilosc = $_SESSION['koszyk'][$tablica][2];
+        $nowa_ilosc += 1;
+        $_SESSION['koszyk'][$tablica][2] = $nowa_ilosc;
+    }
+    else{
+        $push_array = array($indeks, $rozmiar, $ilosc, $limit);
+        array_push($_SESSION['koszyk'], $push_array);
+    }
 }
 
 print_r($_SESSION['koszyk']);

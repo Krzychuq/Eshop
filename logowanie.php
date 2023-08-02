@@ -22,9 +22,11 @@ session_start();
         
         <div class="divy">
             <label for="pass"><img src="svg/password.svg" width="24px" height="auto" alt="Hasło: "></label>
-            <input name='pass' type="password" placeholder="Hasło">
+            <input name='pass' type="password" placeholder="Hasło" id='haslo'>
         </div>
-
+        <!-- pokaz haslo -->
+        <label for="">Pokaż hasła</label>
+        <input type="checkbox" class="pokaz_haslo" onclick="pokazhasla()" width="16" height="16"></input>
         <br>
         
         <button type='submit' class="przycisk_zaloguj_zarejestruj">Zaloguj się</button>
@@ -41,6 +43,11 @@ if(isset($_SESSION['error'])){
     unset($_SESSION['error']);
     echo "<script src='blad.js'></script>";
 }
+if(isset($_SESSION['success'])){
+    echo "<div class='success'>" . "&#10003 ". $_SESSION["success"] . "</div>";
+    unset($_SESSION['success']);
+    echo "<script src='powiadomienie.js'></script>";
+}
 ?>
 </div>
 <footer>
@@ -48,4 +55,17 @@ if(isset($_SESSION['error'])){
 </footer>
 </body>
 </html>
+<script>
+function pokazhasla() {
+var haslo = document.getElementById("haslo");
+
+  //haslo pokaz
+  if (haslo.type === "password") {
+    haslo.type = "text";
+  } 
+  else {
+    haslo.type = "password";
+  }
+}
+</script>
 <script src="loading.js"></script>

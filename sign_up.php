@@ -48,10 +48,14 @@ if( isset($login) && !empty($login) && isset($pass) && !empty($pass) ){
                 $dostep = 0;
                 $zapytanie3 = $conn -> prepare("INSERT INTO dane_konta (id_loginu, dostep) VALUES(?,?)");
                 $zapytanie3 -> execute([$id_login,$dostep]);
+                
 
              if ($zapytanie3 === FALSE) {
-                 echo "Błąd dodania konta";
+                $_SESSION['error'] =  "Błąd dodania konta";
              } 
+             else{
+                $_SESSION['success'] = "Zarejestrowano";
+             }
             
              $conn = null;
              header("location: logowanie.php");

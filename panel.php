@@ -1,7 +1,9 @@
 <?php
 session_start();
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email']) ){
-        //nic
+        if($_SESSION['dostep'] !== 1){
+            header("location: index.php");
+        }
     }
     else{
         header("location: index.php");
@@ -241,7 +243,7 @@ session_start();
 <?php
 $licznik_zdjec = 0;
 foreach($pyt_produkt as $linia){  
-    $pyt_rozmiar = $conn->prepare("SELECT rozmiar FROM rozmiary_produktow WHERE id_produktu = ?");
+    $pyt_rozmiar = $conn->prepare("SELECT rozmiar, ilosc FROM rozmiary_produktow WHERE id_produktu = ?");
     $pyt_rozmiar->execute([$linia["id"]]);
     echo "<tr>";
     echo "<td>" . $linia["id"] . "</td>";
@@ -252,7 +254,7 @@ foreach($pyt_produkt as $linia){
     echo "<td>" . $linia["rodzaj"] . "</td>";
     echo "<td>";
     while($kolejny = $pyt_rozmiar->fetch()){
-        echo  " |".$kolejny['rozmiar'] ."| ";
+        echo  " |".$kolejny['rozmiar'] ."-". $kolejny['ilosc'] ." | ";
     }
     echo "</td>";
     if($linia["zdjecie1"] != NULL){
