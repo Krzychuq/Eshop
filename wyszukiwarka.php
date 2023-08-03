@@ -1,42 +1,22 @@
 <?php
-include('laczenieZbaza.php');
-  $slowo = 'bluza';
-  $szukaj1 = $conn->query('SELECT nazwa, cena, zdjecie1 FROM produkty');
-  while($wynik = $szukaj1->fetch()){
-    $produkty[] = $wynik['nazwa'];
-  }
-
-// get the q parameter from URL
+include_once('laczenieZbaza.php');
+//slowo do bazy
+$slowo = "%". $_REQUEST["q"] . "%";
+//pytanie o produkty
+$szukaj1 = $conn->prepare('SELECT nazwa, cena, zdjecie1, link FROM produkty WHERE nazwa like ? LIMIT 10');
+$szukaj1 -> execute([$slowo]);
+//slowo klucz
 $q = $_REQUEST["q"];
-
-$hint = "";
-
-// lookup all hints from array if $q is different from ""
-if ($q !== "") {
+//wynik
+if($szukaj1-> rowCount() > 0) {
   $q = strtolower($q);
-  $len=strlen($q);
-  foreach($produkty as $name) {
-    if (stristr($q, substr($name, 0, $len))) {
-      if ($hint === "") {
-        $hint = $name;
-      } else {
-        $hint .= ", $name";
-      }
-    }
+  while($wynik = $szukaj1->fetch()){
+    echo "<div class='wyszukiwanie_produkt'><a style='text-decoration:none; color: #171717;' href=".$wynik['link']."><div><img src=".$wynik['zdjecie1']." alt='produkt' class ='wyszukanie_prod_zdjecie'></div><div class='wyszukanie_prod_info'>".$wynik['nazwa']."<p>".$wynik['cena']."</p></div></a></div>";
   }
 }
-
-// Output "no suggestion" if no hint was found or output correct values
-if($hint === ""){
-    echo "Brak dopasowania";
-}
+//brak wyniku
 else{
-    while($wynik = $szukaj1->fetch()){
-        $wiersz_produktu = "<div><img src=$wynik[zdjecie1] alt='produkt' width='80px' height='100px'></div><div><p>$hint</p><p>$wynik[cena]</p></div>";
-        echo $wiersz_produktu;
-    }
-
-
+  echo "<h3>Brak dopasowania</h3>";
 }
 $conn = null;
 ?>

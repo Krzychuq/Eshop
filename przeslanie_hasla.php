@@ -101,7 +101,7 @@ if(isset($_POST['pass']) && isset($_POST['passp'])){
                     $data_zmiany_hasla = date("Y-m-d H:i:s");
                     $token = substr(sha1(mt_rand()),0,20);
                     //Zmiana hasla, daty i tokenu
-                    $pyt2 = $conn->prepare("UPDATE loginy SET data_zmiany_hasla = ?, token_hasla = ?, pass = ? WHERE token_hasla = ?")
+                    $pyt2 = $conn->prepare("UPDATE loginy SET data_zmiany_hasla = ?, token_hasla = ?, pass = ? WHERE token_hasla = ?");
                     $pyt2 -> execute([$data_zmiany_hasla, $token, $nowe_haslo, $token_strony]);
                     header("location: logowanie.php");
                 }

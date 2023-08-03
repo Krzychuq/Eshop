@@ -149,18 +149,46 @@ body{
 
 /* Classes */
 .form-wyszukania{
+    grid-area: 1 / 2 / 2 / 3; 
     width: 100%;
     height: auto;
 }
 .wyszukiwarka{
     font-size: 16px;
-    width: 98%;
+    width: 100%;
     height: 100%;
     border: none;
     outline: none;
     background-color: transparent;
 
 }
+.wyniki_wyszukiwania{
+    opacity:0;
+    grid-area: 2 / 1 / 3 / 3;
+    background-color: #f5f5f5;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 10px;
+    transition: 0.5s;
+}
+    .wyszukiwanie_produkt{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+    }
+     .wyszukanie_prod_info{
+        padding: 10px;
+        font-size: 1.3rem;
+     }
+     .wyszukanie_prod_zdjecie{
+        width: 100px;
+        height: 100px;
+     }
 
 .dymek{
     border-radius: 22px;
@@ -287,14 +315,17 @@ body{
 }
 
 .menu2{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 0.1fr 4fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
     font-family: Font2, "segoe ui";
     padding: 10px;
-    flex: 50%;
+    width: 60%;
     height: 45px;
     text-align: center;
-    background-color: #ffffffef;
+    background-color: #f5f5f5;
     border-radius: 10px;
     border: none;
     transition: 1.1s;
@@ -938,82 +969,40 @@ body{
     animation: lds-ellipsis3 0.6s infinite;
   }
   @keyframes lds-ellipsis1 {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  @keyframes lds-ellipsis3 {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(0);
-    }
+    0% {transform: scale(0);}
+    100% {transform: scale(1);}
   }
   @keyframes lds-ellipsis2 {
-    0% {
-      transform: translate(0, 0);
-    }
-    100% {
-      transform: translate(24px, 0);
-    }
+    0% {transform: translate(0, 0);}
+    100% {transform: translate(24px, 0);}
   }
+  @keyframes lds-ellipsis3 {
+    0% {transform: scale(1);}
+    100% {transform: scale(0);}
+  }
+
 /* /loading */
 
 /* mobile */
 
 @media only screen and (max-width: 1100px) {
-    .showcase_flex div img{
-        width: 260px;
-        height: 260px;
-    }
-    .showcase_flex_nazwa{
-        font-size: 1.1rem;
-    }
-    .showcase_flex_cena{
-        font-size: 0.8rem;
-    }
-    .linki{
-        font-size: 14px;
-        padding: 6px;
-    } 
-    .menu2{
-        width: 40%;
-        
-     }   
-     .menu1 , .wyloguj{
-        width: 20%;
-     }
+    .wyniki_wyszukiwania{flex-direction: column;}
+    .showcase_flex div img{width: 260px; height: 260px;}
+    .showcase_flex_nazwa{font-size: 1.1rem;}
+    .showcase_flex_cena{font-size: 0.8rem;}
+    .linki{font-size: 14px; padding: 6px;} 
+    .menu2{width: 40%;}   
+    .menu1 , .wyloguj{width: 20%;}
 }
 
 @media only screen and (max-width: 768px) {
-  .linki {
-    padding: 0 60px;
-  }
-  .showcase_flex div img{
-    width: 170px;
-    height: 170px;
- }
- .showcase_flex_nazwa{
-    font-size: 0.8rem;
-}
-.showcase_flex_cena{
-    font-size: 0.5rem;
-}
+    .linki {padding: 0 60px;}
+    .showcase_flex div img{width: 170px; height: 170px;}
+    .showcase_flex_nazwa{font-size: 0.8rem;}
+    .showcase_flex_cena{font-size: 0.5rem;}
 }
 
 @media only screen and (max-width: 530px){
-
-    .zaloguj{
-        width: 230px;
-    }
-
-    .wrap-sign-up-in:after{
-        display: block;
-        height: 310px;
-        width: 250px;
-    }
+    .zaloguj{width: 230px;}
+    .wrap-sign-up-in:after{display: block; height: 310px; width: 250px;}
 }

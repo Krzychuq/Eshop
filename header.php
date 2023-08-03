@@ -11,8 +11,7 @@
     <form class="form-wyszukania" action=''>
         <input class="wyszukiwarka" name onfocusin="powieksz_wyszukiwanie()" onfocusout="zmniejsz_wyszukiwanie()" type="text" name='wyszukiwarka' id="wyszukiwarka" onkeyup='wyszukanie(this.value)' placeholder="Szukaj">
     </form>
-    <div>
-        <p id="wyniki"></p>
+    <div class='wyniki_wyszukiwania' id="wyniki">
     </div>
 </div>
 <div class='wyloguj'>
@@ -32,7 +31,8 @@
 <script>
 wyszukiwarka = document.getElementsByClassName("menu2")[0];
 function powieksz_wyszukiwanie(){
-    wyszukiwarka.style.transform = "scale(1.1)";
+    if(window.innerWidth > 1100){ wyszukiwarka.style.transform = "scale(1.1)"; }
+    else{ wyszukiwarka.style.transform = "scale(1.04)"; }
 }
 function zmniejsz_wyszukiwanie(){
     wyszukiwarka.style.transform = "scale(1)";
