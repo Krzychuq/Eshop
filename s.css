@@ -315,6 +315,7 @@ body{
 }
 
 .menu2{
+    z-index: 1;
     display: grid;
     grid-template-columns: 0.1fr 4fr;
     grid-template-rows: repeat(2, 1fr);
@@ -692,7 +693,13 @@ body{
     padding-top: 3%;
 }
 .grid_produkt #div1{
+    position: relative;
     grid-area: 1 / 2 / 2 / 3; 
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+    height: auto;
+    overflow: hidden;
 }
 .grid_produkt #div2{
     grid-area: 1 / 1 / 2 / 2;
@@ -735,13 +742,6 @@ body{
     padding: 5px;
 }
 /* produkt zoom */
-#div1 {
-    margin-left: auto;
-    margin-right: auto;
-    width: max-content;
-    height: auto;
-    overflow: hidden;
-  }
  #div1 img {
     transform-origin: center center;
     object-fit: cover;
@@ -988,7 +988,7 @@ body{
 @media only screen and (max-width: 1100px) {
     .wyniki_wyszukiwania{flex-direction: column;}
     .showcase_flex div img{width: 260px; height: 260px;}
-    .showcase_flex_nazwa{font-size: 1.1rem;}
+    .showcase_flex_nazwa{font-size: 1.3rem;}
     .showcase_flex_cena{font-size: 0.8rem;}
     .linki{font-size: 14px; padding: 6px;} 
     .menu2{width: 40%;}   
@@ -998,11 +998,14 @@ body{
 @media only screen and (max-width: 768px) {
     .linki {padding: 0 60px;}
     .showcase_flex div img{width: 170px; height: 170px;}
-    .showcase_flex_nazwa{font-size: 0.8rem;}
-    .showcase_flex_cena{font-size: 0.5rem;}
+    .showcase_flex_nazwa{font-size: 1.1rem;}
+    .showcase_flex_cena{font-size: 0.9rem;}
 }
 
-@media only screen and (max-width: 530px){
+@media only screen and (max-width: 570px){
     .zaloguj{width: 230px;}
     .wrap-sign-up-in:after{display: block; height: 310px; width: 250px;}
+    .showcase_flex div img{width: 150px; height: 150px;}
+    .showcase_flex_nazwa{font-size: 1rem;}
+    .showcase_flex_cena{font-size: 0.8rem;}
 }

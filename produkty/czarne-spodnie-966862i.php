@@ -51,7 +51,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
     <div id="div3">
     <!-- info -->
         <?php
-        echo "<form action='../dodaj_do_koszyka.php' method=POST>";
+        echo "<form action='' method=POST>";
         echo "<input id='ilosc_rozmiaru' name=ilosc_rozmiaru value=' ' type=hidden>";
         echo "<input name=indeks value=$indeks_produktu type=hidden>";
         echo "<p id=nazwa>".ucfirst($nazwa_prod)."</p>";
@@ -63,7 +63,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         }
 
         echo "</select>";
-        echo "<button type=submit onclick='add_to_cart()' >Kup teraz</button></form>";
+        echo "<button name='btnsubmit' type=submit onclick='add_to_cart()' >Kup teraz</button></form>";
         ?>
     </div>
 
@@ -104,7 +104,7 @@ function onZoom(e) {
     const y = e.clientY - e.target.offsetTop;
 
     img.style.transformOrigin = `${x}px ${y}px`;
-    img.style.transform = 'scale(1.7)';
+    img.style.transform = 'scale(1.5)';
 }
 
 function offZoom(e) {
@@ -123,3 +123,4 @@ $('#rozmiar option').each(function() {
 });
 
 </script>
+<?php include_once('../dodaj_do_koszyka.php');?>

@@ -51,7 +51,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
     <div id="div3">
     <!-- info -->
         <?php
-        echo "<form action=../dodaj_do_koszyka.php method=POST>";
+        echo "<form action='' method=POST>";
         echo "<input id='ilosc_rozmiaru' name=ilosc_rozmiaru value=' ' type=hidden>";
         echo "<input style=display:none; name=indeks value=$indeks_produktu type=text>";
         echo "<p id=nazwa>".ucfirst($nazwa_prod)."</p>";
@@ -63,7 +63,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         }
 
         echo "</select>";
-        echo "<button type=submit >Kup teraz</button></form>";
+        echo "<button name='btnsubmit' type=submit >Kup teraz</button></form>";
         ?>
     </div>
 

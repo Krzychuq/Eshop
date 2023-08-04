@@ -63,7 +63,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         }
 
         echo "</select>";
-        echo "<button type=submit >Kup teraz</button></form>";
+        echo "<button name='btnsubmit' type=submit >Kup teraz</button></form>";
         ?>
     </div>
 

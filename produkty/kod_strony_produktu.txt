@@ -6,8 +6,9 @@ session_start();
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <link rel='stylesheet' href='../s.css?v1.4'>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../flickity.min.js"></script>
+    <link rel='stylesheet' href='../s.css?v1.3'>
     <title>Sesja</title>
 </head>
 <body>
@@ -40,7 +41,8 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
             <?php if($dane["zdjecie2"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod2 id=prod2 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
             <?php if($dane["zdjecie3"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod3 id=prod3 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
             <?php if($dane["zdjecie4"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod4 id=prod4 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
-        </div>
+    </div>
+    
     <div id='div1'>
     <!-- zdjecie głowne produktu -->
         <?php echo "<img src=$zdjecie_prod1 id=prod width=400px height=auto alt=zdjecie/produktu>"; ?>
@@ -49,19 +51,19 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
     <div id="div3">
     <!-- info -->
         <?php
-        echo "<form action=../dodaj_do_koszyka.php method=POST>";
+        echo "<form action='' method=POST>";
         echo "<input id='ilosc_rozmiaru' name=ilosc_rozmiaru value=' ' type=hidden>";
-        echo "<input name=indeks value=$indeks_produktu type=hidden>";
+
+        echo "<input style=display:none; name=indeks value=$indeks_produktu type=text>";
         echo "<p id=nazwa>".ucfirst($nazwa_prod)."</p>";
         echo "<p name=cena id=cena>".$dane["cena"]. " PLN</p>";
         echo "<p name=ilosc id=ilosc>Dostepna ilość: ".$dane["ilosc"]."</p>";
         echo "<span>Rozmiary</span> "."<select id=rozmiar name=rozmiar >";
         while ($rozmiar = $pyt_rozmiar->fetch()) {
-            echo "<option value=".$rozmiar["rozmiar"].">".$rozmiar["rozmiar"]. " |". $rozmiar["ilosc"] . "|".'</option>';
+            echo "<option value=".$rozmiar["rozmiar"]." >".$rozmiar["rozmiar"]. " |". $rozmiar["ilosc"] . "|".'</option>';
         }
-
         echo "</select>";
-        echo "<button type=submit>Kup teraz</button></form>";
+        echo "<button name='btnsubmit' type=submit >Kup teraz</button></form>";
         ?>
     </div>
 
@@ -102,7 +104,7 @@ function onZoom(e) {
     const y = e.clientY - e.target.offsetTop;
 
     img.style.transformOrigin = `${x}px ${y}px`;
-    img.style.transform = 'scale(1.7)';
+    img.style.transform = 'scale(1.5)';
 }
 
 function offZoom(e) {
@@ -119,6 +121,5 @@ $('#rozmiar option').each(function() {
     }
 });
 });
-
 </script>
 <?php include_once('../dodaj_do_koszyka.php');?>
