@@ -23,7 +23,7 @@
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){
         echo "<a href='../koszyk.php' id='koszyk'> <img src='../svg/shopping_cart.svg' width='36px' height='36px' alt='koszyk'> </a>";
         echo "<a href='../konto.php' id='konto'><img src='../svg/account.svg' width='36px' height='36px' alt='konto'></a>";
-        echo "<form  action='wyloguj.php'  method='POST'>
+        echo "<form  action='../wyloguj.php'  method='POST'>
         <button id='wyloguj'><img src='../svg/logout.svg' width='36px' height='36px' alt='&#9032'></button> </form>";
     }
 ?>

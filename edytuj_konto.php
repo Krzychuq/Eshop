@@ -53,6 +53,7 @@ include_once("laczenieZbaza.php");
     ?>
     </select><br>
     <button type="submit" style="font-size: 19px;">Zapisz</button>
+    <button type="button" style="font-size: 19px;" onclick='anuluj()'>Anuluj</button>
 
 </form>
 
@@ -74,4 +75,9 @@ if(isset($_SESSION['success'])){
 </footer>
 </body>
 </html>
+<script>
+    function anuluj(){
+        window.location.href = "konto.php";
+    }
+</script>
 <script src="loading.js"></script>

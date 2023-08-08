@@ -58,12 +58,13 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         echo "<p name=cena id=cena>".$dane["cena"]. " PLN</p>";
         echo "<p name=ilosc id=ilosc>Dostepna ilość: ".$dane["ilosc"]."</p>";
         echo "<span>Rozmiary</span> "."<select id=rozmiar name=rozmiar >";
+        echo "<option value=''>Wybierz</option>";
         while ($rozmiar = $pyt_rozmiar->fetch()) {
             echo "<option value=".$rozmiar["rozmiar"].">".$rozmiar["rozmiar"]. " |". $rozmiar["ilosc"] . "|".'</option>';
         }
 
         echo "</select>";
-        echo "<button name='btnsubmit' type=submit onclick='add_to_cart()' >Kup teraz</button></form>";
+        echo "<button name='btnsubmit' type=submit onclick='add_to_cart()' id='btnsubmit' disabled>Kup teraz</button></form>";
         ?>
     </div>
 
@@ -111,16 +112,25 @@ function offZoom(e) {
     img.style.transformOrigin = `center center`;
     img.style.transform = 'scale(1)';
 }
-$(document).ready(function(){
-$('#rozmiar option').each(function() {
-    if($(this).is(':selected')){
-        tekst = $(this).text();
-        przerobka = tekst.split("|");
-        $('#ilosc_rozmiaru').val(przerobka[1]);
 
+
+
+$('#rozmiar').click(function(){
+    $('#rozmiar option').each(function() {
+    if($(this).is(':selected')){
+        if($(this).val()){
+            $('#btnsubmit').removeAttr("disabled");
+            tekst = $(this).text();
+            przerobka = tekst.split("|");
+            $('#ilosc_rozmiaru').val(przerobka[1]);
+        }
+        else{
+            $('#btnsubmit').attr("disabled","disabled");
+        }
     }
 });
 });
+
 
 </script>
 <?php include_once('../dodaj_do_koszyka.php');?>

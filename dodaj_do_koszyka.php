@@ -2,11 +2,13 @@
 if(session_status() == PHP_SESSION_DISABLED){ session_start(); }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {  
     //submit
+    if(!empty($_POST['ilosc_rozmiaru'])){
+
     if(isset($_POST['btnsubmit'])) {
-        $indeks = $_POST['indeks'];
-        $rozmiar = $_POST['rozmiar'];
-        $limit = $_POST['ilosc_rozmiaru'];
-        $ilosc = 1;
+        $indeks = $_POST['indeks']; //[0]
+        $rozmiar = $_POST['rozmiar']; //[1]
+        $limit = $_POST['ilosc_rozmiaru']; //[3]
+        $ilosc = 1; //[2]
     //dodaj produkt    
         if(empty($_SESSION['koszyk'])){
             $koszyk= array($indeks, $rozmiar, $ilosc, $limit);
@@ -21,20 +23,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                 }
             }
-            if($_SESSION['koszyk'][$tablica][2] < $_SESSION['koszyk'][$tablica][3]){
+            if($_SESSION['koszyk'][$tablica][0] == $indeks && $_SESSION['koszyk'][$tablica][1] == $rozmiar && $_SESSION['koszyk'][$tablica][2] < $_SESSION['koszyk'][$tablica][3]){
                 $nowa_ilosc = $_SESSION['koszyk'][$tablica][2];
                 $nowa_ilosc += 1;
                 $_SESSION['koszyk'][$tablica][2] = $nowa_ilosc;
             }
+            elseif($_SESSION['koszyk'][$tablica][2] > $_SESSION['koszyk'][$tablica][3]){
+                $_SESSION['c']="BRAK SZTUK";
+            }
             //dodaje nowy produkt
-            if($powtorzenie == FALSE){
+            else{
                 $push_array = array($indeks, $rozmiar, $ilosc, $limit);
                 array_push($_SESSION['koszyk'], $push_array);
             }
         }
         
-        // print_r($_SESSION['koszyk']);
+        print_r($_SESSION['koszyk']);
     }
   }
+  else{
+    $_SESSION['error'] ='Wybierz rozmiar';
+  }
+}
 
 ?>
