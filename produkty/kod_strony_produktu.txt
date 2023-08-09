@@ -119,13 +119,13 @@ $('#rozmiar').click(function(){
     $('#rozmiar option').each(function() {
     if($(this).is(':selected')){
         if($(this).val()){
-            $('#btnsubmit').removeAttr("disabled");
+            $('#btnsubmit').prop("disabled", false);
             tekst = $(this).text();
             przerobka = tekst.split("|");
             $('#ilosc_rozmiaru').val(przerobka[1]);
         }
         else{
-            $('#btnsubmit').attr("disabled","disabled");
+            $('#btnsubmit').prop("disabled",true);
         }
     }
 });

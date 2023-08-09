@@ -929,6 +929,7 @@ body{
 .produkt_z_koszyka{
     display: flex;
     flex-direction: row;
+    background: #f8f8f8;
 }
 
 

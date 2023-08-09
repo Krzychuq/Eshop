@@ -20,21 +20,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $powtorzenie = in_array($indeks, $_SESSION['koszyk'][$i]);
                 if($powtorzenie == TRUE){
                     $tablica = $i;
-                    
+                }
+                else{
+                    $_SESSION['error'] = 'Nie znaleziono';
                 }
             }
-            if($_SESSION['koszyk'][$tablica][0] == $indeks && $_SESSION['koszyk'][$tablica][1] == $rozmiar && $_SESSION['koszyk'][$tablica][2] < $_SESSION['koszyk'][$tablica][3]){
+            if($_SESSION['koszyk'][$tablica][0] != $indeks ){
+                $push_array = array($indeks, $rozmiar, $ilosc, $limit);
+                array_push($_SESSION['koszyk'], $push_array);
+            }
+            elseif($_SESSION['koszyk'][$tablica][0] == $indeks && $_SESSION['koszyk'][$tablica][1] == $rozmiar && $_SESSION['koszyk'][$tablica][2] < $_SESSION['koszyk'][$tablica][3]){
                 $nowa_ilosc = $_SESSION['koszyk'][$tablica][2];
                 $nowa_ilosc += 1;
                 $_SESSION['koszyk'][$tablica][2] = $nowa_ilosc;
             }
-            elseif($_SESSION['koszyk'][$tablica][2] > $_SESSION['koszyk'][$tablica][3]){
-                $_SESSION['c']="BRAK SZTUK";
+            elseif($_SESSION['koszyk'][$tablica][0] == $indeks && $_SESSION['koszyk'][$tablica][1] != $rozmiar){
+                $push_array = array($indeks, $rozmiar, $ilosc, $limit);
+                array_push($_SESSION['koszyk'], $push_array);
             }
             //dodaje nowy produkt
             else{
-                $push_array = array($indeks, $rozmiar, $ilosc, $limit);
-                array_push($_SESSION['koszyk'], $push_array);
+
             }
         }
         
