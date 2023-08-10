@@ -18,12 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //szuka powtorzenia by zwiekszyc ilosc
             for($i=0; $i < sizeof($_SESSION['koszyk']); $i++){
                 $powtorzenie = in_array($indeks, $_SESSION['koszyk'][$i]);
-                if($powtorzenie == TRUE){
+                $powtorzenie_r = in_array($rozmiar, $_SESSION['koszyk'][$i]);
+                if($powtorzenie == $powtorzenie_r){
                     $tablica = $i;
                 }
-                else{
-                    $_SESSION['error'] = 'Nie znaleziono';
-                }
+                
             }
             if($_SESSION['koszyk'][$tablica][0] != $indeks ){
                 $push_array = array($indeks, $rozmiar, $ilosc, $limit);

@@ -27,11 +27,11 @@ include_once("laczenieZbaza.php");
 <?php
 print_r($_SESSION['koszyk']);
 if(!empty($_SESSION['koszyk'])){
-  for($i=0; $i < sizeof($_SESSION['koszyk']); $i++){
-    $indeks = $_SESSION['koszyk'][$i][0];
-    $rozmiar = $_SESSION['koszyk'][$i][1];
-    $sztuk_zaznaczone = $_SESSION['koszyk'][$i][2];
-    $limit = $_SESSION['koszyk'][$i][3];
+  for($liczba_produktow=0; $liczba_produktow < sizeof($_SESSION['koszyk']); $liczba_produktow++){
+    $indeks = $_SESSION['koszyk'][$liczba_produktow][0];
+    $rozmiar = $_SESSION['koszyk'][$liczba_produktow][1];
+    $sztuk_zaznaczone = $_SESSION['koszyk'][$liczba_produktow][2];
+    $limit = $_SESSION['koszyk'][$liczba_produktow][3];
     $pyt = $conn->prepare('SELECT id, nazwa, cena, zdjecie1, link FROM produkty WHERE indeks_produktu like ?');
       $pyt -> execute([$indeks]);
       $results = $pyt->fetchAll();
@@ -46,18 +46,19 @@ if(!empty($_SESSION['koszyk'])){
       $pyt_rozmiar -> execute([$id, $rozmiar]);
       $rozmiar_z_bazy = $pyt_rozmiar->fetch(PDO::FETCH_ASSOC);
     echo "<div class='produkt_z_koszyka'>";
-
     echo "<div>";
     echo "<img src='$zdjecie' width=200px height=200px>";
     echo "</div>";
-    echo "<p>$nazwa</p>";
+    echo "<a href='$link'>$nazwa</a>";
     echo "<p>$cena</p>";
     echo "<p>$rozmiar</p>";
     echo "<p>$sztuk_zaznaczone</p>";
     echo "<select>";
     
     for($i=0; $i <= $rozmiar_z_bazy['ilosc'];){
-      echo "<option value=$i>$i</option>";
+      if($i == 0){}
+      elseif($i == $sztuk_zaznaczone){echo "<option value=$i selected>$i</option>";}
+      else{echo "<option value=$i>$i</option>";}
       $i++;
     }
     echo "</select>";
