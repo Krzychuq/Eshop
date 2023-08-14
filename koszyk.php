@@ -55,11 +55,10 @@ if(!empty($_SESSION['koszyk'])){
     echo "<p>$sztuk_zaznaczone</p>";
     echo "<select>";
     
-    for($i=0; $i <= $rozmiar_z_bazy['ilosc'];){
+    for($i=0; $i <= $rozmiar_z_bazy['ilosc']; $i++){
       if($i == 0){}
       elseif($i == $sztuk_zaznaczone){echo "<option value=$i selected>$i</option>";}
       else{echo "<option value=$i>$i</option>";}
-      $i++;
     }
     echo "</select>";
     echo "<form action=usun_produkt_koszyk.php method=POST>";

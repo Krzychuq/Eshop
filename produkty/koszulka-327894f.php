@@ -53,17 +53,18 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         <?php
         echo "<form action='' method=POST>";
         echo "<input id='ilosc_rozmiaru' name=ilosc_rozmiaru value=' ' type=hidden>";
-        echo "<input style=display:none; name=indeks value=$indeks_produktu type=text>";
+        echo "<input name=indeks value=$indeks_produktu type=hidden>";
         echo "<p id=nazwa>".ucfirst($nazwa_prod)."</p>";
         echo "<p name=cena id=cena>".$dane["cena"]. " PLN</p>";
         echo "<p name=ilosc id=ilosc>Dostepna ilość: ".$dane["ilosc"]."</p>";
         echo "<span>Rozmiary</span> "."<select id=rozmiar name=rozmiar >";
+        echo "<option value=''>Wybierz</option>";
         while ($rozmiar = $pyt_rozmiar->fetch()) {
             echo "<option value=".$rozmiar["rozmiar"].">".$rozmiar["rozmiar"]. " |". $rozmiar["ilosc"] . "|".'</option>';
         }
 
         echo "</select>";
-        echo "<button name='btnsubmit' type=submit >Kup teraz</button></form>";
+        echo "<button name='btnsubmit' type=submit onclick='add_to_cart()' id='btnsubmit' disabled>Kup teraz</button></form>";
         ?>
     </div>
 
@@ -104,7 +105,7 @@ function onZoom(e) {
     const y = e.clientY - e.target.offsetTop;
 
     img.style.transformOrigin = `${x}px ${y}px`;
-    img.style.transform = 'scale(1.7)';
+    img.style.transform = 'scale(1.5)';
 }
 
 function offZoom(e) {
@@ -112,16 +113,24 @@ function offZoom(e) {
     img.style.transform = 'scale(1)';
 }
 
-$(document).ready(function(){
-$('#rozmiar option').each(function() {
-    if($(this).is(':selected')){
-        tekst = $(this).text();
-        przerobka = tekst.split("|");
-        $('#ilosc_rozmiaru').val(przerobka[1]);
 
+
+$('#rozmiar').click(function(){
+    $('#rozmiar option').each(function() {
+    if($(this).is(':selected')){
+        if($(this).val()){
+            $('#btnsubmit').prop("disabled", false);
+            tekst = $(this).text();
+            przerobka = tekst.split("|");
+            $('#ilosc_rozmiaru').val(przerobka[1]);
+        }
+        else{
+            $('#btnsubmit').prop("disabled",true);
+        }
     }
 });
 });
+
 
 </script>
 <?php include_once('../dodaj_do_koszyka.php');?>
