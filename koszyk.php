@@ -62,6 +62,12 @@ if(!empty($_SESSION['koszyk'])){
       $i++;
     }
     echo "</select>";
+    echo "<form action=usun_produkt_koszyk.php method=POST>";
+    echo "<input type='hidden' name=indeks value=$indeks>";
+    echo "<input type='hidden' name=rozmiar value=$rozmiar>";
+    echo "<button type='submit'>X</button>";
+    echo "</form>";
+  
     echo "</div>";
   }
 }
@@ -82,7 +88,9 @@ if(isset($_SESSION['success'])){
 }
 ?>
 </div>
-
+<div>
+  
+</div>
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

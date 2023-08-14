@@ -25,7 +25,7 @@ session_start();
             <input name='pass' type="password" placeholder="Hasło" id='haslo'>
         </div>
         <!-- pokaz haslo -->
-        <label for="">Pokaż hasła</label>
+        <label for="">Pokaż hasło</label>
         <input type="checkbox" class="pokaz_haslo" onclick="pokazhasla()" width="16" height="16"></input>
         <br>
         
