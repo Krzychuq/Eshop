@@ -14,7 +14,7 @@ if(isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="s.css?v1.3">
+    <link rel="stylesheet" href="s.css?v1.1">
     <title>Sesja</title>
 </head>
 <body>
@@ -46,13 +46,19 @@ if(!empty($_SESSION['koszyk'])){
       $pyt_rozmiar -> execute([$id, $rozmiar]);
       $rozmiar_z_bazy = $pyt_rozmiar->fetch(PDO::FETCH_ASSOC);
     echo "<div class='produkt_z_koszyka'>";
-    echo "<div>";
+    
+    echo "<div class='koszyk_zdjecie_produktu'>";
     echo "<img src='$zdjecie' width=200px height=200px>";
     echo "</div>";
+
+    echo "<div class='koszyk_informacje'>";
     echo "<a href='$link'>$nazwa</a>";
-    echo "<p>$cena</p>";
-    echo "<p>$rozmiar</p>";
-    echo "<p>$sztuk_zaznaczone</p>";
+    echo "<p>Cena: $cena</p>";
+    echo "<p>Rozmiar: $rozmiar</p>";
+    echo "</div>";
+
+    echo "<div class='koszyk_sztuki'>";
+    echo "<p>Ilość</p>";
     echo "<select>";
     
     for($i=0; $i <= $rozmiar_z_bazy['ilosc']; $i++){
@@ -61,6 +67,8 @@ if(!empty($_SESSION['koszyk'])){
       else{echo "<option value=$i>$i</option>";}
     }
     echo "</select>";
+    echo "</div>";
+    
     echo "<form action=usun_produkt_koszyk.php method=POST>";
     echo "<input type='hidden' name=indeks value=$indeks>";
     echo "<input type='hidden' name=rozmiar value=$rozmiar>";
