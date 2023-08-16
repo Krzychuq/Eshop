@@ -8,7 +8,7 @@ session_start();
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../flickity.min.js"></script>
-    <link rel='stylesheet' href='../s.css?v1.2'>
+    <link rel='stylesheet' href='../s.css?v1.1'>
     <title>Sesja</title>
 </head>
 <body>

@@ -24,22 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 
             }
+            //dodaje pierwszy produkt
             if($_SESSION['koszyk'][$tablica][0] != $indeks ){
                 $push_array = array($indeks, $rozmiar, $ilosc, $limit);
                 array_push($_SESSION['koszyk'], $push_array);
             }
+            //dodaje ten sam ze zwiekszona liczba produkt
             elseif($_SESSION['koszyk'][$tablica][0] == $indeks && $_SESSION['koszyk'][$tablica][1] == $rozmiar && $_SESSION['koszyk'][$tablica][2] < $_SESSION['koszyk'][$tablica][3]){
                 $nowa_ilosc = $_SESSION['koszyk'][$tablica][2];
                 $nowa_ilosc += 1;
                 $_SESSION['koszyk'][$tablica][2] = $nowa_ilosc;
             }
+            //dodaje nowy produkt
             elseif($_SESSION['koszyk'][$tablica][0] == $indeks && $_SESSION['koszyk'][$tablica][1] != $rozmiar){
                 $push_array = array($indeks, $rozmiar, $ilosc, $limit);
                 array_push($_SESSION['koszyk'], $push_array);
             }
-            //dodaje nowy produkt
             else{
-
+                //nic
             }
         }
         

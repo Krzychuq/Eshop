@@ -25,7 +25,7 @@ include_once("laczenieZbaza.php");
 
 <div class="contener">
 <?php
-print_r($_SESSION['koszyk']);
+// print_r($_SESSION['koszyk']);
 if(!empty($_SESSION['koszyk'])){
   for($liczba_produktow=0; $liczba_produktow < sizeof($_SESSION['koszyk']); $liczba_produktow++){
     $indeks = $_SESSION['koszyk'][$liczba_produktow][0];
@@ -48,12 +48,14 @@ if(!empty($_SESSION['koszyk'])){
     echo "<div class='produkt_z_koszyka'>";
     
     echo "<div class='koszyk_zdjecie_produktu'>";
-    echo "<img src='$zdjecie' width=200px height=200px>";
+    echo "<a class='koszyk_link' href='$link'><img src='$zdjecie' width=200px height=200px></a>";
     echo "</div>";
 
     echo "<div class='koszyk_informacje'>";
-    echo "<a href='$link'>$nazwa</a>";
+    echo "<a class='koszyk_link' href='$link'>".ucfirst($nazwa)."</a>";
+    echo "<div style='height: 12px;'></div>";
     echo "<p>Cena: $cena</p>";
+    echo "<div style='height: 12px;'></div>";
     echo "<p>Rozmiar: $rozmiar</p>";
     echo "</div>";
 
@@ -72,14 +74,14 @@ if(!empty($_SESSION['koszyk'])){
     echo "<form action=usun_produkt_koszyk.php method=POST>";
     echo "<input type='hidden' name=indeks value=$indeks>";
     echo "<input type='hidden' name=rozmiar value=$rozmiar>";
-    echo "<button type='submit'>X</button>";
+    echo "<button type='submit'><img onmouseover='animacjaIN(this)' onmouseout='animacjaOUT(this)' onclick='animacjaCLICK(this)' width='32px' height:'32px' src='svg/kosz_zamkniety.svg'></button>";
     echo "</form>";
   
     echo "</div>";
   }
 }
 else{
-  echo "<h2>Pusty koszyk</h2>";
+  echo "<h2 style='text-align:center;'>Twój koszyk jest pusty</h2>";
 }
 
 //powiadomienia
@@ -103,3 +105,18 @@ if(isset($_SESSION['success'])){
 </footer>
 </body>
 </html>
+<script>
+  function animacjaIN(zrodlo){
+    zrodlo.src = "svg/kosz_otwarty.svg";
+  }
+
+  function animacjaOUT(zrodlo){
+    zrodlo.src = "svg/kosz_zamkniety.svg";
+  }
+  function animacjaCLICK(rozmiar){
+    rozmiar.style.transition = "0.5s";
+    rozmiar.style.transform = "scale(0.8)";
+  }
+</script>
+
+<script src='loading.js'></script>

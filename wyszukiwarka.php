@@ -16,7 +16,7 @@ if($szukaj1-> rowCount() > 0) {
 }
 //brak wyniku
 else{
-  echo "<h3>Brak dopasowania</h3>";
+  echo "<h3>Brak dopasowania...</h3>";
 }
 $conn = null;
 ?>

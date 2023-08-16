@@ -11,8 +11,7 @@
     <form class="form-wyszukania" action=''>
         <input class="wyszukiwarka" name onfocusin="powieksz_wyszukiwanie()" onfocusout="zmniejsz_wyszukiwanie()" type="text" name='wyszukiwarka' id="wyszukiwarka" onkeyup='wyszukanie(this.value)' placeholder="Szukaj">
     </form>
-    <div class='wyniki_wyszukiwania' id="wyniki">
-    </div>
+
 </div>
 <div class='wyloguj'>
 <?php
@@ -28,6 +27,7 @@
     }
 ?>
 </div>
+
 <script>
 wyszukiwarka = document.getElementsByClassName("menu2")[0];
 function powieksz_wyszukiwanie(){
@@ -44,4 +44,6 @@ function ustawValue(){
 </script>
 
 </header>
+<div class='wyniki_wyszukiwania' id="wyniki">
+</div>
 <br>
