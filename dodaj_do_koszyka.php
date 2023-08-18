@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $powtorzenie_r = in_array($rozmiar, $_SESSION['koszyk'][$i]);
                 if($powtorzenie == $powtorzenie_r){
                     $tablica = $i;
+                    break;
                 }
                 
             }

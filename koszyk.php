@@ -24,9 +24,17 @@ include_once("laczenieZbaza.php");
 ?>
 
 <div class="contener">
+  <div class='koszyk'>
+    <div class="koszyk_naglowek" id="koszyk_naglowek1">
+      <span>Koszyk</span>
+    </div>
+    <div class="koszyk_naglowek" id="koszyk_naglowek2">
+      <span>Podsumowanie</span>
+    </div>
 <?php
 // print_r($_SESSION['koszyk']);
 if(!empty($_SESSION['koszyk'])){
+  echo "<div class='produkty_koszyk'>";
   for($liczba_produktow=0; $liczba_produktow < sizeof($_SESSION['koszyk']); $liczba_produktow++){
     $indeks = $_SESSION['koszyk'][$liczba_produktow][0];
     $rozmiar = $_SESSION['koszyk'][$liczba_produktow][1];
@@ -48,13 +56,13 @@ if(!empty($_SESSION['koszyk'])){
     echo "<div class='produkt_z_koszyka'>";
     
     echo "<div class='koszyk_zdjecie_produktu'>";
-    echo "<a class='koszyk_link' href='$link'><img src='$zdjecie' width=200px height=200px></a>";
+    echo "<a class='koszyk_link' href='$link'><img src='$zdjecie' width=180px height=autopx></a>";
     echo "</div>";
 
     echo "<div class='koszyk_informacje'>";
     echo "<a class='koszyk_link' href='$link'>".ucfirst($nazwa)."</a>";
     echo "<div style='height: 12px;'></div>";
-    echo "<p>Cena: $cena</p>";
+    echo "<p class='koszyk_cena'>Cena: ". ( $cena * $sztuk_zaznaczone )."zł</p>";
     echo "<div style='height: 12px;'></div>";
     echo "<p>Rozmiar: $rozmiar</p>";
     echo "</div>";
@@ -64,7 +72,7 @@ if(!empty($_SESSION['koszyk'])){
     echo "<select>";
     
     for($i=0; $i <= $rozmiar_z_bazy['ilosc']; $i++){
-      if($i == 0){}
+    if($i == 0){ /* Pomija */ }
       elseif($i == $sztuk_zaznaczone){echo "<option value=$i selected>$i</option>";}
       else{echo "<option value=$i>$i</option>";}
     }
@@ -79,6 +87,7 @@ if(!empty($_SESSION['koszyk'])){
   
     echo "</div>";
   }
+  echo "</div>";
 }
 else{
   echo "<h2 style='text-align:center;'>Twój koszyk jest pusty</h2>";
@@ -96,13 +105,31 @@ if(isset($_SESSION['success'])){
     echo "<script src='powiadomienie.js'></script>";
 }
 ?>
+<div class='koszyk_podsumowanie'>
+  <form action="" method="POST">
+    <label for="">Kod rabatowy</label>
+    <input type="text">
+    <label for="kurier">Dostawa</label>
+    <div>
+      <img src="" alt="">
+      <p></p>
+      <p></p>
+      <input type="radio" name="kurier" value="">
+    </div>
+
+    <input type="hidden" name="suma" value="">
+    <button type="submit">Przejdź dalej</button>
+  </form>
 </div>
-<div>
-  
+
 </div>
+
+</div>
+
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>
+
 </body>
 </html>
 <script>
