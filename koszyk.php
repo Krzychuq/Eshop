@@ -33,6 +33,7 @@ include_once("laczenieZbaza.php");
     </div>
 <?php
 // print_r($_SESSION['koszyk']);
+$podsumowanie_kosztow = 0;
 if(!empty($_SESSION['koszyk'])){
   echo "<div class='produkty_koszyk'>";
   for($liczba_produktow=0; $liczba_produktow < sizeof($_SESSION['koszyk']); $liczba_produktow++){
@@ -58,18 +59,22 @@ if(!empty($_SESSION['koszyk'])){
     echo "<div class='koszyk_zdjecie_produktu'>";
     echo "<a class='koszyk_link' href='$link'><img src='$zdjecie' width=180px height=autopx></a>";
     echo "</div>";
-
+    $cena_produktu = $cena * $sztuk_zaznaczone;
+    $podsumowanie_kosztow += $cena_produktu;
     echo "<div class='koszyk_informacje'>";
     echo "<a class='koszyk_link' href='$link'>".ucfirst($nazwa)."</a>";
     echo "<div style='height: 12px;'></div>";
-    echo "<p class='koszyk_cena'>Cena: ". ( $cena * $sztuk_zaznaczone )."zł</p>";
+    echo "<p class='koszyk_cena'>Cena: ". $cena_produktu ." PLN</p>";
     echo "<div style='height: 12px;'></div>";
     echo "<p>Rozmiar: $rozmiar</p>";
     echo "</div>";
 
     echo "<div class='koszyk_sztuki'>";
     echo "<p>Ilość</p>";
-    echo "<select>";
+    echo "<form action='aktualizuj_ilosc.php' method=POST style='justify-content:center; width:100%;'>";
+    echo "<input type=hidden value=".$indeks." name=indeks>";
+    echo "<input type=hidden value=".$rozmiar." name=rozmiar>";
+    echo "<select onchange='this.form.submit()' name='ilosc'>";
     
     for($i=0; $i <= $rozmiar_z_bazy['ilosc']; $i++){
     if($i == 0){ /* Pomija */ }
@@ -77,6 +82,7 @@ if(!empty($_SESSION['koszyk'])){
       else{echo "<option value=$i>$i</option>";}
     }
     echo "</select>";
+    echo "</form>";
     echo "</div>";
     
     echo "<form action=usun_produkt_koszyk.php method=POST>";
@@ -110,15 +116,35 @@ if(isset($_SESSION['success'])){
     <label for="">Kod rabatowy</label>
     <input type="text">
     <label for="kurier">Dostawa</label>
-    <div>
-      <img src="" alt="">
-      <p></p>
-      <p></p>
-      <input type="radio" name="kurier" value="">
+    <div class='lista_kurierow'>
+      <div class="kurier_listy" >
+        <img src="https://techcabal.com/wp-content/uploads/2015/08/dhl_logo876.jpg" alt="" width="40px" height="40px">
+        <p>14 PLN</p>
+        <input type="radio" name="kurier" value="">
+      </div>
+      <div class="kurier_listy" >
+        <img src="https://www.orderhive.com/wp-content/uploads/2021/04/GLS-cover.svg" alt="" width="40px" height="40px">
+        <p>14 PLN</p>
+        <input  type="radio" name="kurier" value="">
+      </div>
+      <div class="kurier_listy" >
+        <img src="https://avlab.pl/wp-content/uploads/2020/09/poczta-polska-logo.jpg" alt="" width="40px" height="40px">
+        <p>14 PLN</p>
+        <input type="radio" name="kurier" onclick="document.write('<?php przelicz($this) ?>');" value="">
+      </div>
     </div>
-
-    <input type="hidden" name="suma" value="">
-    <button type="submit">Przejdź dalej</button>
+  <div>
+    <?php 
+    function przelicz($inp){
+      // $input_selected = $inp.value;
+      // $input_val =;
+    }
+    
+    echo  "<p>Łączny koszt: ".$podsumowanie_kosztow." PLN</p>";
+    echo "<input type='hidden' name='suma' value=". $podsumowanie_kosztow .">" ;
+    ?>
+  </div>
+    <button class='button_kup'  type="submit">Przejdź dalej</button>
   </form>
 </div>
 

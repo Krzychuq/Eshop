@@ -64,7 +64,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         }
 
         echo "</select>";
-        echo "<button name='btnsubmit' type=submit onclick='add_to_cart()' id='btnsubmit' disabled>Kup teraz</button></form>";
+        echo "<button  class='button_kup'  name='btnsubmit' type=submit onclick='add_to_cart()' id='btnsubmit' disabled>Kup teraz</button></form>";
         ?>
     </div>
 

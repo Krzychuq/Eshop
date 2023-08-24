@@ -5,9 +5,8 @@ $rozmiar = $_POST['rozmiar'];
   for($i=0; $i < sizeof($_SESSION['koszyk']); $i++){
     $powtorzenie = in_array($indeks, $_SESSION['koszyk'][$i]);
     $powtorzenie_r = in_array($rozmiar, $_SESSION['koszyk'][$i]);
-    if($powtorzenie == $powtorzenie_r){
+    if($powtorzenie == 1 && $powtorzenie_r == 1){
         $tablica = $i;
-        break;
     }
   }
   if($_SESSION['koszyk'][$tablica][0] == $indeks && $_SESSION['koszyk'][$tablica][1] == $rozmiar){

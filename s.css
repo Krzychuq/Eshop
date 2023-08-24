@@ -27,7 +27,6 @@ body{
     display: flex;
     flex-direction: column;
     background: #fbc936;
-    /* background: url('svg/cool-background.svg');  */
     font-family:'Segoe UI'; 
     color: #0f0f0f;
     margin: 0;
@@ -771,7 +770,7 @@ body{
     cursor: zoom-in;
 }
 /* produkt zoom */
-.grid_produkt #div3 button{
+.button_kup{
     margin-top: 10%;
     width: 80%;
     height: 6vh;
@@ -784,16 +783,18 @@ body{
     cursor: pointer;
     transition: 0.5s;
 }
-    .grid_produkt #div3 button:hover{
+
+    .button_kup :hover{
         background-color: #df2846;
         box-shadow: 3px 3px 1px #00000083;
         transform: scale(1.1);
         transition: 0.5s;
     }
-        .grid_produkt #div3 button:active{
-            background-color: #fa153c;
-            transform: scale(0.8);
-        }
+    .button_kup:active{
+        background-color: #fa153c;
+        transform: scale(0.8);
+    }
+
 .grid_produkt #div4{
     grid-area: 2 / 1 / 3 / 4;
     width: 93%;
@@ -951,7 +952,7 @@ body{
 
 .koszyk{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.7fr 1fr;
     grid-template-rows: auto 1fr; 
 }
 #koszyk_naglowek1{ grid-area: 1 / 1 / 2 / 2; }
@@ -988,11 +989,7 @@ body{
         gap: 20px;
     }
 
-    /* .produkt_z_koszyka:first-child{ margin-top: 20px;} */
 
-    /* .koszyk_zdjecie_produktu{
-
-    } */
 
     .koszyk_informacje{
         width: 35%;
@@ -1023,6 +1020,25 @@ body{
     background-color: #f9f9f9;
     grid-area: 2 / 2 / 3 / 3; 
 }
+    .kurier_listy{
+        filter: grayscale(100%);
+    }
+    /* .kurier_listy:hover{filter: grayscale(0%);}
+    .kurier_listy:active{filter: grayscale(0%);}  */
+    .kurier_listy input:checked ~ .kurier_listy{ filter: grayscale(0%); }
+
+.lista_kurierow{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+
 /* loading */
 .lds-ellipsis {
     display: inline-block;
