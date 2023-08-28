@@ -113,38 +113,37 @@ if(isset($_SESSION['success'])){
 ?>
 <div class='koszyk_podsumowanie'>
   <form action="" method="POST">
-    <label for="">Kod rabatowy</label>
-    <input type="text">
+    <label for="rabat"><s>Kod rabatowy</s></label>
+    <input type="text" name='rabat' placeholder='!In progress!'>
+    <br>
     <label for="kurier">Dostawa</label>
     <div class='lista_kurierow'>
       <div class="kurier_listy" >
         <img src="https://techcabal.com/wp-content/uploads/2015/08/dhl_logo876.jpg" alt="" width="40px" height="40px">
         <p>14 PLN</p>
-        <input type="radio" name="kurier" value="">
+        <input type="radio" name="kurier" id='kurier1' onclick='przelicz(this)' value="14">
       </div>
       <div class="kurier_listy" >
         <img src="https://www.orderhive.com/wp-content/uploads/2021/04/GLS-cover.svg" alt="" width="40px" height="40px">
-        <p>14 PLN</p>
-        <input  type="radio" name="kurier" value="">
+        <p>12 PLN</p>
+        <input  type="radio" name="kurier" id='kurier2' onclick='przelicz(this)' value="12">
       </div>
       <div class="kurier_listy" >
         <img src="https://avlab.pl/wp-content/uploads/2020/09/poczta-polska-logo.jpg" alt="" width="40px" height="40px">
-        <p>14 PLN</p>
-        <input type="radio" name="kurier" onclick="document.write('<?php przelicz($this) ?>');" value="">
+        <p>11 PLN</p>
+        <input type="radio" name="kurier" id='kurier3' onclick='przelicz(this)' value="11">
       </div>
     </div>
   <div>
     <?php 
-    function przelicz($inp){
-      // $input_selected = $inp.value;
-      // $input_val =;
-    }
-    
-    echo  "<p>Łączny koszt: ".$podsumowanie_kosztow." PLN</p>";
-    echo "<input type='hidden' name='suma' value=". $podsumowanie_kosztow .">" ;
+    echo "<br><p>Koszt dostawy: <span id=koszt_dostawy>0</span> PLN</p>";
+    echo  "<p>Łączny koszt: <span id='suma'>".$podsumowanie_kosztow."</span> PLN</p>";
+    echo "<input type='hidden' id='koszt_calkowity' name='suma' value='". $podsumowanie_kosztow ."'>" ;
     ?>
+    <div style="text-align: center;">
+      <button class='button_kup'  type="submit" style="margin-top: 5%; width: 90%;">Przejdź dalej</button>
+    </div>
   </div>
-    <button class='button_kup'  type="submit">Przejdź dalej</button>
   </form>
 </div>
 
@@ -170,6 +169,18 @@ if(isset($_SESSION['success'])){
     rozmiar.style.transition = "0.5s";
     rozmiar.style.transform = "scale(0.8)";
   }
+
+  suma = document.getElementById('suma').innerHTML;
+  suma = parseFloat(suma);
+
+function przelicz(inp) {
+  if(inp.checked){
+    document.getElementById('koszt_dostawy').innerHTML = inp.value;
+    suma_koncowa = suma + parseFloat(inp.value);
+    document.getElementById('suma').innerHTML = suma_koncowa;
+    document.getElementById('koszt_calkowity').value = suma_koncowa;
+  }
+}
 </script>
 
 <script src='loading.js'></script>
