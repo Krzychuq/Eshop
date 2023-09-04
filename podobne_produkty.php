@@ -11,7 +11,7 @@ echo "<ul class='list_prod' style='left: 0; transition: 0.7s;'>";
         echo "<a style='color: black; text-decoration:none;' href='$linia[link]'>";
         echo "<img src=$link>";
         echo "<p style='font-size: 1.2rem;'>$nazwa</p>";
-        echo "<p style='font-size: 0.9rem; font-weight:bold;'>$linia[cena] PLN</p>";
+        echo "<p style='font-size: 0.9rem; font-weight:bold;'>$linia[cena] zł</p>";
         echo "</a>";
         echo "</li>";
     }

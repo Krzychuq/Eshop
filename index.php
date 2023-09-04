@@ -36,7 +36,7 @@ while($linia = $pyt_produkt->fetch()){
     echo "<a style='color: black; text-decoration:none;' href=$linia[link]>";
     echo "<img src=$linia[zdjecie1]>";
     echo "<p class='showcase_flex_nazwa'>$nazwa</p>";
-    echo "<p class='showcase_flex_cena'>$linia[cena] PLN</p>";
+    echo "<p class='showcase_flex_cena'>$linia[cena] zł</p>";
     echo "</a>";
     echo "</div>";
 }

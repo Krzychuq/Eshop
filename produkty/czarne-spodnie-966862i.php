@@ -55,7 +55,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         echo "<input id='ilosc_rozmiaru' name=ilosc_rozmiaru value=' ' type=hidden>";
         echo "<input name=indeks value=$indeks_produktu type=hidden>";
         echo "<p id=nazwa>".ucfirst($nazwa_prod)."</p>";
-        echo "<p name=cena id=cena>".$dane["cena"]. " PLN</p>";
+        echo "<p name=cena id=cena>".$dane["cena"]. " zł</p>";
         echo "<p name=ilosc id=ilosc>Dostepna ilość: ".$dane["ilosc"]."</p>";
         echo "<span>Rozmiary</span> "."<select id=rozmiar name=rozmiar >";
         echo "<option value=''>Wybierz</option>";

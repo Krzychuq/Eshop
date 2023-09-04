@@ -24,17 +24,18 @@ include_once("laczenieZbaza.php");
 ?>
 
 <div class="contener">
-  <div class='koszyk'>
-    <div class="koszyk_naglowek" id="koszyk_naglowek1">
-      <span>Koszyk</span>
-    </div>
-    <div class="koszyk_naglowek" id="koszyk_naglowek2">
-      <span>Podsumowanie</span>
-    </div>
+
 <?php
 // print_r($_SESSION['koszyk']);
 $podsumowanie_kosztow = 0;
 if(!empty($_SESSION['koszyk'])){
+  echo "<div class='koszyk'>
+  <div class='koszyk_naglowek' id='koszyk_naglowek1'>
+    <span>Koszyk</span>
+  </div>
+  <div class='koszyk_naglowek' id='koszyk_naglowek2'>
+    <span>Podsumowanie</span>
+  </div>";
   echo "<div class='produkty_koszyk'>";
   for($liczba_produktow=0; $liczba_produktow < sizeof($_SESSION['koszyk']); $liczba_produktow++){
     $indeks = $_SESSION['koszyk'][$liczba_produktow][0];
@@ -64,7 +65,7 @@ if(!empty($_SESSION['koszyk'])){
     echo "<div class='koszyk_informacje'>";
     echo "<a class='koszyk_link' href='$link'>".ucfirst($nazwa)."</a>";
     echo "<div style='height: 12px;'></div>";
-    echo "<p class='koszyk_cena'>Cena: ". $cena_produktu ." PLN</p>";
+    echo "<p class='koszyk_cena'>Cena: ". $cena_produktu ." zł</p>";
     echo "<div style='height: 12px;'></div>";
     echo "<p>Rozmiar: $rozmiar</p>";
     echo "</div>";
@@ -94,9 +95,46 @@ if(!empty($_SESSION['koszyk'])){
     echo "</div>";
   }
   echo "</div>";
+  //elementy koszyku
+  echo "<div class='koszyk_podsumowanie'>
+  <form action='' method='POST'>
+    <label for='rabat'><s>Kod rabatowy</s></label>
+    <input type='text' name='rabat' placeholder='!In progress!'>
+    <br>
+    <label for='kurier'>Dostawa</label>
+    <div class='lista_kurierow'>
+      <div class='kurier_listy' >
+        <img src='svg/shipping-van.svg' alt='' width='30px' height='30px'>
+        <span>Kurier DHL 15 zł</span>
+        <input  type='radio' name='kurier' id='kurier1' onclick='przelicz(this)' value='15'>
+      </div>
+      <div class='kurier_listy' >
+        <img src='svg/shipping-van.svg' alt='' width='30px' height='30px'>
+        <span>Kurier Poczta Polska 12 zł</span>
+        <input  type='radio' name='kurier' id='kurier1' onclick='przelicz(this)' value='12'>
+      </div>
+      <div class='kurier_listy' >
+        <img src='svg/package.svg' alt='' width='28px' height='28px'>
+        <span>Kurier InPost 11 zł</span>
+        <input  type='radio' name='kurier' id='kurier1' onclick='przelicz(this)' value='11'>
+      </div>
+    </div>
+  <div>
+    <br><p>Koszt dostawy: <span id=koszt_dostawy>0</span> zł</p>
+   <p>Łączny koszt: <span id='suma'>$podsumowanie_kosztow</span> zł</p>
+    <input type='hidden' id='koszt_calkowity' name='suma' value='$podsumowanie_kosztow'>
+    <div class='kup' style='text-align: center;'>
+      <button class='button_kup'  type='submit' style='margin-top: 5%; width: 90%;'>Przejdź dalej</button>
+    </div>
+  </div>
+  </form>
+</div>";
 }
 else{
-  echo "<h2 style='text-align:center;'>Twój koszyk jest pusty</h2>";
+  echo "<div class='wiadomosc_koszyk_pusty'>";
+  echo "<h2>Twój koszyk jest pusty</h2><br>";
+  echo "<a href='index.php'><h3>> Zapełnij go <</h3></a>";
+  echo "</div>";
 }
 
 //powiadomienia
@@ -111,41 +149,7 @@ if(isset($_SESSION['success'])){
     echo "<script src='powiadomienie.js'></script>";
 }
 ?>
-<div class='koszyk_podsumowanie'>
-  <form action="" method="POST">
-    <label for="rabat"><s>Kod rabatowy</s></label>
-    <input type="text" name='rabat' placeholder='!In progress!'>
-    <br>
-    <label for="kurier">Dostawa</label>
-    <div class='lista_kurierow'>
-      <div class="kurier_listy" >
-        <img src="https://techcabal.com/wp-content/uploads/2015/08/dhl_logo876.jpg" alt="" width="40px" height="40px">
-        <p>14 PLN</p>
-        <input type="radio" name="kurier" id='kurier1' onclick='przelicz(this)' value="14">
-      </div>
-      <div class="kurier_listy" >
-        <img src="https://www.orderhive.com/wp-content/uploads/2021/04/GLS-cover.svg" alt="" width="40px" height="40px">
-        <p>12 PLN</p>
-        <input  type="radio" name="kurier" id='kurier2' onclick='przelicz(this)' value="12">
-      </div>
-      <div class="kurier_listy" >
-        <img src="https://avlab.pl/wp-content/uploads/2020/09/poczta-polska-logo.jpg" alt="" width="40px" height="40px">
-        <p>11 PLN</p>
-        <input type="radio" name="kurier" id='kurier3' onclick='przelicz(this)' value="11">
-      </div>
-    </div>
-  <div>
-    <?php 
-    echo "<br><p>Koszt dostawy: <span id=koszt_dostawy>0</span> PLN</p>";
-    echo  "<p>Łączny koszt: <span id='suma'>".$podsumowanie_kosztow."</span> PLN</p>";
-    echo "<input type='hidden' id='koszt_calkowity' name='suma' value='". $podsumowanie_kosztow ."'>" ;
-    ?>
-    <div style="text-align: center;">
-      <button class='button_kup'  type="submit" style="margin-top: 5%; width: 90%;">Przejdź dalej</button>
-    </div>
-  </div>
-  </form>
-</div>
+
 
 </div>
 
@@ -181,6 +185,7 @@ function przelicz(inp) {
     document.getElementById('koszt_calkowity').value = suma_koncowa;
   }
 }
+// zrob funkcje podswietlania (przejdz dalej) gdy input checked
 </script>
 
 <script src='loading.js'></script>

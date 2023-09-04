@@ -11,7 +11,7 @@ $q = $_REQUEST["q"];
 if($szukaj1-> rowCount() > 0) {
   $q = strtolower($q);
   while($wynik = $szukaj1->fetch()){
-    echo "<div class='wyszukiwanie_produkt'><a style='text-decoration:none; color: #171717;' href=".$wynik['link']."><div><img src="."../".$wynik['zdjecie1']." alt='produkt' class ='wyszukanie_prod_zdjecie'></div><div class='wyszukanie_prod_info'>".$wynik['nazwa']."<p>".$wynik['cena']." PLN</p></div></a></div>";
+    echo "<div class='wyszukiwanie_produkt'><a style='text-decoration:none; color: #171717;' href=".$wynik['link']."><div><img src="."../".$wynik['zdjecie1']." alt='produkt' class ='wyszukanie_prod_zdjecie'></div><div class='wyszukanie_prod_info'>".$wynik['nazwa']."<p>".$wynik['cena']." zł</p></div></a></div>";
   }
 }
 //brak wyniku
