@@ -116,7 +116,7 @@ if(!empty($_SESSION['koszyk'])){
       <div class='kurier_listy' >
         <img src='svg/package.svg' alt='' width='28px' height='28px'>
         <span>Kurier InPost 11 zł</span>
-        <input  type='radio' name='kurier' id='kurier1' onclick='przelicz(this)' value='11'>
+        <input type='radio' name='kurier' id='kurier1' onclick='przelicz(this)' value='11'>
       </div>
     </div>
   <div>
@@ -124,7 +124,7 @@ if(!empty($_SESSION['koszyk'])){
    <p>Łączny koszt: <span id='suma'>$podsumowanie_kosztow</span> zł</p>
     <input type='hidden' id='koszt_calkowity' name='suma' value='$podsumowanie_kosztow'>
     <div class='kup' style='text-align: center;'>
-      <button class='button_kup'  type='submit' style='margin-top: 5%; width: 90%;'>Przejdź dalej</button>
+      <button class='button_kup'  type='submit' style='margin-top: 5%; width: 90%;'  disabled>Przejdź dalej</button>
     </div>
   </div>
   </form>
@@ -162,6 +162,12 @@ if(isset($_SESSION['success'])){
 </body>
 </html>
 <script>
+  function powieksz(){
+    document.getElementsByClassName('button_kup')[0].style.transform = 'scale(1.1)';
+  }
+  function normal(){
+    document.getElementsByClassName('button_kup')[0].style.transform = 'scale(1)';
+  }
   function animacjaIN(zrodlo){
     zrodlo.src = "svg/kosz_otwarty.svg";
   }
@@ -183,9 +189,14 @@ function przelicz(inp) {
     suma_koncowa = suma + parseFloat(inp.value);
     document.getElementById('suma').innerHTML = suma_koncowa;
     document.getElementById('koszt_calkowity').value = suma_koncowa;
+    document.getElementsByClassName('button_kup')[0].style.background = '#fbc936';
+    document.getElementsByClassName('button_kup')[0].style.color = '#161616';
+    document.getElementsByClassName('button_kup')[0].style.boxShadow = '3px 3px 1px #00000083';
+    document.getElementsByClassName('button_kup')[0].setAttribute('onmouseover', 'powieksz()');
+    document.getElementsByClassName('button_kup')[0].setAttribute('onmouseout', 'normal()');
+    document.getElementsByClassName('button_kup')[0].removeAttribute('disabled');
   }
 }
-// zrob funkcje podswietlania (przejdz dalej) gdy input checked
 </script>
 
 <script src='loading.js'></script>
