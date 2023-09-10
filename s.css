@@ -770,7 +770,7 @@ body{
     cursor: zoom-in;
 }
 /* produkt zoom */
-.button_kup{
+.button_kup, .button_podsumowanie{
     margin-top: 10%;
     width: 80%;
     height: 6vh;
@@ -784,10 +784,12 @@ body{
     transition: 0.3s;
 }
 
-    /* .button_kup:hover{
+    .button_kup:hover{
+        background-color: #fbc936;
+        color: #131313;
         transform: scale(1.1);
         transition: 0.3s;
-    } */
+    }
 
 .grid_produkt #div4{
     grid-area: 2 / 1 / 3 / 4;

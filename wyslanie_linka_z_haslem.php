@@ -18,7 +18,7 @@ if($mail_weryfikacja == $email){
     $tytul = 'Reset hasła do konta Session';
     //token
     $token = substr(sha1(mt_rand()),0,20);
-    $token_link = "localhost/session/przeslanie_hasla.php"."?key=".$token;
+    $token_link = "localhost/forum/przeslanie_hasla.php"."?key=".$token;
     // Zawartość
     $content = "<h2>Witaj!</h2> <p>O to <a href=$token_link>link</a> do zmiany hasła.Jeśli to nie ty wysłałeś prośbe zmiany hasła. Skontaktuj się znami pod support@gmail.com i zmień hasło!</p>";
     $content = wordwrap($content,70,"\r\n");

@@ -91,8 +91,8 @@ if(isset($_POST['pass']) && isset($_POST['passp'])){
         $patern = "/^(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z])(?=\D*\d)(?=[^!@#$%^&*]*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,32}$/";
         $weryfikacja_hasla = preg_match($patern, $pass);
         
-        if( $pass == $pass_powtorzone){
-            if($weryfikacja_hasla == TRUE){
+        if($weryfikacja_hasla == TRUE){
+        if( $pass == $pass_powtorzone ){
                 $pyt1 = $conn->prepare("SELECT token_hasla FROM loginy WHERE token_hasla = ?");
                 $pyt1 -> execute([$token_strony]);
                 $pyt1_liczba = $pyt1 -> fetchColumn();
@@ -112,12 +112,12 @@ if(isset($_POST['pass']) && isset($_POST['passp'])){
              }
 
              else{
-                $_SESSION['wiadomosc_hasla'] = "Hasło nie zgadza się z wytycznymi!";
+              $_SESSION['wiadomosc_hasla'] = "Hasła nie są takie same! ";
              }
         }
 
         else{
-            $_SESSION['wiadomosc_hasla'] = "Hasła nie są takie same!";
+          $_SESSION['wiadomosc_hasla'] = "Hasło nie zgadza się z wytycznymi! $weryfikacja_hasla";
         }
 $conn = null; 
 }
