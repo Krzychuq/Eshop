@@ -64,7 +64,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         }
 
         echo "</select>";
-        echo "<button  class='button_kup' name='btnsubmit' type=submit onclick='add_to_cart()' id='btnsubmit' disabled>Kup teraz</button></form>";
+        echo "<button  class='button_kup'  name='btnsubmit' type=submit onclick='add_to_cart()' id='btnsubmit' disabled>Kup teraz</button></form>";
         ?>
     </div>
 
@@ -86,12 +86,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
 </body>
 </html>
 <script>
-const container = document.getElementById('div1');
-const img = document.getElementById('prod');
 
-container.addEventListener('mousemove', onZoom);
-container.addEventListener('mouseover', onZoom);
-container.addEventListener('mouseleave', offZoom);
 
 $(".pick_pic").click(function(){
     zdjecie = document.getElementById(this.id);
@@ -100,20 +95,6 @@ $(".pick_pic").click(function(){
     const zmiana_zdjecia = $(glowne_zdjecie).attr('src', zrodlo);
     
 });
-function onZoom(e) {
-    const x = e.clientX - e.target.offsetLeft;
-    const y = e.clientY - e.target.offsetTop;
-
-    img.style.transformOrigin = `${x}px ${y}px`;
-    img.style.transform = 'scale(1.5)';
-}
-
-function offZoom(e) {
-    img.style.transformOrigin = `center center`;
-    img.style.transform = 'scale(1)';
-}
-
-
 
 $('#rozmiar').click(function(){
     $('#rozmiar option').each(function() {

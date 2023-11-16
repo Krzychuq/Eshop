@@ -6,12 +6,14 @@
     <a href="../index.php"><img src="../svg/logo1.svg" alt="logo" width="100px" height="auto"></a>
 
 </div>
+
 <div class="menu2">
     <img src="../svg/search.svg" width="22px" height="22px" alt="U+1f60d">
     <form class="form-wyszukania" action=''>
         <input class="wyszukiwarka" name onfocusin="powieksz_wyszukiwanie()" onfocusout="zmniejsz_wyszukiwanie()" type="text" name='wyszukiwarka' id="wyszukiwarka" onkeyup='wyszukanie(this.value)' placeholder="Szukaj">
     </form>
 </div>
+
 <div class='wyloguj'>
 <?php
     if( !isset( $_SESSION['email'] ) && empty( $_SESSION['email'] ) ){
@@ -26,6 +28,7 @@
     }
 ?>
 </div>
+
 <script>
 wyszukiwarka = document.getElementsByClassName("menu2")[0];
 function powieksz_wyszukiwanie(){
