@@ -40,6 +40,8 @@ while($linia = $pyt_produkt->fetch()){
     echo "</a>";
     echo "</div>";
 }
+
+$conn = null;
 ?>
     </div>
 </div>
@@ -58,4 +60,3 @@ while($linia = $pyt_produkt->fetch()){
 </footer>
 </body>
 </html>
-<script src="slideshow.js"></script>

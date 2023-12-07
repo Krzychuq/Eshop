@@ -1,7 +1,7 @@
 <br>
 <div class="footer">
     <div id="footer_div_1">
-        <img src="../svg/logo1.svg" alt="logo" width="100px" height="60px">
+        <img src="../svg/logo1.svg" alt="logo">
     </div>
     <div id="footer_div_2">
         <a href="../newsletter_zapisy.php">Newsletter</a><br>
@@ -14,3 +14,46 @@
         <a href="https://facebook.com" target="_blank"><img src="../svg/facebook.svg" alt="facebook" width="28px" height="28px"></a>
     </div>
 </div>
+<script>
+const zdjecie = document.getElementById('prod');
+const container = document.getElementsByClassName("contener")[0];
+
+const shrink = (e) => {
+  const el = e.target
+  
+  // Remove cloned element from DOM after animation is over
+  el.addEventListener("animationend", (e) => e.target.remove())
+
+  // Trigger browser reflow to start animation
+  el.style.animation = 'none';
+  el.offsetHeight
+  el.style.animation = ''
+  el.classList.add("shrink-down")
+}
+
+const toggleFullScreen = (e) => {
+  // Get position values for element
+  const {
+    top,
+    left
+  } = e.target.getBoundingClientRect()
+
+  // Clone the element and its children
+  let fullScreen = e.target.cloneNode(true)
+
+  // Set top and left with custom property
+  fullScreen.style.setProperty("--inset", `${top}px auto auto ${left}px`)
+
+  // Add class with animation and position
+  fullScreen.classList.add("full-screen")
+
+  // Listen for click to close full screen
+  fullScreen.addEventListener("click", shrink)
+
+  // Place in container over element to expand
+  container.appendChild(fullScreen)
+}
+
+// Add click listeners on all zdjecie
+    zdjecie.addEventListener("click", toggleFullScreen);
+</script>

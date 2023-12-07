@@ -1,3 +1,6 @@
+<head>
+    <link rel="icon" type="image/x-icon" href="svg/logo1.svg">
+</head>
 <header class="naglowek">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="wyszukiwarka.js"></script>

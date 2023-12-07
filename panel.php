@@ -46,7 +46,7 @@ session_start();
 
 <div class="panel" id="panel1">
     <!-- Dodaj produkt -->
-    <h3   id="p1" onclick="otwarcie_zakladki(this)">Dodaj produkt <div  id='s1'><span>&#9661;</span></div></h3>
+    <h3   id="p1" >Dodaj produkt</h3>
     <form action="dodaj_produkt.php" class="form_panel" method="post" id="form1" enctype="multipart/form-data">
         <input type="text" name="nazwa" placeholder="Nazwa">
         <input type="text" name="cena" placeholder="Cena">
@@ -93,7 +93,7 @@ session_start();
 
 <div class="panel" id="panel2">
     <!-- Usun produkt -->
-    <h3 id="p2" onclick="otwarcie_zakladki(this)">Usuń produkt <div  id='s2'><span>&#9661;</span></div></h3>
+    <h3 id="p2" >Usuń produkt </h3>
     <form action="usun_produkt.php" class="form_panel" method="post" id="form2">
         <select name="id">
 
@@ -110,7 +110,7 @@ session_start();
     </form>
     <br>
     <!-- Usuń rozmiar -->
-    <h3 style="font-weight:bold;" onclick="otwarcie_zakladki(this)">Usuń rozmiar <div  id='s3'><span>&#9661;</span></div></h3>
+    <h3 style="font-weight:bold;" >Usuń rozmiar </h3>
         <form action="usun_rozmiar.php" class="form_panel" method="post" id="form5">
             <select name="id">
 
@@ -139,7 +139,7 @@ session_start();
     <br>
     <!-- Dodaj rozmiar -->
     <br>
-    <h3 onclick="otwarcie_zakladki(this)">Dodaj rozmiar <div  id='s4'><span>&#9661;</span></div></h3>
+    <h3 >Dodaj rozmiar </h3>
     <form action="dodaj_rozmiar.php" class="form_panel" method="post" id="form6">
         <select name="id">
 
@@ -171,7 +171,7 @@ session_start();
 
 <div class="panel" id="panel3">
     <!-- Aktualizuj produkt -->
-    <h3  id="p4" onclick="otwarcie_zakladki(this)" >Aktualizuj produkt <div  id='s5'><span>&#9661;</span></div></h3>
+    <h3  id="p4"  >Aktualizuj produkt </h3>
     <form action="akt_produkt.php" class="form_panel" method="post" id="form3" enctype="multipart/form-data">
         <select name="id">
 
@@ -301,24 +301,6 @@ $conn = null;
 </body>
 </html>
 <script>
-    function otwarcie_zakladki(x){
-        id_strzalki = $(x).children("div").attr('id');
-            document.getElementById(id_strzalki).style.transition = '0.5s';
-        formularz = $(x).next().attr('id');
-        if($(("#"+formularz)).css('display') == 'none'){
-            $(("#"+formularz)).css('display',"flex");
-            document.getElementById(id_strzalki).style.transform = ' rotate(180deg)';
-        }
-        else{ 
-            $(("#"+formularz)).css('display',"none"); 
-            document.getElementById(id_strzalki).style.transform = ' rotate(0deg)';
-        }
-        kategoria = $(x).children("span").attr('id').css('display');
-        if(kategoria == 'none'){
-            $(x).children("span").attr('id').show();
-        }
-        else{$(x).children("span").attr('id').hide();}
 
-    }
 </script>
 <script src="loading.js"></script>
