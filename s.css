@@ -1,3 +1,8 @@
+:root{
+    --kolor_body: #fbc936;
+    --kolor_produkty_glowna: #f0f0f0;
+    --kolor_paskow: #111111;
+}
 /* key elements */
 ::-webkit-scrollbar {
     width: 10px;
@@ -26,7 +31,7 @@ body{
     min-height: 100vh; 
     display: flex;
     flex-direction: column;
-    background: #fbc936;
+    background: var(--kolor_body);
     font-family:'Segoe UI'; 
     color: #0f0f0f;
     margin: 0;
@@ -176,15 +181,11 @@ body{
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
     transition: 0.5s;
     border-collapse: collapse;
     z-index: 99;
     position: absolute;
-    top: 100px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    top: 76px;
 }
     .wyszukiwanie_produkt{
         border: #e0e0e0 1px solid;
@@ -467,7 +468,7 @@ body{
 .footer{
     width: 100%;  
     height: 20%;
-    background-color: #111111;
+    background-color: var(--kolor_paskow);
     display: flex;
     flex-direction: row;
 }
@@ -477,7 +478,7 @@ body{
         width: 33%;
         padding: 20px;
         color: #f8f8f8;
-        border-left: 1px solid #111111;
+        border-left: 1px solid #1f1f1f;
         margin-top: 20px;
         margin-bottom: 20px;
         display: flex;
@@ -678,9 +679,10 @@ body{
     width: 100%;
     min-height: 200px;
     height: max-content;
-    background-color: #f7f7f7;
+    background-color: var(--kolor_produkty_glowna);
+    backdrop-filter: blur(4px);
     padding: 12px;
-
+    border-radius: 10px;
 }
 .showcase_tytul{
     font-size: 1.8rem;
@@ -709,6 +711,7 @@ body{
 .showcase_flex div img{
     width: 300px;
     height: 300px;
+    border-radius: 20px;
 }
 /* .lista_produktow_poziom{
 
