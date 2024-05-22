@@ -138,59 +138,50 @@ if(!empty($_POST["opis"]) && isset($_POST["opis"])){
     $dodanie_produktu -> execute([$opis,$id]);
 }
 
-if(!empty($_FILES['zdjecie']['name']) && isset($_FILES['zdjecie']['name'])){
-$nazwa_zdjecia = $_FILES["zdjecie"]["name"];
-$zdjecietemp = $_FILES["zdjecie"]["tmp_name"];
-$rozszerzenie_zdjecia = mime_content_type($zdjecietemp);
-//sprawdzanie formatu
-if($rozszerzenie_zdjecia == "image/png" || $rozszerzenie_zdjecia == "image/jpg" || $rozszerzenie_zdjecia == "image/jpeg" || $rozszerzenie_zdjecia == "image/webp"){
-    if(is_uploaded_file($zdjecietemp)) {
-
-        //nowa nazwa z datą
-        $zdjecie_bez_roz = explode(".",$nazwa_zdjecia);
-        $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . '.' . $zdjecie_bez_roz[1];
-        $sciezka = "zdjecia_produktow/";
-        $sciezka_do_bazy = $sciezka . $nowa_nazwa_zdjecia;
-
-        //stare zdjecie
-        $pyt_zdjecie_z_bazy = $conn->prepare("SELECT zdjecie FROM produkty WHERE id = ?");
-        $pyt_zdjecie_z_bazy -> execute([$id]);
-
-        if($pyt_zdjecie_z_bazy){
-            $wykonanie = $pyt_zdjecie_z_bazy->fetch(PDO::FETCH_ASSOC);
-            $stare_zdjecie = $wykonanie['zdjecie'];
+if(isset($_FILES['zdjecia']) || !empty($_FILES['zdjecia'])){
+    $liczba_zdjec = count($_FILES["zdjecia"]['name']);
+    $zdjecia_array = '';
+    for($i=0; $i < $liczba_zdjec; $i++){
+        if(!empty($_FILES["zdjecia"]['name'][$i]) && isset($_FILES["zdjecia"]['name'][$i])){
+            $rozszerzenie = mime_content_type($_FILES["zdjecia"]["tmp_name"][$i]);
+    
+        if($rozszerzenie == "image/png" || $rozszerzenie == "image/jpg" || $rozszerzenie == "image/jpeg" || $rozszerzenie == "image/webp"){
+    
+    //POST
+        if(is_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i])){
+    //nowa nazwa z datą
+            $zdjecie_bez_roz = explode(".",$_FILES["zdjecia"]['name'][$i]);
+            $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . "-$i" . '.' . $zdjecie_bez_roz[1];
+            $sciezka = "zdjecia_produktow/";
+            $sciezka .= $nowa_nazwa_zdjecia;
+            if($i == 0){ $zdjecia_array .= $nowa_nazwa_zdjecia; }
+            else{ $zdjecia_array .= "," . $nowa_nazwa_zdjecia; }
+    
+    //dodanie zdjecia do folderu
+            move_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i], $sciezka);
+        }   
         }
-
-        $zdjecie_do_usuniecia = $stare_zdjecie;
-
-        //usuniecie starego zdjecia
-        if(file_exists($zdjecie_do_usuniecia)) {
-            unlink($zdjecie_do_usuniecia);
-        } 
-
-        //nowe zdjecie
-            
-        if(move_uploaded_file($zdjecietemp, $sciezka . $nowa_nazwa_zdjecia)) {
-            $dodanie_produktu = $conn->prepare('UPDATE produkty SET zdjecie = ? WHERE id = ?');
-            $dodanie_produktu -> execute([$sciezka_do_bazy, $id]);
-            $_SESSION['success'] = "Zaaktualizowano produkt";
-        }
-        else {
-            $_SESSION['error'] = "Nie udało sie umieścić zdjecia!";
         }
     }
-    else {
-        $_SESSION['error'] = "Nie udało sie zapisać zdjecia!";
+
+//dodanie produktu do bazy
+$zdjecia_string='';
+$zdjecia_array = explode(',', $zdjecia_array);
+for($i=0; $i < sizeof($zdjecia_array); $i++){
+    if($i== (sizeof($zdjecia_array)-1)){
+        $zdjecia_string .= $zdjecia_array[$i];
     }
-}   
-else{
-    $_SESSION['error'] = "Zdjęcie może być tylko w formacie jpg, jpeg, png, webp !"; 
+    else{
+        $zdjecia_string .= $zdjecia_array[$i]. ",";
+    }
 }
-}
-header("location: panel.php");
+$dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,opis,zdjecie,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
+$dodanie_produktu -> execute([$litery_male, $cena, $suma, $rodzaj, $opis, $zdjecia_string, $generuj_indeks,$link]);
 $conn = null;
+header("location: panel.php");
 }
 else{
+    $conn = null;
     $_SESSION['error'] = "Wpisz ID";
     header("location: panel.php");
 }

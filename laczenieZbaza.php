@@ -1,7 +1,7 @@
 <?php
 $hostname='localhost';
-$username='root';
-$pass='';
+$username='polaczenie';
+$pass='n(w1K__-OWxWtyKA';
 $bazaD ='shop';
 
 try {

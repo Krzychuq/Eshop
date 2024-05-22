@@ -26,33 +26,5 @@ include_once('../produkt.php');
 </footer>
 </body>
 </html>
-<script>
-
-
-$(".pick_pic").click(function(){
-    zdjecie = document.getElementById(this.id);
-    const zrodlo = zdjecie.getAttribute("src");
-    var glowne_zdjecie = document.getElementById("prod");
-    const zmiana_zdjecia = $(glowne_zdjecie).attr('src', zrodlo);
-    
-});
-
-$('#rozmiar').click(function(){
-    $('#rozmiar option').each(function() {
-    if($(this).is(':selected')){
-        if($(this).val()){
-            $('#btnsubmit').prop("disabled", false);
-            tekst = $(this).text();
-            przerobka = tekst.split("|");
-            $('#ilosc_rozmiaru').val(przerobka[1]);
-        }
-        else{
-            $('#btnsubmit').prop("disabled",true);
-        }
-    }
-});
-});
-
-
-</script>
+<script src='skrypt_produktu.js'></script>
 <?php include_once('../dodaj_do_koszyka.php');?>

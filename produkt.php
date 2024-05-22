@@ -1,19 +1,15 @@
 <?php
-$actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$indeks1 = explode('http://localhost/forum/produkty/', $actual_link);
-$indeks2 = explode('.php',$indeks1[1]);
+$indeks1 = explode("/", $_SERVER["REQUEST_URI"]);
+$indeks2 = explode('.php',$indeks1[3]);
 $indeks3 = explode('-',$indeks2[0]);
-$pyt_prod= $conn -> prepare('SELECT nazwa,cena,ilosc,opis,zdjecie1,zdjecie2,zdjecie3,zdjecie4 FROM produkty WHERE indeks_produktu like ?');
+$pyt_prod= $conn -> prepare('SELECT nazwa,cena,ilosc,opis,zdjecie FROM produkty WHERE indeks_produktu like ?');
 $indeks_produktu = end($indeks3);
 $pyt_prod->execute([$indeks_produktu]);
 $dane = $pyt_prod->fetch();
 $pyt_rozmiar= $conn -> prepare('SELECT rozmiary_produktow.rozmiar, rozmiary_produktow.ilosc FROM rozmiary_produktow inner join produkty on rozmiary_produktow.id_produktu = produkty.id WHERE produkty.indeks_produktu like ? ORDER BY RIGHT (rozmiary_produktow.rozmiar,1) desc');
 $pyt_rozmiar->execute([$indeks_produktu]);
-$zdjecie_prod1 = "../". $dane["zdjecie1"];
-$zdjecie_prod2 = "../". $dane["zdjecie2"];
-$zdjecie_prod3 = "../". $dane["zdjecie3"];
-$zdjecie_prod4 = "../". $dane["zdjecie4"];
 $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
+$zdjecia_array = explode(",", $dane["zdjecie"]);
 ?>
 
 <div class='contener'>
@@ -21,15 +17,23 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
 <div class='grid_produkt'>
     <div id='div2'>
         <!-- zdjecia do wyboru produktu -->
-            <?php if($dane["zdjecie1"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod1 id=prod1 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
-            <?php if($dane["zdjecie2"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod2 id=prod2 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
-            <?php if($dane["zdjecie3"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod3 id=prod3 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
-            <?php if($dane["zdjecie4"] != NULL){echo "<img class='pick_pic' src=$zdjecie_prod4 id=prod4 style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu>";} ?>
+            <?php 
+            if($dane["zdjecie"] != NULL){
+                for($i=0; $i < sizeof($zdjecia_array); $i++){
+                    $zdjecie_prod = "../zdjecia_produktow/" . $zdjecia_array[$i];
+                    echo "<img class='pick_pic' src='$zdjecie_prod' id=prod$i style='width:auto; height:auto; max-width: 100px;' alt=zdjecie/produktu".$i.">";
+                }  
+            }
+            else{
+                echo "<img class='pick_pic' src='' id=prod1 style='width:auto; height:auto; max-width: 100px;' alt=brak_zdjecia>";
+            }
+
+            ?>
     </div>
     
     <div id='div1'>
     <!-- zdjecie głowne produktu -->
-        <?php echo "<img src=$zdjecie_prod1 id=prod alt=zdjecie/produktu>"; ?>
+        <?php echo "<img src='". "../zdjecia_produktow/" .$zdjecia_array[0]. "' id=prod alt=zdjecie/produktu>"; ?>
     </div>
 
     <div id="div3">
@@ -57,6 +61,7 @@ $nazwa_prod = str_replace('-', ' ', $dane["nazwa"]);
         <?php
         echo "<h2>Opis produktu</h2><br>";
         echo "<p style=padding:1%; font-family:Segoe UI;>".$dane["opis"]."</p>";
+        $conn = null;
         ?>
     </div>
 </div>

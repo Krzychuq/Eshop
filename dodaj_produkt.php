@@ -39,27 +39,34 @@ if(empty($ilosc_XXL)){
 
 $opis = $_POST["opis"];
 
-$nazwa_zdjecia1 = $_FILES["zdjecie1"]["name"];
-$zdjecietemp1 = $_FILES["zdjecie1"]["tmp_name"];
-$rozszerzenie_zdjecia1 = mime_content_type($zdjecietemp1);
-if(!empty($_FILES["zdjecie2"]["name"]) && isset($_FILES["zdjecie2"]["name"])){
-    $nazwa_zdjecia2 = $_FILES["zdjecie2"]["name"];
-    $zdjecietemp2 = $_FILES["zdjecie2"]["tmp_name"];
-    $rozszerzenie_zdjecia2 = mime_content_type($zdjecietemp2);
-}
-if(!empty($_FILES["zdjecie3"]["name"]) && isset($_FILES["zdjecie3"]["name"])){
-    $nazwa_zdjecia3 = $_FILES["zdjecie3"]["name"];
-    $zdjecietemp3 = $_FILES["zdjecie3"]["tmp_name"];
-    $rozszerzenie_zdjecia3 = mime_content_type($zdjecietemp3);
-}
-if(!empty($_FILES["zdjecie4"]["name"]) && isset($_FILES["zdjecie4"]["name"])){
-    $nazwa_zdjecia4 = $_FILES["zdjecie4"]["name"];
-    $zdjecietemp4 = $_FILES["zdjecie4"]["tmp_name"];
-    $rozszerzenie_zdjecia4 = mime_content_type($zdjecietemp4);
-}
-//sprawdzanie formatu
-if(!empty($nazwa_zdjecia1) && isset($nazwa_zdjecia1)){
-if($rozszerzenie_zdjecia1 == "image/png" || $rozszerzenie_zdjecia1 == "image/jpg" || $rozszerzenie_zdjecia1 == "image/jpeg" || $rozszerzenie_zdjecia1 == "image/webp"){
+
+if(isset($_FILES['zdjecia']) || !empty($_FILES['zdjecia'])){
+    $liczba_zdjec = count($_FILES["zdjecia"]['name']);
+    $zdjecia_array = '';
+    for($i=0; $i < $liczba_zdjec; $i++){
+        if(!empty($_FILES["zdjecia"]['name'][$i]) && isset($_FILES["zdjecia"]['name'][$i])){
+            $rozszerzenie = mime_content_type($_FILES["zdjecia"]["tmp_name"][$i]);
+    
+        if($rozszerzenie == "image/png" || $rozszerzenie == "image/jpg" || $rozszerzenie == "image/jpeg" || $rozszerzenie == "image/webp"){
+    
+    //POST
+        if(is_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i])){
+    //nowa nazwa z datą
+            $zdjecie_bez_roz = explode(".",$_FILES["zdjecia"]['name'][$i]);
+            $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . "-$i" . '.' . $zdjecie_bez_roz[1];
+            $sciezka = "zdjecia_produktow/";
+            $sciezka .= $nowa_nazwa_zdjecia;
+            if($i == 0){ $zdjecia_array .= $nowa_nazwa_zdjecia; }
+            else{ $zdjecia_array .= "," . $nowa_nazwa_zdjecia; }
+    
+    //dodanie zdjecia do folderu
+            move_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i], $sciezka);
+        }   
+        }
+        }
+    }
+
+
     $zmiana1 = str_replace("ą", "a", $nazwa);
     $zmiana2 = str_replace("ć", "c", $zmiana1);
     $zmiana3 = str_replace("ę", "e", $zmiana2);
@@ -85,65 +92,20 @@ if($rozszerzenie_zdjecia1 == "image/png" || $rozszerzenie_zdjecia1 == "image/jpg
     $strona = $str . "-" .$generuj_indeks. ".php";
     $link = "http://localhost/forum/produkty/". $strona;
 
-    if(!empty($nazwa_zdjecia2) && isset($nazwa_zdjecia2)){
-    
-    if($rozszerzenie_zdjecia2 == "image/png" || $rozszerzenie_zdjecia2 == "image/jpg" || $rozszerzenie_zdjecia2 == "image/jpeg" || $rozszerzenie_zdjecia2 == "image/webp"){
-        if(is_uploaded_file($zdjecietemp2)){
-            //nowa nazwa z datą
-            $zdjecie_bez_roz2 = explode(".",$nazwa_zdjecia2);
-            $nowa_nazwa_zdjecia2 = date("Y-m-d-H-i-s") . "-2" . '.' . $zdjecie_bez_roz2[1];
-            $sciezka2 = "zdjecia_produktow/";
-            $sciezka_do_bazy2 = $sciezka2 . $nowa_nazwa_zdjecia2;
-        }
-    }
-
-    }
-    else{
-        $sciezka_do_bazy2 = NULL;
-    }
-    if(!empty($nazwa_zdjecia3) && isset($nazwa_zdjecia3)){
-
-    if($rozszerzenie_zdjecia3 == "image/png" || $rozszerzenie_zdjecia3 == "image/jpg" || $rozszerzenie_zdjecia3 == "image/jpeg" || $rozszerzenie_zdjecia3 == "image/webp"){
-        if(is_uploaded_file($zdjecietemp3)){
-            //nowa nazwa z datą
-            $zdjecie_bez_roz3 = explode(".",$nazwa_zdjecia3);
-            $nowa_nazwa_zdjecia3 = date("Y-m-d-H-i-s") . "-3" . '.' . $zdjecie_bez_roz3[1];
-            $sciezka3 = "zdjecia_produktow/";
-            $sciezka_do_bazy3 = $sciezka3 . $nowa_nazwa_zdjecia3;
-        }
-    }
-
-    }
-    else{
-        $sciezka_do_bazy3 = NULL;
-    }
-    if(!empty($nazwa_zdjecia4) && isset($nazwa_zdjecia4)){
-
-    if($rozszerzenie_zdjecia4 == "image/png" || $rozszerzenie_zdjecia4 == "image/jpg" || $rozszerzenie_zdjecia4 == "image/jpeg" || $rozszerzenie_zdjecia4 == "image/webp"){
-        if(is_uploaded_file($zdjecietemp4)){
-            //nowa nazwa z datą
-            $zdjecie_bez_roz4 = explode(".",$nazwa_zdjecia4);
-            $nowa_nazwa_zdjecia4 = date("Y-m-d-H-i-s") . "-4" . '.' . $zdjecie_bez_roz4[1];
-            $sciezka4 = "zdjecia_produktow/";
-            $sciezka_do_bazy4 = $sciezka4 . $nowa_nazwa_zdjecia4;
-        }
-    }
-
-    }
-    else{
-        $sciezka_do_bazy4 = NULL;
-    }
-    if(is_uploaded_file($zdjecietemp1)){
-        //nowa nazwa z datą
-        $zdjecie_bez_roz = explode(".",$nazwa_zdjecia1);
-        $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . "-1" . '.' . $zdjecie_bez_roz[1];
-        $sciezka = "zdjecia_produktow/";
-        $sciezka_do_bazy = $sciezka . $nowa_nazwa_zdjecia;
-
         //dodanie produktu do bazy
         $suma = $ilosc_XS + $ilosc_S + $ilosc_M + $ilosc_L + $ilosc_XL + $ilosc_XXL + $ilosc_Uniwersalny; 
-        $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,opis,zdjecie1,zdjecie2,zdjecie3,zdjecie4,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $dodanie_produktu -> execute([$litery_male, $cena, $suma, $rodzaj, $opis, $sciezka_do_bazy, $sciezka_do_bazy2, $sciezka_do_bazy3, $sciezka_do_bazy4, $generuj_indeks,$link]);
+        $zdjecia_string='';
+        $zdjecia_array = explode(',', $zdjecia_array);
+        for($i=0; $i < sizeof($zdjecia_array); $i++){
+            if($i== (sizeof($zdjecia_array)-1)){
+                $zdjecia_string .= $zdjecia_array[$i];
+            }
+            else{
+                $zdjecia_string .= $zdjecia_array[$i]. ",";
+            }
+        }
+        $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,opis,zdjecie,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
+        $dodanie_produktu -> execute([$litery_male, $cena, $suma, $rodzaj, $opis, $zdjecia_string, $generuj_indeks,$link]);
         $pyt_id = $conn -> prepare('SELECT id FROM produkty WHERE indeks_produktu LIKE ?');
         $pyt_id -> execute([$generuj_indeks]);
         $id = $pyt_id -> fetch(PDO::FETCH_ASSOC);
@@ -177,44 +139,18 @@ if($rozszerzenie_zdjecia1 == "image/png" || $rozszerzenie_zdjecia1 == "image/jpg
             $dodaj_rozmiar7 -> execute([$i, "Uniwersalny", $ilosc_Uniwersalny]);
         }
 
-        //dodanie zdjec do folderu
-        if(move_uploaded_file($zdjecietemp2, $sciezka2 . $nowa_nazwa_zdjecia2)){
-
-        }
-        if(move_uploaded_file($zdjecietemp3, $sciezka3 . $nowa_nazwa_zdjecia3)){
-
-        }
-        if(move_uploaded_file($zdjecietemp4, $sciezka4 . $nowa_nazwa_zdjecia4)){
-
-        }
-
         //nowe strona produktu
-            
-        if(move_uploaded_file($zdjecietemp1, $sciezka . $nowa_nazwa_zdjecia)) {
-            $nowastrona = 'produkty/' . $strona;
-            $nowa_strona_produktu = fopen($nowastrona,"w");
-            copy('produkty/kod_strony_produktu.txt', $nowastrona);
-            fclose($nowa_strona_produktu);
-        }
-        else {
-            $_SESSION['error'] = "Nie udało sie umieścić zdjecia!";
-        }
-    }
-    else {
-        $_SESSION['error'] = "Nie udało sie zapisać zdjecia!";
-    }
-}    
-else{
-    $_SESSION['error'] = "Zdjęcie może być tylko w formacie jpg, jpeg, png, webp!";
-    header("location: panel.php");
-}
-}
-else{
-    $_SESSION['error'] = "Dodaj zdjecie!"; 
-}
+        $nowastrona = 'produkty/' . $strona;
+        $nowa_strona_produktu = fopen($nowastrona,"w");
+        copy('produkty/kod_strony_produktu.txt', $nowastrona);
+        fclose($nowa_strona_produktu);
+
+    
 $_SESSION['success'] = "Dodano produkt";
+
 }
 
+}
 else{
     $_SESSION['error'] = "Wpisz wszystkie pola!";
     $conn = null;

@@ -18,8 +18,8 @@ include_once('../laczenieZbaza.php');
 include_once('../produkt.php');
 ?>
 
-<?php include_once('../podobne_produkty.php');?>
 
+<?php include_once('../podobne_produkty.php');?>
 </div>
 <footer>
     <?php include_once('../footer_produkty.html'); $conn = null;?>
