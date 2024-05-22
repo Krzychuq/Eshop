@@ -3,6 +3,7 @@ session_start();
 include_once('laczenieZbaza.php');
 $id = $_POST["id"];
 if(!empty($id) && isset($id)){
+
 if(!empty($_POST["nazwa"]) && isset($_POST["nazwa"])){
 
     $nazwa = $_POST["nazwa"];
@@ -28,14 +29,14 @@ if(!empty($_POST["nazwa"]) && isset($_POST["nazwa"])){
     rename($stara_strona[1], $nowa_strona_nazwa);
     $link = "http://localhost/forum/produkty/". $strona;
 
-    $dodanie_produktu = $conn->prepare('UPDATE produkty SET nazwa = ?,indeks_produktu = ?, link = ? WHERE id = ?');
-    $dodanie_produktu -> execute([$nazwa, $indeks["indeks_produktu"], $link, $id]);
+    $aktu_produktu = $conn->prepare('UPDATE produkty SET nazwa = ?,indeks_produktu = ?, link = ? WHERE id = ?');
+    $aktu_produktu -> execute([$nazwa, $indeks["indeks_produktu"], $link, $id]);
 }
 
 if(!empty($_POST["cena"]) && isset($_POST["cena"])){
     $cena = $_POST["cena"];
-    $dodanie_produktu = $conn->prepare('UPDATE produkty SET cena = ? WHERE id = ?');
-    $dodanie_produktu -> execute([$cena, $id]);
+    $aktu_produktu = $conn->prepare('UPDATE produkty SET cena = ? WHERE id = ?');
+    $aktu_produktu -> execute([$cena, $id]);
 }
 
 
@@ -118,71 +119,106 @@ if(!empty($_POST["XS"]) || !empty($_POST["S"]) || !empty($_POST["M"]) || !empty(
     }
     $akt_ilosc = $conn -> prepare("UPDATE produkty SET ilosc = ? WHERE id = ?");
     $akt_ilosc -> execute([$suma, $id]);
+    if($pyt_ilosc -> rowCount() == 0){
+        $_SESSION['error'] = "Nie zaaktualizowano";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 
 if(!empty($_POST["rodzaj"]) && isset($_POST["rodzaj"])){
     $rodzaj = $_POST["rodzaj"];
-    $dodanie_produktu = $conn->prepare('UPDATE produkty SET rodzaj = ? WHERE id = ?');
-    $dodanie_produktu -> execute([$rodzaj, $id]);
+    $aktu_produktu = $conn->prepare('UPDATE produkty SET rodzaj = ? WHERE id = ?');
+    $aktu_produktu -> execute([$rodzaj, $id]);
+    if($aktu_produktu -> rowCount() == 0){
+        $_SESSION['error'] = "Nie zaaktualizowano";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 
 if(!empty($_POST["rozmiar"]) && isset($_POST["rozmiar"])){
     $rozmiar = $_POST["rozmiar"];
-    $dodanie_produktu = $conn->prepare('UPDATE rozmiary_produktow SET rozmiar = ? WHERE id_produktu = ?');
-    $dodanie_produktu -> execute([$rozmiar,$id]);
+    $aktu_produktu = $conn->prepare('UPDATE rozmiary_produktow SET rozmiar = ? WHERE id_produktu = ?');
+    $aktu_produktu -> execute([$rozmiar,$id]);
+    if($aktu_produktu -> rowCount() == 0){
+        $_SESSION['error'] = "Nie zaaktualizowano";
+    }
+    else{
+        $_SESSION['success'] = "Zaaktualizowano produkt";
+    }
 }
 
 if(!empty($_POST["opis"]) && isset($_POST["opis"])){
     $opis = $_POST["opis"];
-    $dodanie_produktu = $conn->prepare('UPDATE produkty SET opis = ? WHERE id = ?');
-    $dodanie_produktu -> execute([$opis,$id]);
-}
-
-if(isset($_FILES['zdjecia']) || !empty($_FILES['zdjecia'])){
-    $liczba_zdjec = count($_FILES["zdjecia"]['name']);
-    $zdjecia_array = '';
-    for($i=0; $i < $liczba_zdjec; $i++){
-        if(!empty($_FILES["zdjecia"]['name'][$i]) && isset($_FILES["zdjecia"]['name'][$i])){
-            $rozszerzenie = mime_content_type($_FILES["zdjecia"]["tmp_name"][$i]);
-    
-        if($rozszerzenie == "image/png" || $rozszerzenie == "image/jpg" || $rozszerzenie == "image/jpeg" || $rozszerzenie == "image/webp"){
-    
-    //POST
-        if(is_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i])){
-    //nowa nazwa z datą
-            $zdjecie_bez_roz = explode(".",$_FILES["zdjecia"]['name'][$i]);
-            $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . "-$i" . '.' . $zdjecie_bez_roz[1];
-            $sciezka = "zdjecia_produktow/";
-            $sciezka .= $nowa_nazwa_zdjecia;
-            if($i == 0){ $zdjecia_array .= $nowa_nazwa_zdjecia; }
-            else{ $zdjecia_array .= "," . $nowa_nazwa_zdjecia; }
-    
-    //dodanie zdjecia do folderu
-            move_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i], $sciezka);
-        }   
-        }
-        }
-    }
-
-//dodanie produktu do bazy
-$zdjecia_string='';
-$zdjecia_array = explode(',', $zdjecia_array);
-for($i=0; $i < sizeof($zdjecia_array); $i++){
-    if($i== (sizeof($zdjecia_array)-1)){
-        $zdjecia_string .= $zdjecia_array[$i];
+    $aktu_produktu = $conn->prepare('UPDATE produkty SET opis = ? WHERE id = ?');
+    $aktu_produktu -> execute([$opis,$id]);
+    if($aktu_produktu -> rowCount() == 0){
+        $_SESSION['error'] = "Nie zaaktualizowano";
     }
     else{
-        $zdjecia_string .= $zdjecia_array[$i]. ",";
+        $_SESSION['success'] = "Zaaktualizowano produkt";
     }
 }
-$dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,opis,zdjecie,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
-$dodanie_produktu -> execute([$litery_male, $cena, $suma, $rodzaj, $opis, $zdjecia_string, $generuj_indeks,$link]);
+
+// /////////////////////////////////////////////UNDER WORK////////////////////////////////////
+// if( isset($_FILES['zdjecia']) && !empty($_FILES['zdjecia']) && ){
+//     $liczba_zdjec = count($_FILES["zdjecia"]['name']);
+//     $zdjecia_array = '';
+//     for($i=0; $i < $liczba_zdjec; $i++){
+//         if(!empty($_FILES["zdjecia"]['name'][$i]) && isset($_FILES["zdjecia"]['name'][$i])){
+//             $rozszerzenie = mime_content_type($_FILES["zdjecia"]["tmp_name"][$i]);
+    
+//         if($rozszerzenie == "image/png" || $rozszerzenie == "image/jpg" || $rozszerzenie == "image/jpeg" || $rozszerzenie == "image/webp"){
+    
+//     //POST
+//         if(is_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i])){
+//     //nowa nazwa z datą
+//             $zdjecie_bez_roz = explode(".",$_FILES["zdjecia"]['name'][$i]);
+//             $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . "-$i" . '.' . $zdjecie_bez_roz[1];
+//             $sciezka = "zdjecia_produktow/";
+//             $sciezka .= $nowa_nazwa_zdjecia;
+//             if($i == 0){ $zdjecia_array .= $nowa_nazwa_zdjecia; }
+//             else{ $zdjecia_array .= "," . $nowa_nazwa_zdjecia; }
+    
+//     //dodanie zdjecia do folderu
+//             move_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i], $sciezka);
+//         }   
+//         }
+//         }
+//     }
+
+//     //lista zdjec
+//     $zdjecia_string='';
+//     $zdjecia_array = explode(',', $zdjecia_array);
+//     for($i=0; $i < sizeof($zdjecia_array); $i++){
+//         if($i== (sizeof($zdjecia_array)-1)){
+//             $zdjecia_string .= $zdjecia_array[$i];
+//         }
+//         else{
+//             $zdjecia_string .= $zdjecia_array[$i]. ",";
+//         }
+//     }
+//     // dodanie zdjec do bazy
+//     $aktu_produktu = $conn->prepare('UPDATE produkty SET zdjecie = ? WHERE id = ?');
+//     $aktu_produktu -> execute([$zdjecia_string, $id]);
+//     if($aktu_produktu -> rowCount() == 0){
+//         $_SESSION['error'] = "Nie zaaktualizowano";
+//     }
+//     else{
+//         $_SESSION['success'] = "Zaaktualizowano produkt";
+//     }
+// }
+
 $conn = null;
 header("location: panel.php");
+
 }
 else{
     $conn = null;
-    $_SESSION['error'] = "Wpisz ID";
+    $_SESSION['error'] = "Wybierz ID";
     header("location: panel.php");
 }
 ?>

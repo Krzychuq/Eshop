@@ -193,7 +193,8 @@ session_start();
         </select>
 
         <textarea name="opis" placeholder="Opis" style="resize: vertical; min-height:60px;"></textarea>
-        <input type="file" name='zdjecia[]' multiple>
+        <p>photos update coming soon</p>
+        <!-- <input type="file" name='zdjecia[]' multiple> -->
         <p style="font-weight:bold;">Rozmiary:</p>
 
         <div class="rozmiary">
@@ -252,7 +253,13 @@ foreach($pyt_produkt as $linia){
         echo  " | ".$kolejny['rozmiar'] ."-". $kolejny['ilosc'] ." | ";
     }
     echo "</td>";
-// ZROB LICZNIK ZDJEC
+// Liczy zdjecia
+    if($linia['zdjecie'] != ""){
+        $zdjecie = explode(",",$linia['zdjecie']);
+        $licznik_zdjec = count($zdjecie);
+    }
+    else{$licznik_zdjec = 0;}
+// Wyswietla zdjecia 
     if( $licznik_zdjec == 0 ){
         echo "<td>" . "Brak" . "</td>";
     }

@@ -1,14 +1,17 @@
 
 <?php
+include('laczenieZbaza.php');
 echo "<div class='podobne_produkty'>";
 echo "<p id='tytul_polecane'>Polecane</p>";
-$pytanie_pierwszy_id = $conn -> query('SELECT MAX(id) FROM produkty;');
-$pytanie_ostatni_id = $conn -> query('SELECT MIN(id) FROM produkty;');
+// losowanie produktów
+$pytanie_pierwszy_id = $conn -> query('SELECT MAX(id) FROM produkty');
+$pytanie_ostatni_id = $conn -> query('SELECT MIN(id) FROM produkty');
 $max_array = $pytanie_pierwszy_id->fetch();
 $min_array = $pytanie_ostatni_id->fetch();
 $lista_uzytych_numerow=[''];
 $lista_do_bazy = '';
-for($i=0; $i < 6; $i++){
+// tylko 6
+for($i=0; $i < 6; $i++){ 
   $los = rand($min_array[0], $max_array[0]);
   array_push($lista_uzytych_numerow, $los);
   if(in_array($los, $lista_uzytych_numerow, false)){
@@ -16,8 +19,6 @@ for($i=0; $i < 6; $i++){
     else{ $lista_do_bazy .= "," . $los; }
   }
 }
-echo $lista_do_bazy. "<br>";
-print_r($lista_uzytych_numerow);
 $podobne_produkty = $conn -> query("SELECT id,nazwa, cena, zdjecie,link FROM produkty WHERE id IN ($lista_do_bazy);");
 echo "<ul class='list_prod' style='left: 0; transition: 0.7s;'>";
 while($linia = $podobne_produkty->fetch()){
