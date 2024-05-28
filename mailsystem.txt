@@ -1,0 +1,33 @@
+//wysyłanie maili
+sendmail.ini
+linia 14 smtp.gmail.com
+linia 18 465
+linia 46 i 47 email i haslo
+
+php.ini linia 1100
+sendmail_path zmien np. "\"C:\xampp\sendmail\sendmail.exe\" -t"
+
+przykladowy skrypt:
+<?php
+//
+// *** Odbiorca ***
+$ob = 'x';
+//
+// *** Tytuł ***
+$subject = 'x';
+//
+// *** Tresc ***
+$content = 'x';
+//
+//*** header ***
+$headers = "Od: $ob\r\n";
+//
+//*** Komunikat ***
+if (mail($ob, $subject, $content, $headers))
+{
+	echo "Wysłano";
+} 
+else 
+{
+   	echo "Bład";
+}
