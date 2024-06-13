@@ -42,14 +42,14 @@ if(!empty($_SESSION['koszyk'])){
     $rozmiar = $_SESSION['koszyk'][$liczba_produktow][1];
     $sztuk_zaznaczone = $_SESSION['koszyk'][$liczba_produktow][2];
     $limit = $_SESSION['koszyk'][$liczba_produktow][3];
-    $pyt = $conn->prepare('SELECT id, nazwa, cena, zdjecie1, link FROM produkty WHERE indeks_produktu like ?');
+    $pyt = $conn->prepare('SELECT id, nazwa, cena, zdjecie, link FROM produkty WHERE indeks_produktu like ?');
       $pyt -> execute([$indeks]);
       $results = $pyt->fetchAll();
       foreach ($results as $linia){
         $id = $linia['id'];
         $nazwa = $linia['nazwa'];
         $cena = $linia['cena'];
-        $zdjecie = $linia['zdjecie1'];
+        $zdjecie = explode(",",$linia["zdjecie"]);
         $link = $linia['link'];
       }
       $pyt_rozmiar = $conn -> prepare('SELECT ilosc FROM rozmiary_produktow WHERE id_produktu = ? and rozmiar like ?');
@@ -58,7 +58,7 @@ if(!empty($_SESSION['koszyk'])){
     echo "<div class='produkt_z_koszyka'>";
     
     echo "<div class='koszyk_zdjecie_produktu'>";
-    echo "<a class='koszyk_link' href='$link'><img src='$zdjecie' width=180px height=autopx></a>";
+    echo "<a class='koszyk_link' href='$link'><img src='zdjecia_produktow/$zdjecie[0]' width=180px height=autopx></a>";
     echo "</div>";
     $cena_produktu = $cena * $sztuk_zaznaczone;
     $podsumowanie_kosztow += $cena_produktu;

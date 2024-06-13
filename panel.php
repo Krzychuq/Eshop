@@ -193,8 +193,7 @@ session_start();
         </select>
 
         <textarea name="opis" placeholder="Opis" style="resize: vertical; min-height:60px;"></textarea>
-        <p>photos update coming soon</p>
-        <!-- <input type="file" name='zdjecia[]' multiple> -->
+        <input type="file" name='zdjecia[]' multiple>
         <p style="font-weight:bold;">Rozmiary:</p>
 
         <div class="rozmiary">

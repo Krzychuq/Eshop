@@ -432,7 +432,7 @@ body{
 }
 
 .wrap-konta{
-    background-color: #ffffff4d;
+    background-color: #ffffff71;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;   
@@ -455,7 +455,7 @@ body{
     width: fit-content;
 }
     .info_profilu p {padding: 5px;}
-    .info_profilu p:nth-child(even) {background-color: #111111; color: #f8f8f8;}
+    .info_profilu p:nth-child(even) {background-color: #111111; color: #eaeaea;}
     .info_profilu p:nth-child(odd) {background-color: #f8f8f8; color: #111111;}
 
 .form_konta{
@@ -721,6 +721,7 @@ body{
 .showcase_flex div img{
     width: 300px;
     height: 300px;
+    border-radius: 10px;
 }
 /* .lista_produktow_poziom{
 

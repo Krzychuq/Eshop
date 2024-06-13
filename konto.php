@@ -50,7 +50,7 @@ session_start();
 ?>
 
 <div class="profil">
-    <img src="https://www.kindpng.com/picc/m/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png" class="zdjecie_profilowe">
+    <img src="svg/account_black.svg" class="zdjecie_profilowe">
 </div><br>
 
 <div class="info_profilu">

@@ -163,55 +163,53 @@ if(!empty($_POST["opis"]) && isset($_POST["opis"])){
     }
 }
 
-// /////////////////////////////////////////////UNDER WORK////////////////////////////////////
-// if( isset($_FILES['zdjecia']) && !empty($_FILES['zdjecia']) && ){
-//     $liczba_zdjec = count($_FILES["zdjecia"]['name']);
-//     $zdjecia_array = '';
-//     for($i=0; $i < $liczba_zdjec; $i++){
-//         if(!empty($_FILES["zdjecia"]['name'][$i]) && isset($_FILES["zdjecia"]['name'][$i])){
-//             $rozszerzenie = mime_content_type($_FILES["zdjecia"]["tmp_name"][$i]);
+if(isset($_FILES['zdjecia']) && !empty($_FILES['zdjecia'])){
+    $liczba_zdjec = count($_FILES["zdjecia"]['name']);
+    $zdjecia_array = '';
+    for($i=0; $i < $liczba_zdjec; $i++){
+        if(!empty($_FILES["zdjecia"]['name'][$i]) && isset($_FILES["zdjecia"]['name'][$i])){
+            $rozszerzenie = mime_content_type($_FILES["zdjecia"]["tmp_name"][$i]);
     
-//         if($rozszerzenie == "image/png" || $rozszerzenie == "image/jpg" || $rozszerzenie == "image/jpeg" || $rozszerzenie == "image/webp"){
+        if($rozszerzenie == "image/png" || $rozszerzenie == "image/jpg" || $rozszerzenie == "image/jpeg" || $rozszerzenie == "image/webp"){
     
-//     //POST
-//         if(is_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i])){
-//     //nowa nazwa z datą
-//             $zdjecie_bez_roz = explode(".",$_FILES["zdjecia"]['name'][$i]);
-//             $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . "-$i" . '.' . $zdjecie_bez_roz[1];
-//             $sciezka = "zdjecia_produktow/";
-//             $sciezka .= $nowa_nazwa_zdjecia;
-//             if($i == 0){ $zdjecia_array .= $nowa_nazwa_zdjecia; }
-//             else{ $zdjecia_array .= "," . $nowa_nazwa_zdjecia; }
+    //POST
+        if(is_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i])){
+    //nowa nazwa z datą
+            $zdjecie_bez_roz = explode(".",$_FILES["zdjecia"]['name'][$i]);
+            $nowa_nazwa_zdjecia = date("Y-m-d-H-i-s") . "-$i" . '.' . $zdjecie_bez_roz[1];
+            $sciezka = "zdjecia_produktow/";
+            $sciezka .= $nowa_nazwa_zdjecia;
+            if($i == 0){ $zdjecia_array .= $nowa_nazwa_zdjecia; }
+            else{ $zdjecia_array .= "," . $nowa_nazwa_zdjecia; }
     
-//     //dodanie zdjecia do folderu
-//             move_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i], $sciezka);
-//         }   
-//         }
-//         }
-//     }
+    //dodanie zdjecia do folderu
+            move_uploaded_file($_FILES["zdjecia"]['tmp_name'][$i], $sciezka);
 
-//     //lista zdjec
-//     $zdjecia_string='';
-//     $zdjecia_array = explode(',', $zdjecia_array);
-//     for($i=0; $i < sizeof($zdjecia_array); $i++){
-//         if($i== (sizeof($zdjecia_array)-1)){
-//             $zdjecia_string .= $zdjecia_array[$i];
-//         }
-//         else{
-//             $zdjecia_string .= $zdjecia_array[$i]. ",";
-//         }
-//     }
-//     // dodanie zdjec do bazy
-//     $aktu_produktu = $conn->prepare('UPDATE produkty SET zdjecie = ? WHERE id = ?');
-//     $aktu_produktu -> execute([$zdjecia_string, $id]);
-//     if($aktu_produktu -> rowCount() == 0){
-//         $_SESSION['error'] = "Nie zaaktualizowano";
-//     }
-//     else{
-//         $_SESSION['success'] = "Zaaktualizowano produkt";
-//     }
-// }
-
+                //lista zdjec
+            $zdjecia_string='';
+            $zdjecia_array = explode(',', $zdjecia_array);
+            for($i=0; $i < sizeof($zdjecia_array); $i++){
+                if($i== (sizeof($zdjecia_array)-1)){
+                    $zdjecia_string .= $zdjecia_array[$i];
+                }
+                else{
+                    $zdjecia_string .= $zdjecia_array[$i]. ",";
+                }
+            }
+            // dodanie zdjec do bazy
+            $aktu_produktu = $conn->prepare('UPDATE produkty SET zdjecie = ? WHERE id = ?');
+            $aktu_produktu -> execute([$zdjecia_string, $id]);
+            if($aktu_produktu -> rowCount() == 0){
+                $_SESSION['error'] = "Nie zaaktualizowano";
+            }
+            else{
+                $_SESSION['success'] = "Zaaktualizowano produkt";
+            }
+        }   
+        }
+        }
+    }
+}
 $conn = null;
 header("location: panel.php");
 
