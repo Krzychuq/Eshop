@@ -1,1 +1,0 @@
-Mały projekt sklepu internetowego
