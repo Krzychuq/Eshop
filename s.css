@@ -53,12 +53,29 @@ body{
 }
 
 /* ID's */
-#zmien_dane_div, #panel{
+#panel{
+    background-color: #72187e;
+    text-align: center;
+    width: 100%;
+}
+#panel_button{
+    background-color: transparent;
+    color: #f3f3f3;
+    font-size: 1rem;
+    transition: 0.7s;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#zmien_dane_div{
     margin-top: 10px;
     text-align: center;
     padding: 10px;
     width: 100%;
+    grid-area: 2 / 1 / 3 / 3; 
 }
+
 #zmien_dane_button{
     background-color: transparent;
     border-top: transparent 1px solid;
@@ -432,16 +449,66 @@ body{
 }
 
 .wrap-konta{
-    background-color: #ffffff71;
-    width: fit-content;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: 1fr 0.2fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 30px;
+    background-color: #fcfcfc;
+    width: 95%;
+    height: fit-content;
     margin-left: auto;
     margin-right: auto;   
     padding: 50px;
     border-radius: 5px;
 }
 
+.aktualne_zamowienie_wglad{
+    border: 2px solid #111111;
+    background-color: #f9f9f9;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 10px;
+    grid-area: 1 / 2 / 2 / 3;
+    width: 100%;
+    transition: 1s;
+}
+ .aktualne_zamowienie_wglad:hover{
+   transition: 1s;
+   border-top-left-radius: 0px;
+   border-bottom-right-radius: 0px;
+   border-top-right-radius: 20px;
+   border-bottom-left-radius: 20px;
+ }
+  .aktualne_zamowienie_wglad a{ 
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.5fr 2fr;
+    grid-area: 1 / 1 / 2 / 3; 
+    text-decoration: none; color: #111111;
+}
+    .first-aktualne-zamowienie{   
+        grid-area: 1 / 1 / 2 / 3;
+        padding: 10px;
+    }
+    .secound-aktualne-zamowienie{
+        grid-area: 2 / 1 / 3 / 2;
+        padding: 10px;
+    }
+    .third-aktualne-zamowienie{
+        grid-area: 3 / 1 / 4 / 2;  
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        padding: 5px;
+    }
+
+
 .profil{
-    margin-left: auto;
+    grid-area: 1 / 1 / 2 / 2;
+}
+.mailkonta{
+    font-weight: bold;
     margin-right: auto;
     width: fit-content;
     display: flex;
@@ -449,14 +516,10 @@ body{
     gap: 15px;
 }
 .info_profilu{
-    margin-left: auto;
-    margin-right: auto;
     min-width: 200px;
     width: fit-content;
 }
-    .info_profilu p {padding: 5px;}
-    .info_profilu p:nth-child(even) {background-color: #111111; color: #eaeaea;}
-    .info_profilu p:nth-child(odd) {background-color: #f8f8f8; color: #111111;}
+    .info_profilu p {padding: 5px; border-bottom: #47474728 solid 1px; color: #111111;}
 
 .form_konta{
     display: flex;
@@ -1106,7 +1169,7 @@ body{
 
 
 
-/* loading */
+/* loading screen */
 .lds-ellipsis {
     display: inline-block;
     position: absolute;

@@ -28,16 +28,17 @@ include_once("header.php");
     <p class="showcase_tytul">Nowości</p>
     <div class="showcase_flex">
 <?php
-$pyt_produkt = $conn -> query("SELECT nazwa, cena, zdjecie,link FROM produkty LIMIT 3");
+$pyt_produkt = $conn -> query("SELECT nazwa, cena, zdjecie, indeks_produktu FROM produkty LIMIT 3");
 
-while($linia = $pyt_produkt->fetch()){
-    $nazwa = ucfirst($linia["nazwa"]);
+while($wynik = $pyt_produkt->fetch()){
+    $nazwa = ucfirst($wynik["nazwa"]);
+    $zdjecie = explode(",",$wynik["zdjecie"]);
+    include("link_creator.php");
     echo "<div>";
-    echo "<a style='color: black; text-decoration:none;' href=$linia[link]>";
-    $zdjecie = explode(",",$linia["zdjecie"]);
+    echo "<a style='color: black; text-decoration:none;' href=$link>";
     echo "<img src='zdjecia_produktow/$zdjecie[0]'>";
     echo "<p class='showcase_flex_nazwa'>$nazwa</p>";
-    echo "<p class='showcase_flex_cena'>$linia[cena] zł</p>";
+    echo "<p class='showcase_flex_cena'>$wynik[cena] zł</p>";
     echo "</a>";
     echo "</div>";
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 19, 2024 at 05:18 PM
+-- Generation Time: Aug 30, 2024 at 02:53 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -30,9 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `dane_konta` (
   `id` int(11) NOT NULL,
   `id_loginu` int(11) NOT NULL,
+  `NIP` char(10) DEFAULT NULL,
   `imie` varchar(60) DEFAULT NULL,
   `nazwisko` varchar(80) NOT NULL,
   `ulica` varchar(255) DEFAULT NULL,
+  `nr_domu` smallint(6) DEFAULT NULL,
+  `nr_mieszkania` smallint(6) DEFAULT NULL,
   `nr_tel` varchar(20) DEFAULT NULL,
   `miasto` varchar(100) DEFAULT NULL,
   `kod_pocztowy` varchar(6) DEFAULT NULL,
@@ -44,8 +47,8 @@ CREATE TABLE `dane_konta` (
 -- Dumping data for table `dane_konta`
 --
 
-INSERT INTO `dane_konta` (`id`, `id_loginu`, `imie`, `nazwisko`, `ulica`, `nr_tel`, `miasto`, `kod_pocztowy`, `kraj`, `dostep`) VALUES
-(1, 1, 'Jan', 'Kowalski', 'Warszawska 3', '541232115', 'Krotoszyn', '64-321', 'Polska', 1);
+INSERT INTO `dane_konta` (`id`, `id_loginu`, `NIP`, `imie`, `nazwisko`, `ulica`, `nr_domu`, `nr_mieszkania`, `nr_tel`, `miasto`, `kod_pocztowy`, `kraj`, `dostep`) VALUES
+(1, 1, NULL, 'Jan', 'Kowalski', 'Warszawska', 42, 2, '541232115', 'Bydgoszcz', '64-321', 'Polska', 1);
 
 -- --------------------------------------------------------
 
@@ -56,7 +59,7 @@ INSERT INTO `dane_konta` (`id`, `id_loginu`, `imie`, `nazwisko`, `ulica`, `nr_te
 CREATE TABLE `firmy_kurierskie` (
   `id` tinyint(6) NOT NULL,
   `nazwa_firmy` varchar(70) NOT NULL,
-  `cena` smallint(6) NOT NULL,
+  `cena` float NOT NULL,
   `sredni_czas_wysylki` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -65,9 +68,9 @@ CREATE TABLE `firmy_kurierskie` (
 --
 
 INSERT INTO `firmy_kurierskie` (`id`, `nazwa_firmy`, `cena`, `sredni_czas_wysylki`) VALUES
-(1, 'DHL', 13, '2-3'),
-(2, 'Poczta Polska', 13, '2-4'),
-(3, 'Inpost paczkomat', 11, '1-3');
+(1, 'DHL', 13.99, '1-3'),
+(2, 'Poczta Polska', 10.99, '2-4'),
+(3, 'Inpost paczkomat', 9.99, '1-3');
 
 -- --------------------------------------------------------
 
@@ -111,7 +114,7 @@ CREATE TABLE `loginy` (
 --
 
 INSERT INTO `loginy` (`id`, `login`, `pass`, `data_rejestru`, `ostatnie_logowanie`, `token_hasla`, `data_zmiany_hasla`) VALUES
-(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2024-06-22 08:53:25', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09');
+(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2024-08-30 08:11:28', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09');
 
 -- --------------------------------------------------------
 
@@ -127,22 +130,21 @@ CREATE TABLE `produkty` (
   `rodzaj` varchar(50) NOT NULL,
   `opis` text NOT NULL,
   `zdjecie` varchar(250) DEFAULT NULL,
-  `indeks_produktu` varchar(8) DEFAULT NULL,
-  `link` varchar(255) DEFAULT NULL
+  `indeks_produktu` varchar(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Dumping data for table `produkty`
 --
 
-INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`, `link`) VALUES
-(52, 'Product1', 3213.00, 15, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', '2024-06-03-23-37-19-0.jpg', '757012d', 'http://localhost/forum/produkty/product1-757012d.php'),
-(54, 'Product2', 300.99, 23, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', '2024-06-03-23-38-39-0.jpg', '966862i', 'http://localhost/forum/produkty/product2-966862i.php'),
-(55, 'Product3', 154.99, 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', '2024-06-03-23-45-08-0.jpg', '98554t', 'http://localhost/forum/produkty/product3-98554t.php'),
-(57, 'Product4', 180.00, 13, '7', 'Czarny męski plecak o prostej, klasycznej formie. Idealny na co dzień: do szkoły, na uczelnię, do pracy.\r\n\r\ngłówna komora oraz zewnętrzna kieszeń zapinane na suwaki\r\ndługie szelki z możliwością regulacji\r\nwewnętrzna kieszeń na laptopa\r\nniewielka naszywka z przodu', '2024-06-03-23-40-49-0.png', '996025d', 'http://localhost/forum/produkty/product4-996025d.php'),
-(58, 'Product5', 70.00, 25, '2', 'KOSZULKA OVERSIZE STRONG POINT   \r\n\r\nMamy dla Was koszulkę idealną. Luźny, najmodniejszy krój, perfekcyjna długość, przewiewna bawełna, genialna dzianina. Będziecie zachwycone!  \r\n\r\nDelikatne, wyszywane logo w kolorze produktu sprawia, że koszulkę możecie nosić do niemal każdej stylizacji', '2024-06-03-23-43-43-0.jpg', '327894f', 'http://localhost/forum/produkty/product5-327894f.php'),
-(62, 'Product6', 890.00, 14, '10', 'cfy', '2024-06-03-23-44-26-0.jpg', '513819u', 'http://localhost/forum/produkty/product6-513819u.php'),
-(63, 'Product7', 234.00, 22, '11', 'Ładna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreom', '2024-06-03-23-40-33-0.png', '272335o', 'http://localhost/forum/produkty/product7-272335o.php');
+INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`) VALUES
+(52, 'Product1', 3213.00, 15, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', '2024-06-03-23-37-19-0.jpg', '757012d'),
+(54, 'Product2', 300.99, 23, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', '2024-06-03-23-38-39-0.jpg', '966862i'),
+(55, 'Product3', 154.99, 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', '2024-06-03-23-45-08-0.jpg', '98554t'),
+(57, 'Product4', 180.00, 13, '7', 'Czarny męski plecak o prostej, klasycznej formie. Idealny na co dzień: do szkoły, na uczelnię, do pracy.\r\n\r\ngłówna komora oraz zewnętrzna kieszeń zapinane na suwaki\r\ndługie szelki z możliwością regulacji\r\nwewnętrzna kieszeń na laptopa\r\nniewielka naszywka z przodu', '2024-06-03-23-40-49-0.png', '996025d'),
+(58, 'Product5', 70.00, 25, '2', 'KOSZULKA OVERSIZE STRONG POINT   \r\n\r\nMamy dla Was koszulkę idealną. Luźny, najmodniejszy krój, perfekcyjna długość, przewiewna bawełna, genialna dzianina. Będziecie zachwycone!  \r\n\r\nDelikatne, wyszywane logo w kolorze produktu sprawia, że koszulkę możecie nosić do niemal każdej stylizacji', '2024-06-03-23-43-43-0.jpg', '327894f'),
+(62, 'Product6', 890.00, 14, '10', 'cfy', '2024-06-03-23-44-26-0.jpg', '513819u'),
+(63, 'Product7', 234.00, 22, '11', 'Ładna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreomŁadna lorem lreom', '2024-06-03-23-40-33-0.png', '272335o');
 
 -- --------------------------------------------------------
 

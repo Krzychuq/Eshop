@@ -56,8 +56,8 @@ session_start();
         <?php
             $pyt_rodz = $conn->query("SELECT * FROM rodzaj_produktu")->fetchAll();
 
-            foreach($pyt_rodz as $linia){
-                echo "<option value =". $linia["id"] .">" . $linia["nazwa"] . "</option>";
+            foreach($pyt_rodz as $wynik){
+                echo "<option value =". $wynik["id"] .">" . $wynik["nazwa"] . "</option>";
             }    
         ?>
         </select>
@@ -97,8 +97,8 @@ session_start();
         <option value="">ID</option>
         <?php
             $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
-            foreach($pyt_produkt as $linia){
-                echo "<option value =". $linia["id"] .">" . $linia["id"] . "</option>";
+            foreach($pyt_produkt as $wynik){
+                echo "<option value =". $wynik["id"] .">" . $wynik["id"] . "</option>";
             }  
         ?>
 
@@ -114,8 +114,8 @@ session_start();
             <option value="">ID</option>
             <?php
                 $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
-                foreach($pyt_produkt as $linia){
-                    echo "<option value =". $linia["id"] .">" . $linia["id"] . "</option>";
+                foreach($pyt_produkt as $wynik){
+                    echo "<option value =". $wynik["id"] .">" . $wynik["id"] . "</option>";
                 }  
             ?>
 
@@ -143,8 +143,8 @@ session_start();
         <option value="">ID</option>
         <?php
             $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
-            foreach($pyt_produkt as $linia){
-                echo "<option value =". $linia["id"] .">" . $linia["id"] . "</option>";
+            foreach($pyt_produkt as $wynik){
+                echo "<option value =". $wynik["id"] .">" . $wynik["id"] . "</option>";
             }  
         ?>
 
@@ -175,8 +175,8 @@ session_start();
         <option value="">ID</option>
         <?php
             $pyt_produkt = $conn->query("SELECT * FROM produkty")->fetchAll();
-            foreach($pyt_produkt as $linia){
-                echo "<option value =". $linia["id"] .">" . $linia["id"] . "</option>";
+            foreach($pyt_produkt as $wynik){
+                echo "<option value =". $wynik["id"] .">" . $wynik["id"] . "</option>";
             }  
         ?>
 
@@ -186,8 +186,8 @@ session_start();
         <select name="rodzaj">
             <option value="">Rodzaj</option>
         <?php
-            foreach($pyt_rodz as $linia){
-                echo "<option value =". $linia["id"] .">" . $linia["nazwa"] . "</option>";
+            foreach($pyt_rodz as $wynik){
+                echo "<option value =". $wynik["id"] .">" . $wynik["nazwa"] . "</option>";
             }    
         ?>
         </select>
@@ -237,24 +237,25 @@ session_start();
         </tr>
 <?php
 $licznik_zdjec = 0;
-foreach($pyt_produkt as $linia){  
+foreach($pyt_produkt as $wynik){  
     $pyt_rozmiar = $conn->prepare("SELECT rozmiar, ilosc FROM rozmiary_produktow WHERE id_produktu = ?");
-    $pyt_rozmiar->execute([$linia["id"]]);
+    $pyt_rozmiar->execute([$wynik["id"]]);
+    include("link_creator.php");
     echo "<tr>";
-    echo "<td>" . $linia["id"] . "</td>";
-    echo "<td>" . $linia["indeks_produktu"] . "</td>";
-    echo "<td>" . "<a style='color: green; text-decoration:underline dashed;' href=" .$linia["link"].">".$linia["nazwa"] . "</a></td>";
-    echo "<td>" . $linia["cena"] . "</td>";
-    echo "<td>" . $linia["ilosc"] . "</td>";
-    echo "<td>" . $linia["rodzaj"] . "</td>";
+    echo "<td class='panel_id'>" . $wynik["id"] . "</td>";
+    echo "<td class='panel_indeks'>" . $wynik["indeks_produktu"] . "</td>";
+    echo "<td class='panel_nazwa'>" . "<a style='color: green; text-decoration:underline dashed;' href=" .$link.">".$wynik["nazwa"] . "</a></td>";
+    echo "<td class='panel_cena'>" . $wynik["cena"] . "</td>";
+    echo "<td class='panel_ilosc'>" . $wynik["ilosc"] . "</td>";
+    echo "<td class='panel_rodzaj'>" . $wynik["rodzaj"] . "</td>";
     echo "<td>";
     while($kolejny = $pyt_rozmiar->fetch()){
         echo  " | ".$kolejny['rozmiar'] ."-". $kolejny['ilosc'] ." | ";
     }
     echo "</td>";
 // Liczy zdjecia
-    if($linia['zdjecie'] != ""){
-        $zdjecie = explode(",",$linia['zdjecie']);
+    if($wynik['zdjecie'] != ""){
+        $zdjecie = explode(",",$wynik['zdjecie']);
         $licznik_zdjec = count($zdjecie);
     }
     else{$licznik_zdjec = 0;}
@@ -263,7 +264,7 @@ foreach($pyt_produkt as $linia){
         echo "<td>" . "Brak" . "</td>";
     }
     else{
-        echo "<td>" . $licznik_zdjec . "</td>";
+        echo "<td class='panel_zdjecia'>" . $licznik_zdjec . "</td>";
     }
     $licznik_zdjec = 0;
     echo "</tr>";

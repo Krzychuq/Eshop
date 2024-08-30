@@ -1,11 +1,41 @@
 <?php
 session_start();
-        if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email']) ){
-            //nic
+    if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email']) ){
+        
+        include_once("laczenieZbaza.php");
+        $mail = $_SESSION['email'];
+        //identyfikacja
+        $mail = $_SESSION['email'];
+        $pyt_o_id = $conn->prepare("SELECT id FROM loginy WHERE login like ?");
+        $pyt_o_id -> execute([$mail]);
+        $wykonanie = $pyt_o_id->fetch(PDO::FETCH_ASSOC);
+        $id = $wykonanie['id'];
+
+        //dane konta
+        $pyt_o_dane = $conn->prepare("SELECT * FROM dane_konta WHERE id_loginu = ?");
+        $pyt_o_dane -> execute([$id]);
+        $wykonanie = $pyt_o_dane->fetchAll();
+
+        foreach ($wykonanie as $wynik){
+            $imie = $wynik['imie'];
+            $nazwisko = $wynik['nazwisko'];
+            $nip = $wynik['NIP'];
+            $tel = $wynik['nr_tel'];
+            $miasto = $wynik['miasto'];
+            $ulica = $wynik['ulica'];
+            $nr_domu = $wynik['nr_domu'];
+            $nr_mieszkania = $wynik['nr_mieszkania'];
+            $kod_pocztowy = $wynik['kod_pocztowy'];
+            $kraj = $wynik['kraj'];
+            $dostep = $wynik['dostep'];
         }
-        else{
-            header("location: index.php");
-        }
+        $conn = null;
+    }
+    else{
+        header("location: index.php");
+    }
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -18,26 +48,36 @@ session_start();
 <body>
 <?php 
 include_once("header.php");
-include_once("laczenieZbaza.php");
 ?>
 <div class="contener">
-
 <form action="zapis_danych_konta.php" class="form_konta" method="POST">
 
+    <label for="nip">NIP: </label>
+    <input type="text" pattern="[0-9]{10}" name="nip" placeholder="<?php echo $nip; ?>">
+
     <label for="imie">Imie: </label>
-    <input type="text" maxlength="50" name="imie" placeholder="..." >
+    <input type="text" maxlength="100" name="imie" placeholder="<?php echo $imie; ?>" >
 
     <label for="nazwisko">Nazwisko: </label>
-    <input type="text" name="nazwisko">
-
-    <label for="kod_pocztowy">Kod pocztowy: </label>
-    <input type="text" name="kod_pocztowy">
+    <input type="text" maxlength="100" name="nazwisko" placeholder="<?php echo $nazwisko; ?>">
 
     <label for="tel">Podaj numer telefonu: </label>
-    <input type="tel" pattern="[0-9]{9}" maxlength="9" placeholder="np. 123456789" name="tel">
+    <input type="tel" pattern="[0-9]{9}" maxlength="9" name="tel" placeholder="<?php echo $tel; ?>">
+
+    <label for="ulica">Ulica: </label>
+    <input type="text" maxlength="100" name="ulica" placeholder="<?php echo $ulica; ?>" >
+
+    <label for="nr_domu">Nr domu: </label>
+    <input type="text" maxlength="6" name="nr_domu" placeholder="<?php echo $nr_domu; ?>" >
+
+    <label for="nr_mieszkania">Nr mieszkania: </label>
+    <input type="text" maxlength="6" name="nr_mieszkania" placeholder="<?php echo $nr_mieszkania; ?>" >
+
+    <label for="kod_pocztowy">Kod pocztowy: </label>
+    <input type="text" name="kod_pocztowy" maxlenght="6" placeholder="<?php echo $kod_pocztowy; ?>">
 
     <label for="miasto">Miasto: </label>
-    <input type="text" maxlength="100" name="miasto" placeholder="..." >
+    <input type="text" maxlength="100" name="miasto" placeholder="<?php echo $miasto; ?>" >
 
     <label for="kraj">Kraj: </label>
     <select type="text" maxlength="100" name="kraj">

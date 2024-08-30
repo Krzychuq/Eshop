@@ -19,17 +19,19 @@ for($i=0; $i < 6; $i++){
     else{ $lista_do_bazy .= "," . $los; }
   }
 }
-$podobne_produkty = $conn -> query("SELECT id,nazwa, cena, zdjecie,link FROM produkty WHERE id IN ($lista_do_bazy);");
+$podobne_produkty = $conn -> query("SELECT id,nazwa, cena, zdjecie, indeks_produktu FROM produkty WHERE id IN ($lista_do_bazy);");
 echo "<ul class='list_prod' style='left: 0; transition: 0.7s;'>";
-while($linia = $podobne_produkty->fetch()){
-    $nazwa = ucfirst($linia["nazwa"]);
-    $zdjecia_array = explode(",", $linia["zdjecie"]);
-    $link = "../zdjecia_produktow/" . $zdjecia_array[0];
+while($wynik = $podobne_produkty->fetch()){
+    $nazwa = ucfirst($wynik["nazwa"]);
+    $zdjecia_array = explode(",", $wynik["zdjecie"]);
+    $linkZdj = "../zdjecia_produktow/" . $zdjecia_array[0];
+    include("link_creator.php");
+
     echo "<li>";
-    echo "<a style='color: black; text-decoration:none;' href='$linia[link]'>";
-    echo "<img src=$link class='podobny_produkt_zdjecie' alt='podobny produkt'>";
+    echo "<a style='color: black; text-decoration:none;' href='$link'>";
+    echo "<img src=$linkZdj class='podobny_produkt_zdjecie' alt='podobny produkt'>";
     echo "<p style='font-size: 1.2rem;'>$nazwa</p>";
-    echo "<p style='font-size: 0.9rem; font-weight:bold;'>$linia[cena] zł</p>";
+    echo "<p style='font-size: 0.9rem; font-weight:bold;'>$wynik[cena] zł</p>";
     echo "</a>";
     echo "</li>";
 }

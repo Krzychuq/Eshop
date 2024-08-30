@@ -42,15 +42,15 @@ if(!empty($_SESSION['koszyk'])){
     $rozmiar = $_SESSION['koszyk'][$liczba_produktow][1];
     $sztuk_zaznaczone = $_SESSION['koszyk'][$liczba_produktow][2];
     $limit = $_SESSION['koszyk'][$liczba_produktow][3];
-    $pyt = $conn->prepare('SELECT id, nazwa, cena, zdjecie, link FROM produkty WHERE indeks_produktu like ?');
+    $pyt = $conn->prepare('SELECT id, nazwa, cena, zdjecie, indeks_produktu FROM produkty WHERE indeks_produktu like ?');
       $pyt -> execute([$indeks]);
       $results = $pyt->fetchAll();
-      foreach ($results as $linia){
-        $id = $linia['id'];
-        $nazwa = $linia['nazwa'];
-        $cena = $linia['cena'];
-        $zdjecie = explode(",",$linia["zdjecie"]);
-        $link = $linia['link'];
+      foreach ($results as $wynik){
+        $id = $wynik['id'];
+        $nazwa = $wynik['nazwa'];
+        $cena = $wynik['cena'];
+        $zdjecie = explode(",",$wynik["zdjecie"]);
+        include("link_creator.php");
       }
       $pyt_rozmiar = $conn -> prepare('SELECT ilosc FROM rozmiary_produktow WHERE id_produktu = ? and rozmiar like ?');
       $pyt_rozmiar -> execute([$id, $rozmiar]);
