@@ -3,7 +3,7 @@ include_once('laczenieZbaza.php');
 //slowo do bazy
 $slowo = "%". $_REQUEST["q"] . "%";
 //pytanie o produkty
-$szukaj1 = $conn->prepare('SELECT nazwa, cena, zdjecie, link, indeks_produktu FROM produkty WHERE nazwa like ? LIMIT 10');
+$szukaj1 = $conn->prepare('SELECT nazwa, cena, zdjecie, indeks_produktu FROM produkty WHERE nazwa like ? LIMIT 10');
 $szukaj1 -> execute([$slowo]);
 //slowo klucz
 $q = $_REQUEST["q"];

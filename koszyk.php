@@ -32,9 +32,6 @@ if(!empty($_SESSION['koszyk'])){
   echo "<div class='koszyk'>
   <div class='koszyk_naglowek' id='koszyk_naglowek1'>
     <span>Koszyk</span>
-  </div>
-  <div class='koszyk_naglowek' id='koszyk_naglowek2'>
-    <span>Podsumowanie</span>
   </div>";
   echo "<div class='produkty_koszyk'>";
   for($liczba_produktow=0; $liczba_produktow < sizeof($_SESSION['koszyk']); $liczba_produktow++){
@@ -97,9 +94,9 @@ if(!empty($_SESSION['koszyk'])){
   echo "</div>";
   //elementy koszyku
   echo "<div class='koszyk_podsumowanie'>
-  <form action='' method='POST'>
-    <label for='rabat'><s>Kod rabatowy</s></label>
-    <input type='text' name='rabat' placeholder='!In progress!'>
+  <form action='zamowienie_klient.php' method='POST'>
+    <label for='rabat'>Kod rabatowy</label>
+    <input type='text' name='rabat' placeholder='Wpisz kod twardzielu'>
     <br>
     <label for='kurier'>Dostawa</label>
     <div class='lista_kurierow'>
@@ -124,7 +121,7 @@ if(!empty($_SESSION['koszyk'])){
    <p>Łączny koszt: <span id='suma'>$podsumowanie_kosztow</span> zł</p>
     <input type='hidden' id='koszt_calkowity' name='suma' value='$podsumowanie_kosztow'>
     <div class='kup' style='text-align: center;'>
-      <button class='button_podsumowanie'  type='submit' style='margin-top: 5%; width: 90%;'  disabled>Przejdź dalej</button>
+      <button class='button_podsumowanie' type='submit' disabled>Przejdź dalej</button>
     </div>
   </div>
   </form>

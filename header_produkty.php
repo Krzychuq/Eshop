@@ -1,6 +1,11 @@
 <head>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
+<?php
+    if(isset($_SESSION['dostep']) && $_SESSION['dostep'] > 0){
+        echo "<div id='panel'><a href='panel.php' id='zmien_dane'><button id='panel_button'>Panel</button></a></div>";
+    }
+?>
 <header class="naglowek">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="wyszukiwarka_kopia.js"></script>
@@ -20,7 +25,7 @@
 <div class='wyloguj'>
 <?php
     if( !isset( $_SESSION['email'] ) && empty( $_SESSION['email'] ) ){
-        echo "<a href='../logowanie.php' id='log_in'><img src='../svg/log_in.svg' width='36px' height='36px' alt='zaloguj'></a>";
+        echo "<a href='../logowanie.php' title='Logowanie' id='log_in'><img src='../svg/log_in.svg' width='36px' height='36px' alt='zaloguj'></a>";
     }
 
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){

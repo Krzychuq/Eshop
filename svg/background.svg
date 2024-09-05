@@ -1,0 +1,15 @@
+<svg width="2400" height="2400" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <rect stroke="null" id="svg_1" height="2389.99986" width="2399.99996" y="-2.9999" x="-0.00003" fill="url(#svg_3)"/>
+ </g>
+ <defs>
+  <linearGradient spreadMethod="pad" y2="0" x2="1" y1="0" x1="0" id="svg_3">
+   <stop offset="0.11328" stop-opacity="0.98438" stop-color="#ffeb0f"/>
+   <stop offset="1" stop-opacity="0.97266" stop-color="#ffb014"/>
+   <stop offset="1" stop-opacity="0.99609" stop-color="#ffff00"/>
+   <stop offset="NaN" stop-opacity="0" stop-color="0"/>
+   <stop offset="NaN" stop-opacity="0" stop-color="0"/>
+  </linearGradient>
+ </defs>
+</svg>

@@ -1,7 +1,8 @@
 :root{
-    --kolor_body: #fbc936;
+    --kolor_body: url("svg/background.svg");
     --kolor_produkty_glowna: #f0f0f0;
     --kolor_paskow: #111111;
+    --kolorPolaInput: #1d1d1d;
 }
 /* key elements */
 ::-webkit-scrollbar {
@@ -69,37 +70,30 @@ body{
 }
 
 #zmien_dane_div{
-    margin-top: 10px;
+    margin-top: 40px;
     text-align: center;
     padding: 10px;
     width: 100%;
-    grid-area: 2 / 1 / 3 / 3; 
+    grid-area: 4 / 1 / 5 / 2;
 }
 
 #zmien_dane_button{
-    background-color: transparent;
-    border-top: transparent 1px solid;
-    border-bottom: transparent 1px solid;
-    border-left: 1px solid #0e0e0e;
-    border-right: 1px solid #0e0e0e;
+    background-color: #fbc936;
+    border: 2px solid #070707;
+    box-shadow: 3px 3px 1px #696464;
+    border-radius: 3px;
     padding: 6px;
-    width: 40%;
+    width: 60%;
     transition: 0.7s;
     font-size: 20px;
-    color: black;
+    color: #131313;
     text-decoration: none;
     cursor: pointer;
+    transition: 0.5s ease;
 }
     #zmien_dane_button:hover{
-        transition: 0.6s;
-        border-left:transparent 1px solid;
-        border-right: transparent 1px solid;
-        border-bottom: 1px solid #0e0e0e;
-        border-top: 1px solid #0e0e0e;
-    }
-    #zmien_dane_button:active{
-        transform: scale(0.9);
-        transition: 0.5s ease;
+        transform: scale(1.1);
+        transition: 0.2s;
     }
 #wymagania_hasla{
     display: inline-block;
@@ -366,7 +360,6 @@ body{
     text-align: center;
     background-color: #f5f5f5;
     border-radius: 10px;
-    border: none;
     transition: 1.1s;
     margin-left: auto;
     margin-right: auto;
@@ -449,11 +442,7 @@ body{
 }
 
 .wrap-konta{
-    display: grid;
-    grid-template-columns: 0.5fr 1fr;
-    grid-template-rows: 1fr 0.2fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 30px;
+    display: block;
     background-color: #fcfcfc;
     width: 95%;
     height: fit-content;
@@ -463,18 +452,19 @@ body{
     border-radius: 5px;
 }
 
+
 .aktualne_zamowienie_wglad{
-    border: 2px solid #111111;
-    background-color: #f9f9f9;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border: 3px solid #111111;
+    background-color: #fafafa;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
     padding: 10px;
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 1 / 2 / 5 / 3;
     width: 100%;
-    transition: 1s;
+    transition: 0.5s;
 }
  .aktualne_zamowienie_wglad:hover{
-   transition: 1s;
+   transition: 0.6s;
    border-top-left-radius: 0px;
    border-bottom-right-radius: 0px;
    border-top-right-radius: 20px;
@@ -505,9 +495,17 @@ body{
 
 
 .profil{
-    grid-area: 1 / 1 / 2 / 2;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: 0.8fr repeat(2, 1fr) 0.3fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 }
-.mailkonta{
+    .profil #div1{ grid-area: 1 / 1 / 2 / 2; }
+    .profil #div2{ grid-area: 2 / 1 / 3 / 2; }
+    .profil #div3{ grid-area: 3 / 1 / 4 / 2; }
+
+.headerkonta{
     font-weight: bold;
     margin-right: auto;
     width: fit-content;
@@ -522,17 +520,78 @@ body{
     .info_profilu p {padding: 5px; border-bottom: #47474728 solid 1px; color: #111111;}
 
 .form_konta{
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff60;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 0.3fr 1fr 0.2fr;
+    grid-row-gap: 0;
+    background-color: var(--kolorPolaInput);
     border-radius: 7px;
-    color: #111111;
-    padding: 20px;
-    width: fit-content;
+    color: #f9f9f9;
+    padding: 30px;
+    width: 95%;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
-    gap: 4px;
 }
+.form_konta div{
+    width: 60%; 
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form_konta div:nth-child(1){ grid-area: 1 / 1 / 2 / 3; height: fit-content; width: 80%; margin-bottom: 30px;}
+    .form_konta div:nth-child(1) section:nth-child(2){ display: flex; flex-direction: row; gap: 30px; width:80%; margin-left: 0; margin-right: auto;} 
+    .form_konta div:nth-child(1) section:nth-child(2) input{ width: 100%; }
+.form_konta div:nth-child(2){ grid-area: 2 / 1 / 3 / 2; }
+.form_konta div:nth-child(3){ grid-area: 2 / 2 / 3 / 3; }
+.form_konta div:nth-child(4){ grid-area: 3 / 1 / 4 / 3; margin-left: auto; margin-right: auto; }
+ .form_konta div select{
+    width: 60%;
+    border-radius: 4px;
+ }
+ .form_konta div button{
+    width: 200px;
+    background-color: #fbc936;
+    color: #131313;
+    border-radius: 3px;
+    border: 2px solid #070707;
+    box-shadow: 3px 3px 1px #696464;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    transition: 1s;
+    margin-top: 20px;
+ }
+    .form_konta div button:hover{
+        transform: scale(1.1);
+        border-radius: 20px;
+        transition: 0.5s;
+    }
+    .form_konta div button:active{transform: scale(0.8);}
+ .form_konta div input, .form_konta div select{
+    width: 80%;
+    background: var(--kolorPolaInput);
+    color: #f8f8f8;
+    border: none;
+    border-bottom: 2px solid #f8f8f8;
+    outline: none;
+
+ }
+ /* animacja bordera input */
+.form_konta div input:focus, .form_konta div select:focus, .menu2:focus{ --angle: 0deg; border-image: linear-gradient(var(--angle), rgb(248, 204, 8), rgb(185, 8, 255)) 1;
+    animation: 2.5s rotate linear infinite;}
+    @keyframes rotate {
+        to {
+          --angle: 360deg;
+        }
+    }
+    @property --angle {
+        syntax: '<angle>';
+        initial-value: 0deg;
+        inherits: false;
+    }
 
 .footer{
     width: 100%;  
@@ -894,7 +953,6 @@ body{
     font-size: 1.1rem;
     background-color: #c4c4c4;
     color: #303030;
-    border: none;
     border-radius: 3px;
     box-shadow: 3px 3px 1px #0000004b;
     cursor: pointer;
@@ -1087,8 +1145,7 @@ body{
     grid-template-columns: 1.7fr 1fr;
     grid-template-rows: auto 1fr; 
 }
-#koszyk_naglowek1{ grid-area: 1 / 1 / 2 / 2; }
-#koszyk_naglowek2{ grid-area: 1 / 2 / 2 / 3; }
+#koszyk_naglowek1{ grid-area: 1 / 1 / 2 / 3; }
 .koszyk_naglowek{
     position:relative;
     background-color: #151515;
@@ -1147,7 +1204,7 @@ body{
     height: max-content;
     position: sticky;
     top: 0;
-    padding: 7px;
+    padding: 10px;
 }
     .kurier_listy{
         display: flex;
@@ -1167,9 +1224,59 @@ body{
     justify-content: center;
 }
 
+.order{
+    background-color: #f8f8f8;
+    width: 99%;
+    height: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    color: #111111;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+    .order_naglowek{
+        position: relative;
+        background-color: #151515;
+        color: #f9f9f9;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        justify-content: center;
+        font-size: 1.7rem;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
 
 
-/* loading screen */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ loading screen //////////////////////////////////*/
 .lds-ellipsis {
     display: inline-block;
     position: absolute;
@@ -1219,7 +1326,7 @@ body{
 /* /loading */
 
 
-/* mobile */
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ mobile //////////////////////////////////////////////////////////////////////*/
 
 @media only screen and (max-width: 1100px) {
     .panel:last-child{margin-top: 40px;}

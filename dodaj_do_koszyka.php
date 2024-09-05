@@ -40,6 +40,7 @@ if(isset($_POST['btnsubmit'])) {
                 break;
             }
         }
+        // dodaje nowy
         if($if1 == FALSE && $if2 == FALSE){
             $push_array = array($indeks, $rozmiar, $ilosc, $limit);
             array_push($_SESSION['koszyk'], $push_array);

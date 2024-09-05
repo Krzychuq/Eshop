@@ -19,7 +19,6 @@ session_start();
         foreach ($wykonanie as $wynik){
             $imie = $wynik['imie'];
             $nazwisko = $wynik['nazwisko'];
-            $nip = $wynik['NIP'];
             $tel = $wynik['nr_tel'];
             $miasto = $wynik['miasto'];
             $ulica = $wynik['ulica'];
@@ -28,6 +27,30 @@ session_start();
             $kod_pocztowy = $wynik['kod_pocztowy'];
             $kraj = $wynik['kraj'];
             $dostep = $wynik['dostep'];
+        }
+
+        // dane faktury
+        $pyt_o_dane = $conn->prepare("SELECT * FROM dane_do_faktury WHERE id_konta = ?");
+        $pyt_o_dane -> execute([$id]);
+        $wykonanie = $pyt_o_dane->fetchAll();
+
+        foreach ($wykonanie as $wynik2){
+            $state = 1;
+            $nip = $wynik2['NIP'];
+            $nazwa_firmy = $wynik2['nazwa_firmy'];
+            $miasto_firmy = $wynik2['miasto'];
+            $adres_firmy = $wynik2['adres'];
+            $kod_pocztowy_firmy = $wynik2['kod_pocztowy'];
+            $kraj_firmy = $wynik2['kraj'];
+        }
+        if(empty($nip)){
+            $state = 0;
+            $nip = "...";
+            $nazwa_firmy = "...";
+            $miasto_firmy = "...";
+            $adres_firmy = "...";
+            $kod_pocztowy_firmy = "...";
+            $kraj_firmy = "...";
         }
         $conn = null;
     }
@@ -50,38 +73,50 @@ session_start();
 include_once("header.php");
 ?>
 <div class="contener">
-<form action="zapis_danych_konta.php" class="form_konta" method="POST">
+<form action="<?php echo "zapis_danych_konta.php?d=$state";?>" class="form_konta" method="POST">
+<div class="grid-right-column">
+    <section>
+        <h3 style="display: flex; align-items: center; gap:2px;"><img src="svg/person.svg" width="22px" height="22px">Dane konta:</h3>
+    </section>
+    <section>
+        <div>
+        <label for="imie">Imie: </label>
+        <input type="text" maxlength="100" name="imie" placeholder="<?php echo $imie; ?>" >
+        </div>
 
-    <label for="nip">NIP: </label>
-    <input type="text" pattern="[0-9]{10}" name="nip" placeholder="<?php echo $nip; ?>">
+        <div>
+        <label for="nazwisko">Nazwisko: </label>
+        <input type="text" maxlength="100" name="nazwisko" placeholder="<?php echo $nazwisko; ?>">
+        </div>
 
-    <label for="imie">Imie: </label>
-    <input type="text" maxlength="100" name="imie" placeholder="<?php echo $imie; ?>" >
-
-    <label for="nazwisko">Nazwisko: </label>
-    <input type="text" maxlength="100" name="nazwisko" placeholder="<?php echo $nazwisko; ?>">
-
-    <label for="tel">Podaj numer telefonu: </label>
-    <input type="tel" pattern="[0-9]{9}" maxlength="9" name="tel" placeholder="<?php echo $tel; ?>">
+        <div>
+        <label for="tel">Podaj numer telefonu: </label>
+        <input type="tel" pattern="[0-9]{9}" maxlength="9" minlength='9' name="tel" placeholder="<?php echo $tel; ?>">
+        </div>
+    </section>
+</div>
+<div class="grid-mid-column">
+    <h3 style="display: flex; align-items: center; gap:2px;"><img src="svg/house.svg" width="22px" height="22px">Dane do wysyłki:</h3>
 
     <label for="ulica">Ulica: </label>
     <input type="text" maxlength="100" name="ulica" placeholder="<?php echo $ulica; ?>" >
 
     <label for="nr_domu">Nr domu: </label>
-    <input type="text" maxlength="6" name="nr_domu" placeholder="<?php echo $nr_domu; ?>" >
+    <input type="text" maxlength="6"  name="nr_domu" placeholder="<?php echo $nr_domu; ?>" >
 
     <label for="nr_mieszkania">Nr mieszkania: </label>
     <input type="text" maxlength="6" name="nr_mieszkania" placeholder="<?php echo $nr_mieszkania; ?>" >
 
     <label for="kod_pocztowy">Kod pocztowy: </label>
-    <input type="text" name="kod_pocztowy" maxlenght="6" placeholder="<?php echo $kod_pocztowy; ?>">
+    <input type="text" name="kod_pocztowy" pattern="^[0-9]{2}(?:-[0-9]{3})?$" maxlength="6" minlength="6" placeholder="<?php echo $kod_pocztowy; ?>">
 
     <label for="miasto">Miasto: </label>
     <input type="text" maxlength="100" name="miasto" placeholder="<?php echo $miasto; ?>" >
 
+    <!--///////////////////////////// select kraj////////////////////////////////////////// -->
     <label for="kraj">Kraj: </label>
     <select type="text" maxlength="100" name="kraj">
-        <option value="">...</option>
+        <option value=""><?php echo $kraj; ?></option>
     <?php
     $file = fopen("kraje.txt", "r");
     while(! feof($file)) {
@@ -92,9 +127,45 @@ include_once("header.php");
     fclose($file);
     ?>
     </select><br>
+</div>
+    <!-- //////////////////////////////select kraj //////////////////////////////////////-->
+<div class="grid-left-column">
+    <h3 style="display: flex; align-items: center; gap:2px;"><img src="svg/faktura.svg" width="22px" height="22px">Dane do faktury:</h3>
+    <label for="nip">NIP: </label>
+    <input type="text" pattern="[0-9]{10}" maxlength="10" minlength='10' name="nip" placeholder="<?php echo $nip; ?>">
+
+    <label for="firma">Nazwa firmy: </label>
+    <input type="text" maxlength="150" name="firma" placeholder="<?php echo $nazwa_firmy; ?>">
+
+    <label for="adresf">Adres : </label>
+    <input type="text" maxlength="100" name="adresf" placeholder="<?php echo $adres_firmy; ?>">
+
+    <label for="kod_pocztowyf">Kod pocztowy: </label>
+    <input type="text" pattern="^[0-9]{2}(?:-[0-9]{3})?$" maxlength="6" minlength='6' name="kod_pocztowyf" placeholder="<?php echo $kod_pocztowy_firmy; ?>">
+
+    <label for="miastof">Miasto: </label>
+    <input type="text" maxlength="100" name="miastof" placeholder="<?php echo $miasto_firmy; ?>">
+
+    <label for="krajf">Kraj: </label>
+    <select type="text" maxlength="100" name="krajf">
+        <option value=""><?php echo $kraj_firmy; ?></option>
+    <?php
+    $file = fopen("kraje.txt", "r");
+    while(! feof($file)) {
+      $line = fgets($file);
+      echo "<option value=$line>$line</option>";
+    }
+    
+    fclose($file);
+    ?>
+    </select>
+</div>
+
+
+<div>
     <button type="submit" style="font-size: 19px;">Zapisz</button>
     <button type="button" style="font-size: 19px;" onclick='anuluj()'>Anuluj</button>
-
+</div>
 </form>
 
 </div>
