@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2024 at 02:53 PM
+-- Generation Time: Wrz 06, 2024 at 02:48 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -24,13 +24,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `dane_do_faktury`
+--
+
+CREATE TABLE `dane_do_faktury` (
+  `id` int(11) NOT NULL,
+  `id_konta` int(11) NOT NULL,
+  `NIP` char(10) NOT NULL,
+  `nazwa_firmy` varchar(150) NOT NULL,
+  `adres` varchar(150) NOT NULL,
+  `kod_pocztowy` char(6) NOT NULL,
+  `miasto` varchar(80) NOT NULL,
+  `kraj` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `dane_do_faktury`
+--
+
+INSERT INTO `dane_do_faktury` (`id`, `id_konta`, `NIP`, `nazwa_firmy`, `adres`, `kod_pocztowy`, `miasto`, `kraj`) VALUES
+(1, 1, '9999999999', 'golesp', 'ul. marginowa 32/3b', '22-323', 'Wrocław', 'Polska');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `dane_konta`
 --
 
 CREATE TABLE `dane_konta` (
   `id` int(11) NOT NULL,
   `id_loginu` int(11) NOT NULL,
-  `NIP` char(10) DEFAULT NULL,
   `imie` varchar(60) DEFAULT NULL,
   `nazwisko` varchar(80) NOT NULL,
   `ulica` varchar(255) DEFAULT NULL,
@@ -38,7 +61,7 @@ CREATE TABLE `dane_konta` (
   `nr_mieszkania` smallint(6) DEFAULT NULL,
   `nr_tel` varchar(20) DEFAULT NULL,
   `miasto` varchar(100) DEFAULT NULL,
-  `kod_pocztowy` varchar(6) DEFAULT NULL,
+  `kod_pocztowy` char(6) DEFAULT NULL,
   `kraj` varchar(100) DEFAULT NULL,
   `dostep` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
@@ -47,8 +70,8 @@ CREATE TABLE `dane_konta` (
 -- Dumping data for table `dane_konta`
 --
 
-INSERT INTO `dane_konta` (`id`, `id_loginu`, `NIP`, `imie`, `nazwisko`, `ulica`, `nr_domu`, `nr_mieszkania`, `nr_tel`, `miasto`, `kod_pocztowy`, `kraj`, `dostep`) VALUES
-(1, 1, NULL, 'Jan', 'Kowalski', 'Warszawska', 42, 2, '541232115', 'Bydgoszcz', '64-321', 'Polska', 1);
+INSERT INTO `dane_konta` (`id`, `id_loginu`, `imie`, `nazwisko`, `ulica`, `nr_domu`, `nr_mieszkania`, `nr_tel`, `miasto`, `kod_pocztowy`, `kraj`, `dostep`) VALUES
+(1, 1, 'jan', 'Kowalski', 'poważna', 42, 2, '111111646', 'Bydgoszcz', '333333', 'Belgia', 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +137,7 @@ CREATE TABLE `loginy` (
 --
 
 INSERT INTO `loginy` (`id`, `login`, `pass`, `data_rejestru`, `ostatnie_logowanie`, `token_hasla`, `data_zmiany_hasla`) VALUES
-(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2024-08-30 08:11:28', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09');
+(1, 'admin1@g.pl', '$argon2i$v=19$m=65536,t=4,p=1$YjFBeFE1SkJaa1pScDMxNQ$2ef4mk9Xz32gOvjNEAUMHKYWvZKcrKfGfVBSmIydQNE', '2023-05-15 17:29:12', '2024-09-05 14:46:46', 'fef15f5bfbc48e99a8ab', '2023-06-06 17:21:09');
 
 -- --------------------------------------------------------
 
@@ -138,7 +161,7 @@ CREATE TABLE `produkty` (
 --
 
 INSERT INTO `produkty` (`id`, `nazwa`, `cena`, `ilosc`, `rodzaj`, `opis`, `zdjecie`, `indeks_produktu`) VALUES
-(52, 'Product1', 3213.00, 15, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', '2024-06-03-23-37-19-0.jpg', '757012d'),
+(52, 'Product1', 3213.00, 18, '5', 'Plecak Nike Sportswear RPM jest stworzony do przechowywania wszystkiego, czego tylko potrzebujesz. Plecak jest idealny na wypady dzięki wyściełanemu tyłowi dla wygody i uniwersalnemu systemowi pasków.', '2024-06-03-23-37-19-0.jpg', '757012d'),
 (54, 'Product2', 300.99, 23, '4', 'LPP, właściciel marki House, jest partnerem inicjatywy Cotton made in Africa (CmiA), uznanego na całym świecie standardu zrównoważonej bawełny uprawianej przez drobnych, afrykańskich rolników. Pozyskujemy bawełnę zweryfikowaną przez CmiA, pomagając w ten sposób farmerom uzyskać dostęp do zrównoważonych metod produkcji. Bawełna zweryfikowana przez CmiA, której używamy w naszym łańcuchu dostaw, ma znacznie mniejszy wpływ na środowisko niż konwencjonalna bawełna. Inicjatywa wspiera społeczności wiejskie w Afryce.', '2024-06-03-23-38-39-0.jpg', '966862i'),
 (55, 'Product3', 154.99, 5, '7', 'Plecak Vans Old Skool Check ma dużą komorę główną, łatwo dostępną kieszeń z przegródkami zapinaną na suwak z przodu oraz kieszeń na butelkę z wodą. Wyściełane paski naramienne o prostym kroju zapewniają dodatkową wygodę. Całości dopełnia logo Vans z przodu oraz nadruk w kratę na całej powierzchni. Wymiary: 41,9 cm dł. x 32,4 cm szer. x 12,1 cm głęb. Pojemność: 22 litry.', '2024-06-03-23-45-08-0.jpg', '98554t'),
 (57, 'Product4', 180.00, 13, '7', 'Czarny męski plecak o prostej, klasycznej formie. Idealny na co dzień: do szkoły, na uczelnię, do pracy.\r\n\r\ngłówna komora oraz zewnętrzna kieszeń zapinane na suwaki\r\ndługie szelki z możliwością regulacji\r\nwewnętrzna kieszeń na laptopa\r\nniewielka naszywka z przodu', '2024-06-03-23-40-49-0.png', '996025d'),
@@ -204,7 +227,6 @@ INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`, `ilosc`) VALUE
 (53, 54, 'L', 2),
 (54, 54, 'XL', 5),
 (56, 57, 'Uniwersalny', 13),
-(57, 58, 'XS', 3),
 (58, 58, 'S', 4),
 (59, 58, 'M', 7),
 (60, 58, 'L', 2),
@@ -221,7 +243,9 @@ INSERT INTO `rozmiary_produktow` (`id`, `id_produktu`, `rozmiar`, `ilosc`) VALUE
 (77, 63, 'M', 7),
 (78, 63, 'L', 2),
 (79, 63, 'XL', 3),
-(80, 63, 'XXL', 2);
+(80, 63, 'XXL', 2),
+(81, 52, 'S', 3),
+(82, 58, 'XS', 3);
 
 -- --------------------------------------------------------
 
@@ -239,13 +263,12 @@ CREATE TABLE `status_zamowienia` (
 --
 
 INSERT INTO `status_zamowienia` (`id`, `nazwa`) VALUES
-(1, 'Nowe'),
-(2, 'Do realizacji'),
-(3, 'W trakcie realizacji'),
-(4, 'Wysłane'),
-(5, 'Zrealizowane'),
-(6, 'Anulowane'),
-(7, 'Archiwum');
+(1, 'Do realizacji'),
+(2, 'W trakcie realizacji'),
+(3, 'Wysłane'),
+(4, 'Zrealizowane'),
+(5, 'Anulowane'),
+(6, 'Archiwum');
 
 -- --------------------------------------------------------
 
@@ -279,7 +302,7 @@ CREATE TABLE `zamowienia` (
   `nr_zamowienia` int(11) NOT NULL,
   `id_konta` int(11) NOT NULL,
   `produkty_zamowione` varchar(200) NOT NULL,
-  `ilosc_produktow` int(11) NOT NULL,
+  `ilosc_produktow` varchar(200) NOT NULL,
   `koszt_calkowity` decimal(10,2) NOT NULL,
   `kurier` tinyint(11) NOT NULL,
   `data` datetime NOT NULL,
@@ -289,6 +312,12 @@ CREATE TABLE `zamowienia` (
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `dane_do_faktury`
+--
+ALTER TABLE `dane_do_faktury`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `dane_konta`
@@ -359,6 +388,12 @@ ALTER TABLE `zamowienia`
 --
 
 --
+-- AUTO_INCREMENT for table `dane_do_faktury`
+--
+ALTER TABLE `dane_do_faktury`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `dane_konta`
 --
 ALTER TABLE `dane_konta`
@@ -392,7 +427,7 @@ ALTER TABLE `produkty`
 -- AUTO_INCREMENT for table `rozmiary_produktow`
 --
 ALTER TABLE `rozmiary_produktow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `wiadomosci_klientow`
