@@ -14,26 +14,53 @@ $id = $wykonanie['id'];
 // \\\\\\\\\\\\\\\\\\\\DANE KONTA////////////////
 
 // imie
+$incorrect_data = [];
+$imie = '';
+$nazwisko = '';
+$telOS = '';
+$kodpocztowy = '';
+$nrdomu = '';
+$nrmieszkania = '';
+$miasto = '';
+$kraj = '';
+
 if(!empty($_POST["imie"])){
     $dane = $_POST["imie"];
-    $pyt = $conn->prepare("UPDATE dane_konta SET imie = ? WHERE id_loginu = ?");
-    $pyt -> execute([$dane, $id]);
+    $pattern1 = "/\d/i";
+    $pattern2 = "/\W/i";
+    if(preg_match($pattern1, $dane) || preg_match($pattern2, $dane)){
+        array_push($incorrect_data, "imie");
+    }
+    else{
+        $imie = $dane;
+    }
 }
 
 // nazwisko
 if(!empty($_POST["nazwisko"])){
     $dane = $_POST["nazwisko"];
-    $pyt = $conn->prepare("UPDATE dane_konta SET nazwisko = ? WHERE id_loginu = ?");
-    $pyt -> execute([$dane, $id]);
+    $pattern1 = "/\d/i";
+    $pattern2 = "/\W/i";
+    if(preg_match($pattern1, $dane) || preg_match($pattern2, $dane)){
+        array_push($incorrect_data, "nazwisko");
+    }
+    else{
+        $nazwisko = $dane;
+    }
 }
 
 // telefon
 if(!empty($_POST["tel"])){
     $dane = $_POST["tel"];
-    $pyt = $conn->prepare("UPDATE dane_konta SET nr_tel = ? WHERE id_loginu = ?");
-    $pyt -> execute([$dane, $id]);
+    $pattern1 = "/\d/i";
+    $pattern2 = "/\W/i";
+    if(preg_match($pattern1, $dane) || preg_match($pattern2, $dane)){
+        array_push($incorrect_data, "numer telefonu");
+    }
+    else{
+        $telOS = $dane;
+    }
 }
-
 // \\\\\\\\\\\\\\DANE DO WYSYLKI/////////////////
 
 // kod pocztowy
@@ -76,7 +103,20 @@ if(!empty($_POST["kraj"])){
     $dane = $_POST["kraj"];
     $pyt = $conn->prepare("UPDATE dane_konta SET kraj = ? WHERE id_loginu = ?");
     $pyt -> execute([$dane, $id]);
+    $_SESSION['success'] = "Zapisano dane";
 }
+
+
+// !!!!!!!!!!!!!!!!!!!!!! Wysyła do bazy dane klienta i wysylki za jednym  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// inprogressssssssssssssssssssss
+// if(){
+
+//     $pyt = $conn->prepare("UPDATE dane_konta SET imie = ? WHERE id_loginu = ?");
+//     $pyt -> execute([, $id]);
+// }
+// 
+
+
 
 // \\\\\\\\\\\\\\\\\\\\\\\\\\\DANE DO FAKTURY//////////////////////
 $url = explode("=",$_SERVER["REQUEST_URI"]);
@@ -133,7 +173,9 @@ else{
     }
 }
 
-$_SESSION['success'] = "Zapisano dane";
+if( empty($_SESSION['error']) ){
+    $_SESSION['success'] = "Zapisano dane";
+}
 $conn = null;
 header('location:konto.php');
 ?>

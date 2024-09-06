@@ -33,7 +33,7 @@ $validation = password_verify($pass, $hash);
                 }
                 $conn = null;
                 $_SESSION['dostep'] = $dostep;
-                $czas_sesji = time() + 86400;
+                $czas_sesji = time() + 43200;
                 $czas_cookie = time() + (86400*7);
                 $_SESSION['expire'] = $czas_sesji;
                 setcookie( "uzytkownik", $_SESSION['email'], $czas_cookie,"/" );
