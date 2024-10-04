@@ -3,11 +3,11 @@
 </head>
 <?php
     if(isset($_SESSION['dostep']) && $_SESSION['dostep'] > 0){
-        echo "<div id='panel'><a href='panel.php' id='zmien_dane'><button id='panel_button'>Panel</button></a></div>";
+        echo "<div id='panel'><a href='../panel.php' id='zmien_dane'><button id='panel_button'>Panel</button></a></div>";
     }
 ?>
 <header class="naglowek">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="wyszukiwarka_kopia.js"></script>
 
 <div class='menu1'>
@@ -25,6 +25,7 @@
 <div class='wyloguj'>
 <?php
     if( !isset( $_SESSION['email'] ) && empty( $_SESSION['email'] ) ){
+        echo "<a href='../koszyk.php' id='koszyk'> <img src='../svg/shopping_cart.svg' width='36px' height='36px' alt='koszyk'> </a>";
         echo "<a href='../logowanie.php' title='Logowanie' id='log_in'><img src='../svg/log_in.svg' width='36px' height='36px' alt='zaloguj'></a>";
     }
 

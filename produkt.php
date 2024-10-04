@@ -61,7 +61,6 @@ $zdjecia_array = explode(",", $dane["zdjecie"]);
         <?php
         echo "<h2>Opis produktu</h2><br>";
         echo "<p style=padding:1%; font-family:Segoe UI;>".$dane["opis"]."</p>";
-        $conn = null;
         ?>
     </div>
 </div>

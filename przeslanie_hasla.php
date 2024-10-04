@@ -1,4 +1,10 @@
-<?php session_start();?>
+<?php 
+session_start();
+$url = $_SERVER["REQUEST_URI"];
+$ciecie_url = explode("przeslanie_hasla.php",$url);
+$forward_url = "change_pass.php" .$ciecie_url[1];
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -12,7 +18,8 @@
 <div class="content">
 <section class="wrap-sign-up-in">
 
-<form id="formularz" class='zaloguj' action="" method='POST'>
+<?php echo "<form id='formularz' class='zaloguj' action='".$forward_url."' method='POST'>"; ?>
+    <input type="hidden" name="siteback" value=<?php echo "'". $url ."'";?>>
     <div class="divy">
         <p style="font-size:22px;">Wpisz nowe hasło</p>
     </div><br>
@@ -48,7 +55,7 @@ if(isset($_SESSION['wiadomosc_hasla'])){
 <!-- wytyczne hasla -->
     <div id="alert_haslo"> 
       <span>&#x1F6C8</span>
-      <span>Hasło musi zawierać: wielką literę, długość min 8 znaków i max 32 znaków i jeden znak specjalny !@#$%^&*</span> 
+      <span>Hasło musi zawierać: wielką literę, długość min 8 znaków, max 32 znaków i jeden znak specjalny !@#$%^&*</span> 
     </div>
     <br>
 </form>
@@ -78,47 +85,3 @@ var haslop = document.getElementById("haslop");
 }
 
 </script>
-<?php
-if(isset($_POST['pass']) && isset($_POST['passp'])){
-    $pass = $_POST['pass'];
-    $pass_powtorzone = $_POST['passp'];
-    $url = $_SERVER["REQUEST_URI"];
-    $ciecie_url = explode("?key=",$url);
-    $token_strony = $ciecie_url[1];
-    include_once("laczenieZbaza.php");
-    $nowe_haslo = password_hash($pass, PASSWORD_ARGON2I);
-        unset($_SESSION['email']);
-        $patern = "/^(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z])(?=\D*\d)(?=[^!@#$%^&*]*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,32}$/";
-        $weryfikacja_hasla = preg_match($patern, $pass);
-        
-        if($weryfikacja_hasla == TRUE){
-        if( $pass == $pass_powtorzone ){
-                $pyt1 = $conn->prepare("SELECT token_hasla FROM loginy WHERE token_hasla = ?");
-                $pyt1 -> execute([$token_strony]);
-                $pyt1_liczba = $pyt1 -> fetchColumn();
-
-                if($pyt1_liczba){
-                    $data_zmiany_hasla = date("Y-m-d H:i:s");
-                    $token = substr(sha1(mt_rand()),0,20);
-                    //Zmiana hasla, daty i tokenu
-                    $pyt2 = $conn->prepare("UPDATE loginy SET data_zmiany_hasla = ?, token_hasla = ?, pass = ? WHERE token_hasla = ?");
-                    $pyt2 -> execute([$data_zmiany_hasla, $token, $nowe_haslo, $token_strony]);
-                    header("location: logowanie.php");
-                }
-                else{
-                    $_SESSION['wiadomosc_hasla'] = "Sesja przedawniona za 2 sekundy wrócisz do logowania!";
-                    header("refresh:2; location:logowanie.php");
-                }
-             }
-
-             else{
-              $_SESSION['wiadomosc_hasla'] = "Hasła nie są takie same! ";
-             }
-        }
-
-        else{
-          $_SESSION['wiadomosc_hasla'] = "Hasło nie zgadza się z wytycznymi! $weryfikacja_hasla";
-        }
-$conn = null; 
-}
-?>

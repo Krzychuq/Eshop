@@ -1,6 +1,5 @@
-
 <?php
-include('laczenieZbaza.php');
+include_once('laczenieZbaza.php');
 echo "<div class='podobne_produkty'>";
 echo "<p id='tytul_polecane'>Polecane</p>";
 // losowanie produktów
@@ -11,30 +10,36 @@ $min_array = $pytanie_ostatni_id->fetch();
 $lista_uzytych_numerow=[''];
 $lista_do_bazy = '';
 // tylko 6
-for($i=0; $i < 6; $i++){ 
-  $los = rand($min_array[0], $max_array[0]);
-  array_push($lista_uzytych_numerow, $los);
-  if(in_array($los, $lista_uzytych_numerow, false)){
-    if($i==0){ $lista_do_bazy .= $los; }
-    else{ $lista_do_bazy .= "," . $los; }
+$los = range($min_array[0], $max_array[0]);
+shuffle($los);
+for($i=0; $i < 6; $i++){
+    array_push($lista_uzytych_numerow, $los[$i]);
+    // debug
+    // print_r($lista_uzytych_numerow);
+    if($i==0){ $lista_do_bazy .= $los[$i]; }
+    else{ $lista_do_bazy .= "," . $los[$i]; }
+  
+}
+if(!empty($lista_do_bazy)){
+  $podobne_produkty = $conn -> query("SELECT id,nazwa, cena, zdjecie, indeks_produktu FROM produkty WHERE id IN ($lista_do_bazy);");
+  echo "<ul class='list_prod' style='left: 0; transition: 0.7s;'>";
+
+  while($wynik = $podobne_produkty->fetch()){
+      $nazwa = ucfirst($wynik["nazwa"]);
+      $zdjecia_array = explode(",", $wynik["zdjecie"]);
+      $linkZdj = "../zdjecia_produktow/" . $zdjecia_array[0];
+      include_once("link_creator.php");
+  
+      echo "<li>";
+      echo "<a style='color: black; text-decoration:none;' href='$link'>";
+      echo "<img src=$linkZdj class='podobny_produkt_zdjecie' alt='podobny produkt'>";
+      echo "<p style='font-size: 1.2rem;'>$nazwa</p>";
+      echo "<p style='font-size: 0.9rem; font-weight:bold;'>$wynik[cena] zł</p>";
+      echo "</a>";
+      echo "</li>";
   }
 }
-$podobne_produkty = $conn -> query("SELECT id,nazwa, cena, zdjecie, indeks_produktu FROM produkty WHERE id IN ($lista_do_bazy);");
-echo "<ul class='list_prod' style='left: 0; transition: 0.7s;'>";
-while($wynik = $podobne_produkty->fetch()){
-    $nazwa = ucfirst($wynik["nazwa"]);
-    $zdjecia_array = explode(",", $wynik["zdjecie"]);
-    $linkZdj = "../zdjecia_produktow/" . $zdjecia_array[0];
-    include("link_creator.php");
 
-    echo "<li>";
-    echo "<a style='color: black; text-decoration:none;' href='$link'>";
-    echo "<img src=$linkZdj class='podobny_produkt_zdjecie' alt='podobny produkt'>";
-    echo "<p style='font-size: 1.2rem;'>$nazwa</p>";
-    echo "<p style='font-size: 0.9rem; font-weight:bold;'>$wynik[cena] zł</p>";
-    echo "</a>";
-    echo "</li>";
-}
 echo "</ul>";
 echo "<button class='button_prev' onclick=pozycjaminus()>". "<img src='../svg/arrow-left.svg' width='42px' height='42px'>" ."</button>";
 echo "<button class='button_next' onclick=pozycjaplus()>". "<img src='../svg/arrow-right.svg' width='42px' height='42px'>" ."</button>";
@@ -63,7 +68,8 @@ if(dlugosc < ekran){
     document.getElementsByClassName("list_prod")[0].style.left = przesuniecie;
   }
 }
-// debug alert('Długosć: '+dlugosc+ ' Zdjecia dlugosc: '+ zdjecia_maks + ' Ekran: '+ ekran + ' Liczba: '+liczba);
+// debug 
+// alert('Długosć: '+dlugosc+ ' Zdjecia dlugosc: '+ zdjecia_maks + ' Ekran: '+ ekran + ' Liczba: '+liczba + ' Szerokość zdjecia: ' + szerokosc_zdjecia);
 }
 
 function pozycjaminus(){

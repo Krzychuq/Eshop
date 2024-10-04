@@ -26,14 +26,17 @@ include_once("laczenieZbaza.php");
 <div class="contener">
 
 <?php
+// debbug
 // print_r($_SESSION['koszyk']);
+//
+
 $podsumowanie_kosztow = 0;
 if(!empty($_SESSION['koszyk'])){
-  echo "<div class='koszyk'>
-  <div class='koszyk_naglowek' id='koszyk_naglowek1'>
+  echo "<div class='order'>
+  <div class='order_naglowek' id='koszyk_naglowek1'>
     <span>Koszyk</span>
   </div>";
-  echo "<div class='produkty_koszyk'>";
+  echo "<div class='left_order'>";
   for($liczba_produktow=0; $liczba_produktow < sizeof($_SESSION['koszyk']); $liczba_produktow++){
     $indeks = $_SESSION['koszyk'][$liczba_produktow][0];
     $rozmiar = $_SESSION['koszyk'][$liczba_produktow][1];
@@ -52,7 +55,7 @@ if(!empty($_SESSION['koszyk'])){
       $pyt_rozmiar = $conn -> prepare('SELECT ilosc FROM rozmiary_produktow WHERE id_produktu = ? and rozmiar like ?');
       $pyt_rozmiar -> execute([$id, $rozmiar]);
       $rozmiar_z_bazy = $pyt_rozmiar->fetch(PDO::FETCH_ASSOC);
-    echo "<div class='produkt_z_koszyka'>";
+    echo "<div class='left_item_order'>";
     
     echo "<div class='koszyk_zdjecie_produktu'>";
     echo "<a class='koszyk_link' href='$link'><img src='zdjecia_produktow/$zdjecie[0]' width=180px height=autopx></a>";
@@ -84,48 +87,52 @@ if(!empty($_SESSION['koszyk'])){
     echo "</div>";
     
     echo "<form action=usun_produkt_koszyk.php method=POST>";
-    echo "<input type='hidden' name=indeks value=$indeks>";
-    echo "<input type='hidden' name=rozmiar value=$rozmiar>";
+    // /////////////////////| hidden |\\\\\\\\\\\\\\\\\\\
+    
+    echo "<input type='hidden' name='indeks' value=$indeks>";
+    echo "<input type='hidden' name='rozmiar' value=$rozmiar>";
+        
+    // ///////////////////////////////////////////////////
     echo "<button type='submit'><img onmouseover='animacjaIN(this)' onmouseout='animacjaOUT(this)' onclick='animacjaCLICK(this)' width='32px' height:'32px' src='svg/kosz_zamkniety.svg'></button>";
+
     echo "</form>";
-  
     echo "</div>";
   }
   echo "</div>";
   //elementy koszyku
-  echo "<div class='koszyk_podsumowanie'>
-  <form action='zamowienie_klient.php' method='POST'>
+  $pyt_firmy = $conn -> prepare('SELECT * FROM firmy_kurierskie');
+  $pyt_firmy -> execute();
+  // !null
+  $conn = null;
+
+  echo "<div class='right_order'>
+    <form action='zamowienie_klient.php' method='POST'>
     <label for='rabat'>Kod rabatowy</label>
     <input type='text' name='rabat' placeholder='Wpisz kod twardzielu'>
     <br>
     <label for='kurier'>Dostawa</label>
-    <div class='lista_kurierow'>
-      <div class='kurier_listy' >
-        <img src='svg/shipping-van.svg' alt='' width='30px' height='30px'>
-        <span>Kurier DHL 15 zł</span>
-        <input  type='radio' name='kurier' id='kurier1' onclick='przelicz(this)' value='15'>
+    <div class='lista_kurierow'>";
+    foreach($pyt_firmy as $wynik){
+      echo "<div class='kurier_listy'>";
+      if( $wynik['rodzaj']=="paczkomat" ){ echo " <img src='svg/package.svg' width='28px' height='28px'> "; }
+      else{ echo " <img src='svg/shipping-van.svg' width='30px' height='30px'> "; }
+      echo "<span>". ucfirst($wynik['rodzaj']) ." ".$wynik['nazwa_firmy']." ".$wynik['cena']." zł</span>
+      <input  type='radio' name='kurier' onclick='przelicz(this)' value='".$wynik['cena']."/".$wynik['id']."'>
+      </div>";
+    }
+  echo
+  "</div>
+    <div>
+      <br><p>Koszt dostawy: <span id=koszt_dostawy>0</span> zł</p>
+    <p>Łączny koszt: <span id='suma'>$podsumowanie_kosztow</span> zł</p>
+      <input type='hidden' id='koszt_calkowity' name='suma' value='$podsumowanie_kosztow'>
+      <div class='kup' style='text-align: center;'>
+        <button class='button_podsumowanie' type='submit' disabled>Przejdź dalej</button>
       </div>
-      <div class='kurier_listy' >
-        <img src='svg/shipping-van.svg' alt='' width='30px' height='30px'>
-        <span>Kurier Poczta Polska 12 zł</span>
-        <input  type='radio' name='kurier' id='kurier1' onclick='przelicz(this)' value='12'>
-      </div>
-      <div class='kurier_listy' >
-        <img src='svg/package.svg' alt='' width='28px' height='28px'>
-        <span>Kurier InPost 11 zł</span>
-        <input type='radio' name='kurier' id='kurier1' onclick='przelicz(this)' value='11'>
-      </div>
-    </div>
-  <div>
-    <br><p>Koszt dostawy: <span id=koszt_dostawy>0</span> zł</p>
-   <p>Łączny koszt: <span id='suma'>$podsumowanie_kosztow</span> zł</p>
-    <input type='hidden' id='koszt_calkowity' name='suma' value='$podsumowanie_kosztow'>
-    <div class='kup' style='text-align: center;'>
-      <button class='button_podsumowanie' type='submit' disabled>Przejdź dalej</button>
-    </div>
-  </div>
-  </form>
-</div>";
+    </div>";
+
+   echo "</form>";
+  echo "</div>";
 }
 else{
   echo "<div class='wiadomosc_koszyk_pusty'>";
@@ -133,21 +140,14 @@ else{
   echo "<a href='index.php'><h3>> Zapełnij go <</h3></a>";
   echo "</div>";
 }
-
-//powiadomienia
-if(isset($_SESSION['error'])){
-    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
-    unset($_SESSION['error']);
-    echo "<script src='blad.js'></script>";
-}
-if(isset($_SESSION['success'])){
-    echo "<div class='success'>" . "&#10003 ". $_SESSION["success"] . "</div>";
-    unset($_SESSION['success']);
-    echo "<script src='powiadomienie.js'></script>";
-}
 ?>
+<!-- \\\\\\\\\\\\\\\\\\\\\\| Powiadomienia |///////////////////// -->
+
+<?php include_once("powiadomienia.php"); ?>
 
 
+<!-- \\\\\\\\\\\\\\\\\\\\\\| /Powiadomienia |///////////////////// -->
+ 
 </div>
 
 </div>
@@ -182,8 +182,11 @@ if(isset($_SESSION['success'])){
 
 function przelicz(inp) {
   if(inp.checked){
-    document.getElementById('koszt_dostawy').innerHTML = inp.value;
+    v = inp.value
+    cena = v.split("/");
+    document.getElementById('koszt_dostawy').innerHTML = cena[0];
     suma_koncowa = suma + parseFloat(inp.value);
+    suma_koncowa = Math.round(suma_koncowa * 100) / 100;
     document.getElementById('suma').innerHTML = suma_koncowa;
     document.getElementById('koszt_calkowity').value = suma_koncowa;
     document.getElementsByClassName('button_podsumowanie')[0].style.background = '#fbc936';

@@ -22,25 +22,19 @@ include_once("laczenieZbaza.php");
     <form class="grid_kontakt" style="display:block;" action="newsletter.php" method="POST">
         <div>
         <label for="imie">Twój email</label>
-        <input style="width:100%;" type="email" name="email">
+        <input style="width:100%;" type="email" name="email" maxlength="50">
         </div>
 <br>
     <button type="submit" style="margin-left: auto; margin-right: auto;" class="przycisk_zaloguj_zarejestruj">Zapisz się</button>
 
     </form>
 </div>
-<?php
-if(isset($_SESSION['error'])){
-    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
-    unset($_SESSION['error']);
-    echo "<script src='blad.js'></script>";
-}
-if(isset($_SESSION['success'])){
-    echo "<div class='success'>" . "&#10003 ". $_SESSION["success"] . "</div>";
-    unset($_SESSION['success']);
-    echo "<script src='powiadomienie.js'></script>";
-}
-?>
+<!-- \\\\\\\\\\\\\\\\\\\\\\| Powiadomienia |///////////////////// -->
+
+<?php include_once("powiadomienia.php"); ?>
+
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\| /Powiadomienia |///////////////////// -->
 </div>
 <footer>
     <?php include_once("footer.html"); ?>

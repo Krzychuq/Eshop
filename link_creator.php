@@ -2,7 +2,7 @@
 // This code create links for products. Whenever domain get change, it wont interfer with link
 
 $splitUrl= explode("/",$_SERVER['PHP_SELF']);
-//confirm url
+//confirm url if has produkty page
 if(in_array("produkty",$splitUrl)){
 // create link product
     $urlP = strtolower($wynik['nazwa'])."-".$wynik['indeks_produktu'].".php";

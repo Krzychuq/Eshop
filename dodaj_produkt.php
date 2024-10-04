@@ -67,7 +67,9 @@ if(isset($_FILES['zdjecia']) || !empty($_FILES['zdjecia'])){
     }
 
 
-    $zmiana1 = str_replace("ą", "a", $nazwa);
+    $nazwa = $_POST["nazwa"];
+    $nowa_nazwa = strtolower($nazwa);
+    $zmiana1 = str_replace("ą", "a", $nowa_nazwa);
     $zmiana2 = str_replace("ć", "c", $zmiana1);
     $zmiana3 = str_replace("ę", "e", $zmiana2);
     $zmiana4 = str_replace("ł", "l", $zmiana3);
@@ -76,21 +78,11 @@ if(isset($_FILES['zdjecia']) || !empty($_FILES['zdjecia'])){
     $zmiana7 = str_replace("ś", "s", $zmiana6);
     $zmiana8 = str_replace("ż", "z", $zmiana7);
     $zmiana9 = str_replace("ź", "z", $zmiana8);
-    $zmiana10 = str_replace("Ą", "a", $zmiana9);
-    $zmiana11 = str_replace("Ć", "c", $zmiana10);
-    $zmiana12 = str_replace("Ę", "e", $zmiana11);
-    $zmiana13 = str_replace("Ł", "l", $zmiana12);
-    $zmiana14 = str_replace("Ń", "n", $zmiana13);
-    $zmiana15 = str_replace("Ó", "o", $zmiana14);
-    $zmiana16 = str_replace("Ś", "s", $zmiana15);
-    $zmiana17 = str_replace("Ż", "z", $zmiana16);
-    $zmiana18 = str_replace("Ź", "z", $zmiana17);
-    $litery_male = strtolower($zmiana18);
-    $str = str_replace(" ", "-", $litery_male);
+    $str = str_replace(" ", "-", $zmiana9);
     $litera = strtolower(chr(rand(65,91)));
     $generuj_indeks = rand(0,999999) . $litera;
     $strona = $str . "-" .$generuj_indeks. ".php";
-    $link = "http://localhost/forum/produkty/". $strona;
+
 
         //dodanie produktu do bazy
         $suma = $ilosc_XS + $ilosc_S + $ilosc_M + $ilosc_L + $ilosc_XL + $ilosc_XXL + $ilosc_Uniwersalny; 
@@ -104,8 +96,8 @@ if(isset($_FILES['zdjecia']) || !empty($_FILES['zdjecia'])){
                 $zdjecia_string .= $zdjecia_array[$i]. ",";
             }
         }
-        $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,opis,zdjecie,indeks_produktu,link) VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
-        $dodanie_produktu -> execute([$litery_male, $cena, $suma, $rodzaj, $opis, $zdjecia_string, $generuj_indeks,$link]);
+        $dodanie_produktu = $conn->prepare('INSERT INTO produkty (nazwa,cena,ilosc,rodzaj,opis,zdjecie,indeks_produktu) VALUES(?, ?, ?, ?, ?, ?, ?)');
+        $dodanie_produktu -> execute([$str, $cena, $suma, $rodzaj, $opis, $zdjecia_string, $generuj_indeks]);
         $pyt_id = $conn -> prepare('SELECT id FROM produkty WHERE indeks_produktu LIKE ?');
         $pyt_id -> execute([$generuj_indeks]);
         $id = $pyt_id -> fetch(PDO::FETCH_ASSOC);

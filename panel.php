@@ -275,19 +275,13 @@ echo "</table>";
     
 </div>
 </div>
-<?php 
-if(isset($_SESSION['error'])){
-    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
-    unset($_SESSION['error']);
-    echo "<script src='blad.js'></script>";
-}
-if(isset($_SESSION['success'])){
-    echo "<div class='success'>" . "&#10003 ". $_SESSION["success"] . "</div>";
-    unset($_SESSION['success']);
-    echo "<script src='powiadomienie.js'></script>";
-}
-$conn = null;
-?>
+<!-- \\\\\\\\\\\\\\\\\\\\\\| Powiadomienia |///////////////////// -->
+
+<?php include_once("powiadomienia.php");  $conn = null;?>
+
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\| /Powiadomienia |///////////////////// -->
+
 </body>
 </html>
 <script>

@@ -42,7 +42,6 @@ session_start();
         $miasto = $wynik['miasto'];
         $ulica = $wynik['ulica'];
         $nr_domu = $wynik['nr_domu'];
-        $nr_mieszkania = $wynik['nr_mieszkania'];
         $kod_pocztowy = $wynik['kod_pocztowy'];
         $kraj = $wynik['kraj'];
         $dostep = $wynik['dostep'];
@@ -74,7 +73,7 @@ session_start();
     <p>Email: <?php echo $_SESSION["email"];?></p>
     <p>Imię: <?php echo $imie; ?></p>
     <p>Nazwisko: <?php echo $nazwisko; ?></p>
-    <p>Nr telefonu: <?php echo $tel; ?></p>
+    <p>Telefon: <?php echo $tel; ?></p>
 </div>
 </div>
 <!-- \\\\\\\\\\\\\\\\\\\\\\Dane do wysylki/////////////////////// -->
@@ -84,8 +83,7 @@ session_start();
 </div><br>
 <div class="info_profilu">
     <p>Ulica: <?php echo $ulica; ?></p>
-    <p>Nr domu: <?php echo $nr_domu; ?></p>
-    <p>Nr mieszkania: <?php echo $nr_mieszkania; ?></p>
+    <p>Nr domu/mieszkania: <?php echo $nr_domu; ?></p>
     <p>Kod pocztowy: <?php echo $kod_pocztowy; ?></p>
     <p>Miasto: <?php echo $miasto; ?></p>
     <p>Kraj: <?php echo $kraj; ?></p>
@@ -150,18 +148,12 @@ else{
 <br>
 
 </div>
-<?php 
-if(isset($_SESSION['error'])){
-    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
-    unset($_SESSION['error']);
-    echo "<script src='blad.js'></script>";
-}
-if(isset($_SESSION['success'])){
-    echo "<div class='success'>" . "&#10003 ". $_SESSION["success"] . "</div>";
-    unset($_SESSION['success']);
-    echo "<script src='powiadomienie.js'></script>";
-}
-?>
+<!-- \\\\\\\\\\\\\\\\\\\\\\| Powiadomienia |///////////////////// -->
+
+<?php include_once("powiadomienia.php"); ?>
+
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\| /Powiadomienia |///////////////////// -->
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

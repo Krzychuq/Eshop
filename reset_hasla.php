@@ -27,13 +27,12 @@ session_start();
 
 </section>
 </div>
-<?php 
-if(isset($_SESSION['error'])){
-    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
-    unset($_SESSION['error']);
-    echo "<script src='blad.js'></script>";
-}
-?>
+<!-- \\\\\\\\\\\\\\\\\\\\\\| Powiadomienia |///////////////////// -->
+
+<?php include_once("powiadomienia.php");?>
+
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\| /Powiadomienia |///////////////////// -->
 <footer>
     <?php include_once("footer.html"); ?>
 </footer>

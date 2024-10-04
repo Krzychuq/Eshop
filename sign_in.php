@@ -16,7 +16,6 @@ $validation = password_verify($pass, $hash);
 
         if($validation == true){
                 $_SESSION['email'] = $email;
-                $_SESSION['koszyk'] = '';
                 //identyfikacja
                 $mail = $_SESSION['email'];
                 $pyt_o_id = $conn->prepare("SELECT id FROM loginy WHERE login like ?");

@@ -29,7 +29,7 @@ session_start();
         <input type="checkbox" class="pokaz_haslo" onclick="pokazhasla()" width="16" height="16"></input>
         <br>
         
-        <button type='submit' class="przycisk_zaloguj_zarejestruj">Zaloguj się</button>
+        <button type='submit' class="przycisk_zaloguj_zarejestruj" id='zmien_dane_button'>Zaloguj się</button>
     </form>
     
     <div class="rejestracja">
@@ -37,18 +37,12 @@ session_start();
         <p>Nie masz konta? <a href="rejestracja.php"> Zarejestruj się</a></p>
     </div>
 </section>
-<?php
-if(isset($_SESSION['error'])){
-    echo "<div class='error'>" . "&#10005 ". $_SESSION["error"] . "</div>";
-    unset($_SESSION['error']);
-    echo "<script src='blad.js'></script>";
-}
-if(isset($_SESSION['success'])){
-    echo "<div class='success'>" . "&#10003 ". $_SESSION["success"] . "</div>";
-    unset($_SESSION['success']);
-    echo "<script src='powiadomienie.js'></script>";
-}
-?>
+<!-- \\\\\\\\\\\\\\\\\\\\\\| Powiadomienia |///////////////////// -->
+
+<?php include_once("powiadomienia.php"); ?>
+
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\| /Powiadomienia |///////////////////// -->
 </div>
 <footer>
     <?php include_once("footer.html"); ?>

@@ -7,7 +7,7 @@
     }
 ?>
 <header class="naglowek">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="wyszukiwarka.js"></script>
 
 <div class='menu1'>
@@ -25,12 +25,13 @@
 <div class='wyloguj'>
 <?php
     if( !isset( $_SESSION['email'] ) && empty( $_SESSION['email'] ) ){
+        echo "<a href='koszyk.php' id='koszyk'> <img src='svg/shopping_cart.svg' width='36px' height='36px' alt='koszyk'></a>";
         echo "<a href='logowanie.php' id='log_in'><img src='svg/log_in.svg' width='36px' height='36px' title='Logowanie' alt='zaloguj'></a>";
     }
 
     if( isset( $_SESSION['email'] ) && !empty( $_SESSION['email'] ) ){
-        echo "<a href='koszyk.php' id='koszyk'> <img src='svg/shopping_cart.svg' width='36px' height='36px' alt='koszyk'> </a>";
-        echo "<a href='konto.php' id='konto'><img src='svg/account.svg' width='36px' height='36px' alt='konto'></a>";
+        echo "<a href='koszyk.php' id='koszyk'> <img src='svg/shopping_cart.svg' width='36px' height='36px' alt='Koszyk'></a>";
+        echo "<a href='konto.php' id='konto'><img src='svg/account.svg' width='36px' height='36px' alt='Konto'></a>";
         echo "<form  action='wyloguj.php'  method='POST'>
         <button id='wyloguj'><img src='svg/logout.svg' width='36px' height='36px' alt='&#9032'></button> </form>";
     }
