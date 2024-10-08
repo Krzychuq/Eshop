@@ -21,17 +21,17 @@ function sendmail($email, $tytul, $tresc){
     try {
         //Server settings        
         $mail->isSMTP();                                           
-        $mail->Host       = 'smtp.gmail.com';                     
+        $mail->Host       = *******************;;                     
         $mail->SMTPAuth   = true;                                   
-        $mail->Username   = 'krzysiu.krzys65@gmail.com';                   
-        $mail->Password   = 'vjfigydgyetdtxwe';                               
+        $mail->Username   = ***********;                   
+        $mail->Password   = *******************;                               
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
-        $mail->Port       = 465;   
+        $mail->Port       = *******************;;   
         $mail->CharSet = "UTF-8";    
         $mail->setLanguage('pl', '/optional/path/to/language/directory/');                      
 
         //nadawca i odbiorca
-        $mail->setFrom('krzysiu.krzys65@gmail.com', 'Eshop');
+        $mail->setFrom(email;, name);
         $mail->addAddress($email);
         $mail->WordWrap = 70;
 
