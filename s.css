@@ -28,6 +28,28 @@
     font-family: Font2;
     src: url('sunflower-font/Sunflower-lgZye.otf');
 }
+/* |||||||||||||||||||||Customized radio input||||||||||||||||||||||| */
+/* input[type=radio]{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+} */
+.custom_radio{
+    border: 0;
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+
+
+
+
+/* <<<<<<<<<<<<<<<<<<<<<<<<<<<<< PAGE STYLE >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 *{box-sizing: border-box; margin: 0;}
 body{
     min-height: 100vh; 
@@ -1258,7 +1280,7 @@ a {text-decoration: none; color: #ff7300;}
         padding-bottom: 0px;
         width: 100%;
     }
-        .left_item_order_checkout, .left_item_order_checkout_options .title{ 
+        .left_item_order_checkout .title, .left_item_order_checkout_options .title{ 
             grid-area: 1 / 1 / 2 / 2;
             margin-bottom: 15px;
             color: #0a0a0a;
@@ -1344,6 +1366,11 @@ a {text-decoration: none; color: #ff7300;}
     }
     .checkout_choice_left{
         grid-area: 1 / 1 / 2 / 2;
+        display: flex;
+        margin-right: auto;
+        margin-left: auto;
+        align-items: center;
+        font-size: 2rem
     }
     .checkout_choice_img{
         grid-area: 1 / 2 / 2 / 3;
@@ -1353,7 +1380,10 @@ a {text-decoration: none; color: #ff7300;}
     }
     .checkout_choice_bottom{
         grid-area: 2 / 1 / 3 / 4;
+        padding-left: 5px;
+    
     }
+    .checkout_choice_bottom .name, .checkout_choice_bottom .address{ padding-left: 20px; }
     .left_item_order_checkout_options_title{
         margin-bottom: 15px;
         color: #0a0a0a;

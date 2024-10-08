@@ -156,7 +156,7 @@ if(!empty($_POST["opis"]) && isset($_POST["opis"])){
     $aktu_produktu = $conn->prepare('UPDATE produkty SET opis = ? WHERE id = ?');
     $aktu_produktu -> execute([$opis,$id]);
     if($aktu_produktu -> rowCount() == 0){
-        $_SESSION['error'] = "Nie zaaktualizowano";
+        $_SESSION['error'] = "Nie zaaktualizowano, opis jest taki sam";
     }
     else{
         $_SESSION['success'] = "Zaaktualizowano produkt";
@@ -196,6 +196,19 @@ if(isset($_FILES['zdjecia']) && !empty($_FILES['zdjecia'])){
                     $zdjecia_string .= $zdjecia_array[$i]. ",";
                 }
             }
+            // usuwa stare zdjecia z folderu
+            $del_photos = $conn->prepare('SELECT zdjecie FROM produkty WHERE id = ?');
+            $del_photos -> execute([$id]);
+            $zdjecia = $del_photos -> fetch();
+            $folder = "zdjecia_produktow";
+            if($del_photos -> rowCount() > 0){
+                foreach( $zdjecia as $zdjecie ){
+                    unlink($folder.'/'.$zdjecie);
+                }
+            }
+
+
+
             // dodanie zdjec do bazy
             $aktu_produktu = $conn->prepare('UPDATE produkty SET zdjecie = ? WHERE id = ?');
             $aktu_produktu -> execute([$zdjecia_string, $id]);

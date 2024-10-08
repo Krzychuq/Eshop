@@ -77,7 +77,9 @@ if(isset($_POST["kurier"])){
     <div class='title'><span>Dostawa</span></div>
     <div class='checkout_choice_main'>
         <div class='checkout_choice_left'>
-            
+            <input type="radio" name='dostawa' id='inpost_paczkomat' class='custom_radio'>
+            <!-- <span class='custom_radio'></span> -->
+
         </div>
         <div class='checkout_choice_img'>
             <img src='photos/inpost_paczkomat.png' alt='tytul' width='130px' height='auto'>
